@@ -21,9 +21,9 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     await Future.delayed(const Duration(seconds: 3));
 
-    final  _apiService = ApiService();   //get response
+    final _apiService = ApiService();   //get response
 
-    List<PlacesDataModel> places = [] ;  //declare list as empty
+    List<PlacesDataModel> places = [] ;  //declare list as empty.
 
 
  final response = await _apiService.fetchData();// get list from function
