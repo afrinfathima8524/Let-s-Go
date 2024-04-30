@@ -3,7 +3,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:lets_go/features/details/data/details_data.dart';
-
 import 'package:lets_go/features/details/service/apiService.dart';
 import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
