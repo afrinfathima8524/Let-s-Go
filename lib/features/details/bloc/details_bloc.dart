@@ -2,8 +2,9 @@ import 'dart:async';
 
 
 import 'package:bloc/bloc.dart';
-import 'package:lets_go/features/details/models/places_data_model.dart';
+
 import 'package:lets_go/features/details/service/apiService.dart';
+import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
 
 part 'details_event.dart';
@@ -19,7 +20,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     
     emit(DetailsPageDetailsLoadingState());
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
 
     final _apiService = ApiService();   //get response
 

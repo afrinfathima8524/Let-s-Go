@@ -11,6 +11,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<HomeInitialFetchEvent>(homeInitialFetchEvent);
+    on<HomePagePLaceClickedEvent>(homePagePLaceClickedEvent);
   }
 
   FutureOr<void> homeInitialFetchEvent(
@@ -19,4 +20,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
         emit(PLacesFetchSucessState(places: places));
       }
+
+  FutureOr<void> homePagePLaceClickedEvent(HomePagePLaceClickedEvent event, Emitter<HomeState> emit) {
+
+    
+
+    emit(PlaceDetailNavigatePageState());
+
+
+  }
+
+
 }
