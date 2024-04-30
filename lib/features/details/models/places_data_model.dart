@@ -1,16 +1,16 @@
-class PlacesDataModels {
+class PlacesDataModel {
   int? id;
   String? name;
   String? location;
   String? description;
   String? image;
   int? visitorsPerYear;
-  String? rating;
+  double? rating;
   String? reviews;
   String? funFact;
   List<String>? photos;
 
-  PlacesDataModels(
+  PlacesDataModel(
       {this.id,
       this.name,
       this.location,
@@ -22,7 +22,7 @@ class PlacesDataModels {
       this.funFact,
       this.photos});
 
-  PlacesDataModels.fromJson(Map<String, dynamic> json) {
+  PlacesDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     location = json['location'];

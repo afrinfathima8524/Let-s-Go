@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lets_go/features/details/details_page.dart';
+import 'package:lets_go/features/details/ui/screens/details_page.dart';
+
 
 void main() {
   runApp(const MyApp());

@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc:
   bloc:
   flutter_rating_bar: ^4.0.1
+  http:
 
 dev_dependencies:
   flutter_test:
