@@ -2,6 +2,7 @@ import 'dart:async';
 
 
 import 'package:bloc/bloc.dart';
+import 'package:lets_go/features/details/data/details_data.dart';
 import 'package:lets_go/features/details/service/apiService.dart';
 import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
@@ -19,20 +20,22 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     
     emit(DetailsPageDetailsLoadingState());
 
-    await Future.delayed(const Duration(seconds: 3));
+    await Future.delayed(const Duration(seconds: 1));
 
-    final _apiService = ApiService();   //get response
+    final apiService = ApiService();   //get response
 
     List<PlacesDataModel> places = [] ;  //declare list as empty.
 
 
- final response = await _apiService.fetchData();// get list from function
+ final response = await apiService.fetchData();// get list from function
 
      places = response; //store the List of data.
 
     // print(places[0].name);
 
-   emit(DetailsPageDetailsLoadedSuccessState(list: places));
+    final index = placeDetail.id as int;
+
+   emit(DetailsPageDetailsLoadedSuccessState(details:places[index - 1]));
 
   }
 }

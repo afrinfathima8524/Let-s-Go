@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
+      bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.explore),label: "Explore"),
         BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined),label: "My Trip"),
         BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favroite"),
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         listener: (context, state) {
           if (state is PlaceDetailNavigatePageState) {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
+             Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsPage()));
           }
         },
         listenWhen: (previous, current) => current is HomeActionState,
@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case HomeLoadingState:
-              return Scaffold(
-                body: const Center(
+              return const Scaffold(
+                body: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
@@ -104,7 +104,9 @@ class _HomePageState extends State<HomePage> {
                           itemBuilder: (BuildContext context, int index) {
                             var PlacesClicked = sucessState.places[index];
                             return GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                homeBloc.add(HomePagePLaceClickedEvent(placeClicked: PlacesClicked));
+                              },
                               child: Column(
                                 children: [
                                   PlaceTile(

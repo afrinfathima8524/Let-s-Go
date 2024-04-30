@@ -49,7 +49,7 @@ class _DetailsPageState extends State<DetailsPage> {
           case DetailsPageDetailsLoadedSuccessState:
 
        final successState = state as DetailsPageDetailsLoadedSuccessState ;
-          final clickedPlace = successState.list[0];
+          final clickedPlace = successState.details;
             return Scaffold(
               body: SingleChildScrollView(
                 child: Column(

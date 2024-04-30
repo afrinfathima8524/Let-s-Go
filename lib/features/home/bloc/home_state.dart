@@ -10,4 +10,7 @@ class PLacesFetchSucessState extends HomeState{
   final List<PlacesDataModel> places;
   PLacesFetchSucessState({required this.places});
 }
+
 class PlaceDetailNavigatePageState extends HomeActionState{}
+
+

@@ -5,7 +5,7 @@ class PlacesDataModel {
   String? description;
   String? image;
   int? visitorsPerYear;
-  String? rating;
+  double? rating;
   String? reviews;
   String? funFact;
   List<String>? photos;
