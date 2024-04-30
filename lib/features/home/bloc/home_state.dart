@@ -12,3 +12,5 @@ class PLacesFetchSucessState extends HomeState{
 }
 
 class PlaceDetailNavigatePageState extends HomeActionState{}
+
+

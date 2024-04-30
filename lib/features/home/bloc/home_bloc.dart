@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:lets_go/features/details/data/details_data.dart';
 import 'package:lets_go/features/home/repo/places_repo.dart';
 import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
@@ -23,9 +24,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> homePagePLaceClickedEvent(HomePagePLaceClickedEvent event, Emitter<HomeState> emit) {
 
-    
+    placeDetail = event.placeClicked;
 
     emit(PlaceDetailNavigatePageState());
+
+    
 
 
   }
