@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         listener: (context, state) {
           if (state is PlaceDetailNavigatePageState) {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
+            // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
           }
         },
         listenWhen: (previous, current) => current is HomeActionState,
