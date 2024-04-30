@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/components/placetile.dart';
 
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         listener: (context, state) {
           if (state is PlaceDetailNavigatePageState) {
-            // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
           }
         },
         listenWhen: (previous, current) => current is HomeActionState,

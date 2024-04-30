@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:lets_go/features/details/models/places_data_model.dart';
+import 'package:lets_go/model/Places.dart';
 
 class ApiService {
 
