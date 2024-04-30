@@ -2,8 +2,8 @@ import 'dart:async';
 
 
 import 'package:bloc/bloc.dart';
-import 'package:lets_go/features/details/models/places_data_model.dart';
 import 'package:lets_go/features/details/service/apiService.dart';
+import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
 
 part 'details_event.dart';

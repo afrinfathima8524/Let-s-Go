@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lets_go/features/home/home_page.dart';
 void main (){
-  runApp(const Myapp());
+  runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
