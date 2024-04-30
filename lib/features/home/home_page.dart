@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/features/home/bloc/home_bloc.dart';
+import 'package:lets_go/features/home/components/placetile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,8 +14,117 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = TextEditingController();
+  final HomeBloc homeBloc = HomeBloc();
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    homeBloc.add(HomeInitialFetchEvent());
+    return Scaffold(
+      appBar: AppBar(
+        leading:
+            IconButton(onPressed: () {}, icon: const Icon(Icons.notes_rounded)),
+        actions: const [
+          CircleAvatar(
+            backgroundImage: NetworkImage(
+                "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(icon: Icon(Icons.explore),label: "Explore"),
+        BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined),label: "My Trip"),
+        BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favroite"),
+        // BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+      ]),
+      body: BlocConsumer<HomeBloc, HomeState>(
+        bloc: homeBloc,
+        listener: (context, state) {
+          if (state is PlaceDetailNavigatePageState) {
+            // Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
+          }
+        },
+        listenWhen: (previous, current) => current is HomeActionState,
+        buildWhen: (previous, current) => current is! HomeActionState,
+        builder: (context, state) {
+          switch (state.runtimeType) {
+            case HomeLoadingState:
+              return Scaffold(
+                body: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            case PLacesFetchSucessState:
+              final sucessState = state as PLacesFetchSucessState;
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 150, left: 15),
+                        child: Text(
+                          "What Are You Looking For?",
+                          style: GoogleFonts.poppins(fontSize: 25),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15, left: 15),
+                        child: TextField(
+                          controller: controller,
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.search),
+                              hintText: 'Search',
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(color: Colors.grey))),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 15,left: 15),
+                        child: Text("Experiences in the spotlight",style: GoogleFonts.poppins(fontSize:20,fontWeight:FontWeight.w500),),
+                      ),
+                      Expanded(
+                        child: GridView.builder(
+                          padding: EdgeInsets.symmetric(horizontal: 0,vertical: 0),
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: constraints.maxWidth > 760 ? 4 : 2,
+                            childAspectRatio: 1/1,
+                            crossAxisSpacing: 0,
+                            mainAxisSpacing: 0
+                          ),
+                          itemCount: sucessState.places.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var PlacesClicked = sucessState.places[index];
+                            return GestureDetector(
+                              onTap: () {},
+                              child: Column(
+                                children: [
+                                  PlaceTile(
+                                    placesDataModels: PlacesClicked,
+                                    homeBloc: homeBloc,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+            default:
+              return Container();
+          }
+        },
+      ),
+    );
   }
 }
