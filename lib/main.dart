@@ -73,9 +73,9 @@ class _MyAppState extends State<MyApp> {
       case 1:
         return MyTrips();
       case 2:
-        return FavroitePage();
+        return FavouritePage();
       case 3:
-        return FavroitePage();
+        return FavouritePage();
       default:
         return HomePage();
     }
