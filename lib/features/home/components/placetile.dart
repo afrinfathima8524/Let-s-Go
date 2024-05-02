@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,12 +25,15 @@ class _PlaceTileState extends State<PlaceTile> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(5),
-            child: Image.network(
-              widget.placesDataModels.image.toString(),
-              fit: BoxFit.cover,
-              height: 110,
+          AspectRatio(
+            aspectRatio: 16/10,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.network(
+                widget.placesDataModels.image.toString(),
+                fit: BoxFit.cover,
+                height: 110,
+              ),
             ),
           ),
           Text(widget.placesDataModels.name.toString(),style: GoogleFonts.poppins(fontSize:15,fontWeight:FontWeight.w500),),
