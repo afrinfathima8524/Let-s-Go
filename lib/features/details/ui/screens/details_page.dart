@@ -87,6 +87,10 @@ class _DetailsPageState extends State<DetailsPage> {
                                       onPressed: () {detailsBloc.add(DetailsToHomeNavigateEvent());},
                                       icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
                                 ),
+
+                   
+                                  
+                                  
                               ],
                             )
                           : Container(),
