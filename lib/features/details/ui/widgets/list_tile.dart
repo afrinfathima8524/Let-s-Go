@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lets_go/features/details/models/places_data_model.dart';
+
+import 'package:lets_go/model/Places.dart';
 class MyListTile extends StatelessWidget {
-  final PlacesDataModel list;
+  final PlacesDataModel place;
   const MyListTile({
-    super.key, required this.list,
+    super.key, required this.place,
   });
 
   @override
@@ -22,9 +23,9 @@ class MyListTile extends StatelessWidget {
                 width: 80,
                 height: 80,
                 child: Hero(
-                    tag:"img ",
+                    tag:"hero",
                     child: Image.network(
-                      "https://static.toiimg.com/img/107852737/Master.jpg",
+                      place.image.toString(),
                       fit: BoxFit.cover,
                     ))),
                     const SizedBox(width: 10,),
@@ -34,7 +35,7 @@ class MyListTile extends StatelessWidget {
               
               children: [
                  Text(
-                  list.name.toString(),
+                  place.name.toString(),
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -48,7 +49,7 @@ class MyListTile extends StatelessWidget {
                       size: 15,
                     ),
                     Text(
-                      list.location.toString(),
+                      place.location.toString(),
                       style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -59,7 +60,7 @@ class MyListTile extends StatelessWidget {
                 Row(
                   children: [
                     RatingBarIndicator(
-                      rating:list.rating as double,
+                      rating:place.rating as double,
                       itemBuilder: (context, index) =>
                           const Icon(
                         Icons.star,
@@ -70,7 +71,7 @@ class MyListTile extends StatelessWidget {
                       direction: Axis.horizontal,
                     ),
                      Text(
-                      "(${list.reviews.toString()})",
+                      "(${place.reviews.toString()})",
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.grey),
