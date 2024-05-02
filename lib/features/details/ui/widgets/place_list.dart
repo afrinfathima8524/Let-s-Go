@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/widgets/list_tile.dart';
 import 'package:lets_go/model/Places.dart';
 
 class PlaceList extends StatelessWidget {
   final List<PlacesDataModel> list;
-  const PlaceList({super.key, required this.list});
+  final DetailsBloc detailsBloc;
+  const PlaceList({super.key, required this.list, required this.detailsBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +32,13 @@ class PlaceList extends StatelessWidget {
             itemCount: list.length,
             itemBuilder: (context, index) {
               final place = list[index];
-              return MyListTile(
-                place: place,
+              return GestureDetector(
+                onTap: (){
+                 detailsBloc.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: place));
+                },
+                child: MyListTile(
+                  place: place,
+                ),
               );
             },
           ),

@@ -23,7 +23,7 @@ class MyListTile extends StatelessWidget {
                 width: 80,
                 height: 80,
                 child: Hero(
-                    tag:"img ",
+                    tag:"hero",
                     child: Image.network(
                       place.image.toString(),
                       fit: BoxFit.cover,

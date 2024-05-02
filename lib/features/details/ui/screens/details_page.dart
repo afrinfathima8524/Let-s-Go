@@ -43,7 +43,9 @@ class _DetailsPageState extends State<DetailsPage> {
       listenWhen: (previous, current) => current is DetailsActionState,
       buildWhen: (previous, current) => current is! DetailsActionState,
       listener: (context, state) {
-        // TODO: implement listener
+        if(state is DetailsToHomeNavigationState){
+          Navigator.of(context).pop();
+        }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
@@ -80,7 +82,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                  Padding(
                                   padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
                                   child: IconButton(
-                                      onPressed: () {},
+                                      onPressed: () {detailsBloc.add(DetailsToHomeNavigateEvent());},
                                       icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
                                 ),
                               ],
@@ -104,7 +106,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     height: 10,
                                   ),
                                   constraints.maxWidth < 900
-                                      ? PlaceList(list: successState.list)
+                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,)
                                       : Container(),
                                 ],
                               )
@@ -116,7 +118,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                   height: 50,
                                   child: Align(
                                     alignment: Alignment.centerLeft,
-                                    child: IconButton(onPressed: (){}, icon: const Icon(Icons.arrow_back,size: 25,))),
+                                    child: IconButton(onPressed: (){
+                                      detailsBloc.add(DetailsToHomeNavigateEvent());
+                                    }, icon: const Icon(Icons.arrow_back,size: 25,))),
                                 ),
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -153,7 +157,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                       Expanded(
                                           child:
-                                              PlaceList(list: successState.list)),
+                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,)),
                                     ],
                                   ),
                               ],
@@ -164,6 +168,117 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
             );
+
+            case DetailsPagePlaceDetailsChangedSuccessState:
+
+            final successState = state as DetailsPagePlaceDetailsChangedSuccessState;
+            final clickedPlace = successState.clickedPlaceDetails;
+            return LayoutBuilder(
+              builder: (context, constraints) => Scaffold(
+                body: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      constraints.maxWidth < 900
+                          ? Stack(
+                              children: [
+                               
+                                HeroBanner(
+                                  stream: multiStream,
+                                  clickedPlace:clickedPlace,
+                                ),
+                                 Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                                  child: IconButton(
+                                      onPressed: () {detailsBloc.add(DetailsToHomeNavigateEvent());},
+                                      icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
+                                ),
+                              ],
+                            )
+                          : Container(),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: constraints.maxWidth < 900
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  DetailSection(clickedPlace: clickedPlace),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  PhotosGrid(
+                                    clickedPlace: clickedPlace,
+                                    streamController: streamController,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  constraints.maxWidth < 900
+                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,)
+                                      : Container(),
+                                ],
+                              )
+                            : Column(
+                              children: [
+                                Container(
+                                  
+                                  width: double.infinity,
+                                  height: 50,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: IconButton(onPressed: (){
+                                      detailsBloc.add(DetailsToHomeNavigateEvent());
+                                    }, icon: const Icon(Icons.arrow_back,size: 25,))),
+                                ),
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      //row setup
+                                       
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            HeroBanner(
+                                              stream: multiStream,
+                                              clickedPlace: clickedPlace,
+                                            ),
+                                            DetailSection(
+                                                clickedPlace: clickedPlace),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            PhotosGrid(
+                                              clickedPlace: clickedPlace,
+                                              streamController: streamController,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                          child:
+                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,)),
+                                    ],
+                                  ),
+                              ],
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+
+
 
           default:
             return Container();

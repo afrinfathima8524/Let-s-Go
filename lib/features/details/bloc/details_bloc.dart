@@ -14,6 +14,8 @@ part 'details_state.dart';
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc() : super(DetailsInitial()) {
     on<DetailPageInitialEvent>(detailPageInitialEvent);
+    on<DetailsToHomeNavigateEvent>(detailsToHomeNavigateEvent);
+    on<DetailsPagePlaceDetailsChangeEvent>(detailsPagePlaceDetailsChangeEvent);
  
   }
   
@@ -42,4 +44,24 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   }
 
 
+
+  FutureOr<void> detailsToHomeNavigateEvent(DetailsToHomeNavigateEvent event, Emitter<DetailsState> emit) {
+    emit(DetailsToHomeNavigationState());
+  }
+
+  FutureOr<void> detailsPagePlaceDetailsChangeEvent(DetailsPagePlaceDetailsChangeEvent event, Emitter<DetailsState> emit) async {
+
+    placeDetail = event.clickedPlace;
+
+    final apiService = ApiService();   //get response
+
+    List<PlacesDataModel> places = [] ;  //declare list as empty.
+
+
+ final response = await apiService.fetchData();// get list from function
+
+     places = response; //store the List of data.
+
+    emit(DetailsPagePlaceDetailsChangedSuccessState(clickedPlaceDetails: placeDetail,list:places));
+  }
 }

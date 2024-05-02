@@ -49,7 +49,7 @@ class PhotosGrid extends StatelessWidget {
                             .add(clickedPlace.photos![index].toString());
                       },
                       child: Hero(
-                          tag: "hero",
+                          tag: "banner",
                           child: Image.network(
                             clickedPlace.photos![index].toString(),
                             fit: BoxFit.cover,

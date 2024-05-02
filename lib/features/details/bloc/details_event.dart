@@ -9,5 +9,14 @@ class DetailPageInitialEvent extends DetailsEvent{}
 
 
 //interacting events
+class DetailsPagePlaceDetailsChangeEvent extends DetailsEvent{
+  final PlacesDataModel clickedPlace;
+
+  DetailsPagePlaceDetailsChangeEvent({required this.clickedPlace});
+}
+
+
+//navigations
+class DetailsToHomeNavigateEvent extends DetailsEvent{}
 
 
