@@ -49,14 +49,16 @@ class _DetailsPageState extends State<DetailsPage> {
       },
       builder: (context, state) {
         switch (state.runtimeType) {
+
+   
+   
           case DetailsPageDetailsLoadingState:
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(
-                  color: Colors.blue,
-                ),
-              ),
-            );
+
+          return const Scaffold(
+            body: Center(child: 
+            CircularProgressIndicator(),),
+          );
+    
 
           case DetailsPageDetailsLoadErrorState:
             return const Scaffold(body: Center(child: Text("Page Not Found")));
@@ -106,13 +108,13 @@ class _DetailsPageState extends State<DetailsPage> {
                                     height: 10,
                                   ),
                                   constraints.maxWidth < 900
-                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,)
+                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)
                                       : Container(),
                                 ],
                               )
                             : Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   
                                   width: double.infinity,
                                   height: 50,
@@ -157,7 +159,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                       Expanded(
                                           child:
-                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,)),
+                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)),
                                     ],
                                   ),
                               ],
@@ -215,13 +217,13 @@ class _DetailsPageState extends State<DetailsPage> {
                                     height: 10,
                                   ),
                                   constraints.maxWidth < 900
-                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,)
+                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)
                                       : Container(),
                                 ],
                               )
                             : Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   
                                   width: double.infinity,
                                   height: 50,
@@ -266,7 +268,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                       Expanded(
                                           child:
-                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,)),
+                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)),
                                     ],
                                   ),
                               ],

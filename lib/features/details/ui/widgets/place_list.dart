@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/widgets/list_tile.dart';
@@ -6,7 +8,8 @@ import 'package:lets_go/model/Places.dart';
 class PlaceList extends StatelessWidget {
   final List<PlacesDataModel> list;
   final DetailsBloc detailsBloc;
-  const PlaceList({super.key, required this.list, required this.detailsBloc});
+  final StreamController streamController;
+  const PlaceList({super.key, required this.list, required this.detailsBloc, required this.streamController});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +38,7 @@ class PlaceList extends StatelessWidget {
               return GestureDetector(
                 onTap: (){
                  detailsBloc.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: place));
+                 streamController.add(place.image);
                 },
                 child: MyListTile(
                   place: place,

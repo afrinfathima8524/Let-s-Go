@@ -48,12 +48,10 @@ class PhotosGrid extends StatelessWidget {
                         streamController
                             .add(clickedPlace.photos![index].toString());
                       },
-                      child: Hero(
-                          tag: "banner",
-                          child: Image.network(
-                            clickedPlace.photos![index].toString(),
-                            fit: BoxFit.cover,
-                          )),
+                      child: Image.network(
+                        clickedPlace.photos![index].toString(),
+                        fit: BoxFit.cover,
+                      ),
                     );
                   },
                 ),

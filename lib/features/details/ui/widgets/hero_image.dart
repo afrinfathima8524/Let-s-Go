@@ -14,6 +14,7 @@ class HeroBanner extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) => StreamBuilder<String>(
           stream: stream,
+          initialData:  clickedPlace.image.toString(),
             builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Container(
@@ -23,12 +24,10 @@ class HeroBanner extends StatelessWidget {
                         ? 350
                         : 450,
                 width: double.infinity,
-                child: Hero(
-                    tag: "banner",
-                    child: Image.network(
-                      snapshot.data.toString(),
-                      fit: BoxFit.cover,
-                    )),
+                child: Image.network(
+                  snapshot.data.toString(),
+                  fit: BoxFit.cover,
+                ),
               );
             } else {
                return Container(
@@ -38,12 +37,10 @@ class HeroBanner extends StatelessWidget {
                         ? 350
                         : 450,
                 width: double.infinity,
-                child: Hero(
-                    tag: "hero",
-                    child: Image.network(
-                      clickedPlace.image.toString(),
-                      fit: BoxFit.cover,
-                    )),
+                child: Image.network(
+                  clickedPlace.image.toString(),
+                  fit: BoxFit.cover,
+                ),
               );
             }
           }),

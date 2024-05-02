@@ -21,12 +21,10 @@ class MyListTile extends StatelessWidget {
             SizedBox(
                 width: 80,
                 height: 80,
-                child: Hero(
-                    tag:"hero",
-                    child: Image.network(
-                      place.image.toString(),
-                      fit: BoxFit.cover,
-                    ))),
+                child: Image.network(
+                  place.image.toString(),
+                  fit: BoxFit.cover,
+                )),
                     const SizedBox(width: 10,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
