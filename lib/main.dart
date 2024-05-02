@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lets_go/features/favroite/favroite_page.dart';
+import 'package:lets_go/features/favourite/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
