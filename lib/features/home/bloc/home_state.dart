@@ -15,6 +15,6 @@ class PLacesFetchSucessState extends HomeState {
   });
 }
 
-
+class NavigateToFavroitePageState extends HomeActionState{}
 class PlaceDetailNavigatePageState extends HomeActionState{}
 
