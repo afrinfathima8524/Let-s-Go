@@ -26,17 +26,21 @@ class _HomePageState extends State<HomePage> {
         leading:
             IconButton(onPressed: () {}, icon: const Icon(Icons.notes_rounded)),
         actions: const [
-          CircleAvatar(
-            backgroundImage: NetworkImage(
-                "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
+          Padding(
+            padding: EdgeInsets.only(right: 15),
+            child: CircleAvatar(
+              backgroundColor: Colors.black,
+              backgroundImage: NetworkImage(
+                  "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
+            ),
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: const [
+      bottomNavigationBar: BottomNavigationBar(type: BottomNavigationBarType.fixed, items: const [
         BottomNavigationBarItem(icon: Icon(Icons.explore),label: "Explore"),
         BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined),label: "My Trip"),
         BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favroite"),
-        // BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
+        BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
       ]),
       body: BlocConsumer<HomeBloc, HomeState>(
         bloc: homeBloc,
