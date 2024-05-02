@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/model/Places.dart';
 
 class DetailSection extends StatelessWidget {
@@ -21,17 +22,18 @@ class DetailSection extends StatelessWidget {
             ),
             Text(
               clickedPlace.location.toString(),
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.grey),
-            ),
+              style: GoogleFonts.poppins(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey),)
           ],
         ),
         Text(
           clickedPlace.name.toString(),
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-          ),
+          style:  GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                         ),
         ),
         Row(
           children: [
@@ -47,8 +49,10 @@ class DetailSection extends StatelessWidget {
             ),
             Text(
               "(${clickedPlace.reviews.toString()})",
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold, color: Colors.grey),
+              style:  GoogleFonts.poppins(
+                         color:Colors.grey,
+                          fontSize:12,
+                         ),
             ),
           ],
         ),
@@ -57,9 +61,10 @@ class DetailSection extends StatelessWidget {
         ),
         Text(
           clickedPlace.description.toString() + clickedPlace.funFact.toString(),
-          style: const TextStyle(
-            fontSize: 16,
-          ),
+          style: GoogleFonts.poppins(
+                          fontSize: 16,
+                         
+                         ),
         ),
       ],
     );

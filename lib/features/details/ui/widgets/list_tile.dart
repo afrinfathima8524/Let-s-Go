@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/model/Places.dart';
 class MyListTile extends StatelessWidget {
   final PlacesDataModel place;
@@ -10,7 +11,7 @@ class MyListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
+      padding: const EdgeInsets.only(bottom: 10),
       child: SizedBox(
        // color: Colors.amberAccent,
         width: double.infinity,
@@ -33,22 +34,22 @@ class MyListTile extends StatelessWidget {
               children: [
                  Text(
                   place.name.toString(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
+                  style:  GoogleFonts.poppins(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                         ),
                 ),
                  Row(
                   children: [
                     const Icon(
                       Icons.location_on,
                       color: Colors.grey,
-                      size: 15,
+                      size: 14,
                     ),
                     Text(
                       place.location.toString(),
-                      style: const TextStyle(
-                          fontSize: 16,
+                      style: GoogleFonts.poppins(
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey),
                     ),
@@ -69,8 +70,8 @@ class MyListTile extends StatelessWidget {
                     ),
                      Text(
                       "(${place.reviews.toString()})",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
+                      style:  GoogleFonts.poppins(
+                         fontSize:12,
                           color: Colors.grey),
                     ),
                   ],
