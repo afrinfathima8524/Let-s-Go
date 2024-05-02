@@ -12,7 +12,7 @@ abstract class DetailsActionState extends DetailsState{} //actionState
 class DetailsPageDetailsLoadingState extends DetailsState{} //loading    
 class DetailsPageDetailsLoadErrorState extends DetailsState{}//error
 class DetailsPageDetailsLoadedSuccessState extends DetailsState{
-  final List<PlacesDataModel> list;
+  final PlacesDataModel details;
 
-  DetailsPageDetailsLoadedSuccessState({required this.list});
+  DetailsPageDetailsLoadedSuccessState({required this.details});
 }//loaded success

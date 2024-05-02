@@ -6,8 +6,15 @@ sealed class HomeActionState extends HomeState{}
 
 final class HomeInitial extends HomeState {}
 class HomeLoadingState extends HomeState{}
-class PLacesFetchSucessState extends HomeState{
+class PLacesFetchSucessState extends HomeState {
   final List<PlacesDataModel> places;
-  PLacesFetchSucessState({required this.places});
+  final List<PlacesDataModel>? filteredPlace;
+  PLacesFetchSucessState({
+    required this.places,
+    this.filteredPlace,
+  });
 }
+
+
 class PlaceDetailNavigatePageState extends HomeActionState{}
+

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/components/placetile.dart';
+import 'package:lets_go/model/Places.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(items: [
+      bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.explore),label: "Explore"),
         BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined),label: "My Trip"),
         BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favroite"),
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         listener: (context, state) {
           if (state is PlaceDetailNavigatePageState) {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsPage()));
+             Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsPage()));
           }
         },
         listenWhen: (previous, current) => current is HomeActionState,
@@ -49,13 +50,14 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case HomeLoadingState:
-              return Scaffold(
-                body: const Center(
+              return const Scaffold(
+                body: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
             case PLacesFetchSucessState:
               final sucessState = state as PLacesFetchSucessState;
+              final List<PlacesDataModel> places = sucessState.filteredPlace??sucessState.places;
               return LayoutBuilder(
                 builder: (context, constraints) {
                   return Column(
@@ -74,6 +76,9 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.only(right: 15, left: 15),
                         child: TextField(
+                          onChanged: (value) {
+                            homeBloc.add(FilterPlaceEvent(places:sucessState.places, filterValue: value));
+                          },
                           controller: controller,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.search),
@@ -100,11 +105,13 @@ class _HomePageState extends State<HomePage> {
                             crossAxisSpacing: 0,
                             mainAxisSpacing: 0
                           ),
-                          itemCount: sucessState.places.length,
+                          itemCount: places.length,
                           itemBuilder: (BuildContext context, int index) {
-                            var PlacesClicked = sucessState.places[index];
+                            var PlacesClicked = places[index];
                             return GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                homeBloc.add(HomePagePLaceClickedEvent(placeClicked: PlacesClicked));
+                              },
                               child: Column(
                                 children: [
                                   PlaceTile(
