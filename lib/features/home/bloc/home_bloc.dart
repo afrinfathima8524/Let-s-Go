@@ -14,6 +14,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitialFetchEvent>(homeInitialFetchEvent);
     on<HomePagePLaceClickedEvent>(homePagePLaceClickedEvent);
     on<FilterPlaceEvent>(filterPlaceEvent);
+    on<NavigateToFavroitePageEvent>(navigateToFavroitePageEvent);
   }
 
   FutureOr<void> homeInitialFetchEvent(
@@ -31,5 +32,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> filterPlaceEvent(FilterPlaceEvent event, Emitter<HomeState> emit) {
     final filteredPlaces = event.places.where((place)=>place.name!.toLowerCase().contains(event.filterValue.toLowerCase())).toList();
     emit(PLacesFetchSucessState(places: event.places,filteredPlace: filteredPlaces));
+  }
+
+  FutureOr<void> navigateToFavroitePageEvent(NavigateToFavroitePageEvent event, Emitter<HomeState> emit) {
+    emit(NavigateToFavroitePageState());
   }
 }

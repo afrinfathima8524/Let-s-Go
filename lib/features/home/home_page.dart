@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
+import 'package:lets_go/features/favroite/favroite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/components/placetile.dart';
 import 'package:lets_go/model/Places.dart';
@@ -22,31 +23,14 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     homeBloc.add(HomeInitialFetchEvent());
     return Scaffold(
-      appBar: AppBar(
-        leading:
-            IconButton(onPressed: () {}, icon: const Icon(Icons.notes_rounded)),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 15),
-            child: CircleAvatar(
-              backgroundColor: Colors.black,
-              backgroundImage: NetworkImage(
-                  "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(type: BottomNavigationBarType.fixed, items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.explore),label: "Explore"),
-        BottomNavigationBarItem(icon: Icon(Icons.calendar_today_outlined),label: "My Trip"),
-        BottomNavigationBarItem(icon: Icon(Icons.favorite),label: "Favroite"),
-        BottomNavigationBarItem(icon: Icon(Icons.person),label: "Profile"),
-      ]),
       body: BlocConsumer<HomeBloc, HomeState>(
         bloc: homeBloc,
         listener: (context, state) {
           if (state is PlaceDetailNavigatePageState) {
              Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsPage()));
+          }
+          if (state is NavigateToFavroitePageState) {
+             Navigator.push(context, MaterialPageRoute(builder: (context)=> FavroitePage()));
           }
         },
         listenWhen: (previous, current) => current is HomeActionState,

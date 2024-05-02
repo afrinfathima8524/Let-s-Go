@@ -10,6 +10,6 @@ class HomePagePLaceClickedEvent extends HomeEvent{
 class FilterPlaceEvent extends HomeEvent{
   final List<PlacesDataModel> places;
   final String filterValue;
-
   FilterPlaceEvent({required this.places, required this.filterValue});
 }
+class NavigateToFavroitePageEvent extends HomeEvent{}
