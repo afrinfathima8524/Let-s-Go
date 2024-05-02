@@ -13,6 +13,7 @@ class DetailsPageDetailsLoadingState extends DetailsState{} //loading
 class DetailsPageDetailsLoadErrorState extends DetailsState{}//error
 class DetailsPageDetailsLoadedSuccessState extends DetailsState{
   final PlacesDataModel details;
+  final List<PlacesDataModel> list;
 
-  DetailsPageDetailsLoadedSuccessState({required this.details});
+  DetailsPageDetailsLoadedSuccessState( {required this.details,required this.list,});
 }//loaded success

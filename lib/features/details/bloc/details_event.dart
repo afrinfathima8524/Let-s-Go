@@ -10,4 +10,4 @@ class DetailPageInitialEvent extends DetailsEvent{}
 
 //interacting events
 
-class DetailPagePhotosClickedEvent extends DetailsEvent{}
+

@@ -14,6 +14,7 @@ part 'details_state.dart';
 class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
   DetailsBloc() : super(DetailsInitial()) {
     on<DetailPageInitialEvent>(detailPageInitialEvent);
+ 
   }
   
   
@@ -36,7 +37,9 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     final index = placeDetail.id as int;
 
-   emit(DetailsPageDetailsLoadedSuccessState(details:places[index - 1]));
+   emit(DetailsPageDetailsLoadedSuccessState(details:places[index - 1],list: places));
 
   }
+
+
 }
