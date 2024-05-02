@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:lets_go/model/Places.dart';
 
 class PlacesRepo {
-  static Future<List<PlacesDataModel>> fetchPlace()async{
+  static Future<List<PlacesDataModel>> fetchPlace({String? query})async{
     var client=http.Client();
     List<PlacesDataModel> places=[];
     try{
@@ -12,6 +12,9 @@ class PlacesRepo {
       for (var i = 0; i < result.length; i++) {
         PlacesDataModel place=PlacesDataModel.fromJson(result[i] as Map<String,dynamic>);
         places.add(place);
+        if (query != null) {
+          places=places.where((element) => element.name!.toLowerCase().contains(query.toLowerCase())).toList();
+        }
       }
       return places;
     }

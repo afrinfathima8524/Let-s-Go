@@ -13,25 +13,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
     on<HomeInitialFetchEvent>(homeInitialFetchEvent);
     on<HomePagePLaceClickedEvent>(homePagePLaceClickedEvent);
+    on<FilterPlaceEvent>(filterPlaceEvent);
   }
 
   FutureOr<void> homeInitialFetchEvent(
       HomeInitialFetchEvent event, Emitter<HomeState> emit) async{
         emit(HomeLoadingState());
         List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
-        emit(PLacesFetchSucessState(places: places));
+        emit(PLacesFetchSucessState(places: places, filteredPlace: null));
       }
 
   FutureOr<void> homePagePLaceClickedEvent(HomePagePLaceClickedEvent event, Emitter<HomeState> emit) {
-
     placeDetail = event.placeClicked;
-
     emit(PlaceDetailNavigatePageState());
-
-    
-
-
   }
-
-
+  FutureOr<void> filterPlaceEvent(FilterPlaceEvent event, Emitter<HomeState> emit) {
+    final filteredPlaces = event.places.where((place)=>place.name!.toLowerCase().contains(event.filterValue.toLowerCase())).toList();
+    emit(PLacesFetchSucessState(places: event.places,filteredPlace: filteredPlaces));
+  }
 }
