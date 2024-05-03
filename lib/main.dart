@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lets_go/features/favourite/favourite_page.dart';
+import 'package:lets_go/features/favourite/ui/screens/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_outlined), label: "My Trip"),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: "Favroite"),
+                icon: Icon(Icons.favorite), label: "Favourite"),
             BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
           ],
           type: BottomNavigationBarType.shifting,
@@ -73,9 +73,9 @@ class _MyAppState extends State<MyApp> {
       case 1:
         return MyTrips();
       case 2:
-        return FavouritePage();
+        return FavoritePage();
       case 3:
-        return FavouritePage();
+        return FavoritePage();
       default:
         return HomePage();
     }

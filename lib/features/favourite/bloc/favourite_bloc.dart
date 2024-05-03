@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:lets_go/features/favourite/models/favourite_model.dart';
+import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
 
 part 'favourite_event.dart';
@@ -17,7 +17,7 @@ Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
   }
 
   Stream<FavouriteState> _mapLoadFavouritesToState() async* {
-    List<Model> favourites = [
+    List<PlacesDataModel> favourites = [
       
      
     ];
@@ -25,7 +25,7 @@ Stream<FavouriteState> mapEventToState(FavouriteEvent event) async* {
     yield FavouritesLoadedState(favourites: favourites);
   }
 
-  Stream<FavouriteState> _mapRemoveFromFavouritesToState(Model favoriteItem) async* {
+  Stream<FavouriteState> _mapRemoveFromFavouritesToState(PlacesDataModel favoriteItem) async* {
 
     print('Removed from favorites: ${favoriteItem.name}');
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
-import 'package:lets_go/features/favourite/models/favourite_model.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
+import 'package:lets_go/model/Places.dart'; 
 
 class FavoritePage extends StatefulWidget {
   const FavoritePage({Key? key}) : super(key: key);
@@ -19,6 +19,7 @@ class _FavoritePageState extends State<FavoritePage> {
     _favouriteBloc.add(LoadFavouritesEvent());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +37,7 @@ class _FavoritePageState extends State<FavoritePage> {
             return ListView.builder(
               itemCount: state.favourites.length,
               itemBuilder: (context, index) {
-                final Model favoriteItem = state.favourites[index];
+                final PlacesDataModel favoriteItem = state.favourites[index];
                 return ListTile(
                   title: Text(favoriteItem.name ?? ''),
                   subtitle: Text(favoriteItem.location ?? ''),

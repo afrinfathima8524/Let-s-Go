@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lets_go/features/favourite/models/favourite_model.dart';
+import 'package:lets_go/model/places.dart';
 
 class FavouritesSection extends StatelessWidget {
-  final List<Model> favoriteItems;
+  final List<PlacesDataModel> favoriteItems;
 
   const FavouritesSection({Key? key, required this.favoriteItems}) : super(key: key);
 
@@ -48,12 +48,10 @@ class FavouritesSection extends StatelessWidget {
               ],
             ),
             onTap: () {
-              // Handle tap on favorite item
             },
             trailing: IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                // Handle delete action
               },
             ),
           ),

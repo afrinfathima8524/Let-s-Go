@@ -6,7 +6,7 @@ abstract class FavouriteEvent {}
 class LoadFavouritesEvent extends FavouriteEvent {}
 
 class RemoveFromFavouritesEvent extends FavouriteEvent {
-  final Model favoriteItem;
+  final PlacesDataModel favoriteItem;
 
   RemoveFromFavouritesEvent(this.favoriteItem);
 }

@@ -8,7 +8,7 @@ class FavouriteInitial extends FavouriteState {}
 class FavouritesLoadingState extends FavouriteState {}
 
 class FavouritesLoadedState extends FavouriteState {
-  final List<Model> favourites;
+  final List<PlacesDataModel> favourites;
 
   FavouritesLoadedState({required this.favourites});
 }

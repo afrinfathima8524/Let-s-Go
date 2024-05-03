@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
-import 'package:lets_go/features/favroite/favroite_page.dart';
+import 'package:lets_go/features/favourite/ui/screens/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/components/placetile.dart';
 import 'package:lets_go/model/Places.dart';
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
              Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsPage()));
           }
           if (state is NavigateToFavroitePageState) {
-             Navigator.push(context, MaterialPageRoute(builder: (context)=> FavroitePage()));
+             Navigator.push(context, MaterialPageRoute(builder: (context)=> FavoritePage()));
           }
         },
         listenWhen: (previous, current) => current is HomeActionState,
