@@ -56,7 +56,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
           return const Scaffold(
             body: Center(child: 
-            CircularProgressIndicator(),),
+            CircularProgressIndicator(backgroundColor: Colors.grey,color: Colors.blue,),),
           );
     
 
@@ -163,12 +163,15 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                       Expanded(
                                           child:
-                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)),
+                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,),
+                                              ),
+                                             
                                     ],
                                   ),
                               ],
                             ),
                       ),
+                      
                     ],
                   ),
                 ),

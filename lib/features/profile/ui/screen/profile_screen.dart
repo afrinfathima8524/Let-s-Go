@@ -93,12 +93,13 @@ class _ProfilePageState extends State<ProfilePage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Container(
-                height: 310,
+                height: 350,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
                   // borderRadius:const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                 ),
                 child: ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: profileItems.length,
                   itemBuilder: (context, index) {
               
