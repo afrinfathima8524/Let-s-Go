@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_go/features/favroite/favroite_page.dart';
+import 'package:lets_go/features/favroite/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
@@ -41,19 +41,21 @@ class _HomeState extends State<Home> {
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.white,
           items: const [
             BottomNavigationBarItem(
-                icon: Icon(Icons.explore),
-                label: "Explore",
-                backgroundColor: Color.fromARGB(255, 110, 171, 220),),
+                icon: Icon(Icons.explore,),
+                label: "Explore",),
             BottomNavigationBarItem(
-                icon: Icon(Icons.calendar_today_outlined), label: "My Trip"),
+                icon: Icon(Icons.calendar_today_outlined,), label: "My Trip",),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: "Favroite"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+                icon: Icon(Icons.favorite,), label: "Favroite",),
+            BottomNavigationBarItem(icon: Icon(Icons.person,), label: "Profile",),
           ],
-          type: BottomNavigationBarType.shifting,
+          type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
+          // selectedItemColor: Colors.blue.shade400,
+          fixedColor: Colors.blue.shade400,
           onTap: _onItemTapped,
           elevation: 5,
         ),
