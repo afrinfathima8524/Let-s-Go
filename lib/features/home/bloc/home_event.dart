@@ -12,4 +12,5 @@ class FilterPlaceEvent extends HomeEvent{
   final String filterValue;
   FilterPlaceEvent({required this.places, required this.filterValue});
 }
+class ClearSearchEvent extends HomeEvent{}
 class NavigateToFavroitePageEvent extends HomeEvent{}
