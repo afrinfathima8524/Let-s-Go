@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/profile/data/profile_list.dart';
 
@@ -20,15 +21,35 @@ class _ProfilePageState extends State<ProfilePage> {
            
            children: [
              
-                const CircleAvatar(
-                radius: 55,
-               //backgroundColor: Colors.black,
-               backgroundImage:NetworkImage("https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3407.jpg",),),
+                Stack(
+                  children: [
+                    const CircleAvatar(
+                    radius: 55,
+                                   //backgroundColor: Colors.black,
+                                   backgroundImage:NetworkImage("https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3407.jpg",),),
+
+                                   Positioned(
+                                     left: 85,
+                                     top: 75,
+                                     child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.blue,
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      width: 25,
+                                      height: 25,
+                                       child:const Center(
+                                        child: Icon(Icons.edit,color: Colors.white,size: 12,),
+                                       )
+                                     ),
+                                   )
+                  ],
+                ),
           
               Text("Mathan Kumar",style: GoogleFonts.poppins(fontSize:18,fontWeight:FontWeight.bold)),
               Text("Chennai",style: GoogleFonts.poppins(fontSize:14,fontWeight:FontWeight.bold,color:Colors.blue)),
                       
-            const SizedBox(height: 10,),
+            const SizedBox(height: 20,),
         
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -37,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
                
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
+                 
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 5),
@@ -75,7 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 310,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
+                  // borderRadius:const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20)),
                 ),
                 child: ListView.builder(
                   itemCount: profileItems.length,
@@ -87,11 +108,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       ListTile(
                           leading:  Icon(item.icon),
-                          title: Text(item.itemName,style: GoogleFonts.poppins(fontSize:18,fontWeight:FontWeight.bold,color:Colors.black)),
+                          title: Text(item.itemName,style: GoogleFonts.poppins(fontSize:16,fontWeight:FontWeight.bold,color:Colors.black)),
                           trailing: const Icon(Icons.arrow_forward_ios,),
                         ),
-                       item.itemName != "Version"?
-                        Divider():Container(),
+                       item.itemName != "Version" ?
+                        const Divider(thickness: 10,color: Colors.white,):Container(),
                       
                         
                     ],
