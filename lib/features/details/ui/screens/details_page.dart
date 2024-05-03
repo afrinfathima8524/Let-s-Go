@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/widgets/details_section.dart';
@@ -45,13 +46,21 @@ class _DetailsPageState extends State<DetailsPage> {
       listener: (context, state) {
         if(state is DetailsToHomeNavigationState){
           Navigator.of(context).pop();
+        }else if(state is DetailsPageFavAddedSuccessState){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 100),
+            content:Text("Place delightful to you!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
+        }else if(state is DetailsPageFavRemovedSuccessState){
+
+           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 100),
+            content:Text("Sorry to see you go!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
+
         }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
 
-   
-   
           case DetailsPageDetailsLoadingState:
 
           return const Scaffold(
