@@ -28,12 +28,22 @@ class DetailSection extends StatelessWidget {
                           color: Colors.grey),)
           ],
         ),
-        Text(
-          clickedPlace.name.toString(),
-          style:  GoogleFonts.poppins(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                         ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              clickedPlace.name.toString(),
+              style:  GoogleFonts.poppins(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                             ),
+            ),
+             IconButton(
+            onPressed: () {},
+           icon: const Icon(Icons.favorite_border_outlined,color: Colors.black,size: 25,)),
+           
+             
+          ],
         ),
         Row(
           children: [

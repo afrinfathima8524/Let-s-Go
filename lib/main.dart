@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lets_go/get_started/get_started.dart';
+import 'package:lets_go/features/home/bloc/home_bloc.dart';
+import 'package:lets_go/features/home/home_page.dart';
+import 'package:lets_go/features/my_trip/trips.dart';
 
 void main() {
   runApp(const MyApp());
