@@ -4,6 +4,8 @@ import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
 
+import 'features/profile/ui/screen/profile_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -75,7 +77,7 @@ class _MyAppState extends State<MyApp> {
       case 2:
         return FavroitePage();
       case 3:
-        return FavroitePage();
+        return ProfilePage();
       default:
         return HomePage();
     }
