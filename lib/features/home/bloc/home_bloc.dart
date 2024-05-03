@@ -15,26 +15,41 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomePagePLaceClickedEvent>(homePagePLaceClickedEvent);
     on<FilterPlaceEvent>(filterPlaceEvent);
     on<NavigateToFavroitePageEvent>(navigateToFavroitePageEvent);
+    on<ClearSearchEvent>(clearSearchEvent);
   }
 
   FutureOr<void> homeInitialFetchEvent(
-      HomeInitialFetchEvent event, Emitter<HomeState> emit) async{
-        emit(HomeLoadingState());
-        List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
-        await Future.delayed(const Duration(seconds: 1));
-        emit(PLacesFetchSucessState(places: places, filteredPlace: null));
-      }
+      HomeInitialFetchEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState());
+    List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
+    await Future.delayed(const Duration(seconds: 1));
+    emit(PLacesFetchSucessState(places: places, filteredPlace: null));
+  }
 
-  FutureOr<void> homePagePLaceClickedEvent(HomePagePLaceClickedEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> homePagePLaceClickedEvent(
+      HomePagePLaceClickedEvent event, Emitter<HomeState> emit) {
     placeDetail = event.placeClicked;
     emit(PlaceDetailNavigatePageState());
   }
-  FutureOr<void> filterPlaceEvent(FilterPlaceEvent event, Emitter<HomeState> emit) {
-    final filteredPlaces = event.places.where((place)=>place.name!.toLowerCase().contains(event.filterValue.toLowerCase())).toList();
-    emit(PLacesFetchSucessState(places: event.places,filteredPlace: filteredPlaces));
+
+  FutureOr<void> filterPlaceEvent(
+      FilterPlaceEvent event, Emitter<HomeState> emit) {
+    final filteredPlaces = event.places
+        .where((place) =>
+            place.name!.toLowerCase().contains(event.filterValue.toLowerCase()))
+        .toList();
+    emit(PLacesFetchSucessState(
+        places: event.places, filteredPlace: filteredPlaces));
   }
 
-  FutureOr<void> navigateToFavroitePageEvent(NavigateToFavroitePageEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> navigateToFavroitePageEvent(
+      NavigateToFavroitePageEvent event, Emitter<HomeState> emit) {
     emit(NavigateToFavroitePageState());
+  }
+
+  FutureOr<void> clearSearchEvent(
+      ClearSearchEvent event, Emitter<HomeState> emit) async {
+    List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
+    emit(PLacesFetchSucessState(places: places, filteredPlace: null));
   }
 }

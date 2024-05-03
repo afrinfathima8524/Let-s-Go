@@ -67,6 +67,8 @@ class _HomePageState extends State<HomePage> {
                           decoration: InputDecoration(
                               suffixIcon: IconButton(onPressed: (){
                                 controller.clear();
+                                homeBloc.add(ClearSearchEvent());
+                                FocusScope.of(context).unfocus();
                               }, icon: Icon(Icons.close)),
                               prefixIcon: Icon(Icons.search),
                               hintText: 'Search',
