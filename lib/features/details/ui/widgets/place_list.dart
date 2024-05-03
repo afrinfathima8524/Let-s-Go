@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
+import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lets_go/features/details/ui/widgets/list_tile.dart';
 import 'package:lets_go/model/Places.dart';
 
@@ -44,7 +45,12 @@ class PlaceList extends StatelessWidget {
                 onTap: () {
                   detailsBloc.add(
                       DetailsPagePlaceDetailsChangeEvent(clickedPlace: place));
+
                   streamController.add(place.image);
+
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder:(context) => DetailsPage(),));
+
+                
                 },
                 child: MyListTile(
                   place: place,
