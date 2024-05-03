@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/get_started/get_started.dart';
 import 'package:flutter/services.dart';
-import 'package:lets_go/features/home/ui/home.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,17 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-
-     Future.delayed(const Duration(seconds: 2),(){
-          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> const Home(),),);
+     Future.delayed(const Duration(seconds: 5),(){
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> const GetStarted(),),);
      });
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: SystemUiOverlay.values);
-    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -35,8 +27,13 @@ class _SplashScreenState extends State<SplashScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(
-            child: Image.network("https://clipart-library.com/images_k/travel-clipart-transparent/travel-clipart-transparent-25.png",fit: BoxFit.cover,),
+          Column(
+            children: [
+              Center(
+                child: Image.asset("assets/logo.png",fit: BoxFit.cover,),
+              ),
+              Text("Let's Goooooo",style: GoogleFonts.poppins(fontSize:40,color:Colors.blue,fontWeight:FontWeight.bold),)
+            ],
           )
         ],
       ),
