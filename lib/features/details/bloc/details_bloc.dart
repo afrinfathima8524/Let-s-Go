@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:lets_go/features/details/data/details_data.dart';
+import 'package:lets_go/features/details/data/fav_data.dart';
 import 'package:lets_go/features/details/service/apiService.dart';
 import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
@@ -15,6 +16,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<DetailPageInitialEvent>(detailPageInitialEvent);
     on<DetailsToHomeNavigateEvent>(detailsToHomeNavigateEvent);
     on<DetailsPagePlaceDetailsChangeEvent>(detailsPagePlaceDetailsChangeEvent);
+    on<DetailPageFavoriteAddEvent>(detailPageFavoriteAddEvent);
  
   }
   
@@ -62,5 +64,23 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
      places = response; //store the List of data.
 
     emit(DetailsPagePlaceDetailsChangedSuccessState(clickedPlaceDetails: placeDetail,list:places));
+  }
+
+  FutureOr<void> detailPageFavoriteAddEvent(DetailPageFavoriteAddEvent event, Emitter<DetailsState> emit) {
+
+    if(!favoritePlaces.contains(event.favorited)){
+
+      favoritePlaces.add(event.favorited);
+
+      emit(DetailsPageFavAddedSuccessState());
+
+    }else{
+      favoritePlaces.remove(event.favorited);
+      emit(DetailsPageFavRemovedSuccessState());
+    }
+
+    print(favoritePlaces);
+  
+
   }
 }
