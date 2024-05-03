@@ -15,6 +15,15 @@ class DetailsPagePlaceDetailsChangeEvent extends DetailsEvent{
   DetailsPagePlaceDetailsChangeEvent({required this.clickedPlace});
 }
 
+//favorite 
+
+class DetailPageFavoriteAddEvent extends DetailsEvent{
+  final PlacesDataModel favorited;
+
+  DetailPageFavoriteAddEvent({required this.favorited});
+  
+}
+
 
 //navigations
 class DetailsToHomeNavigateEvent extends DetailsEvent{}
