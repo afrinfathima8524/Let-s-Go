@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
+import 'package:lets_go/features/details/ui/widgets/details_section.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lets_go/model/Places.dart'; 
 
 class FavoritePage extends StatefulWidget {
-  const FavoritePage({Key? key}) : super(key: key);
+  final PlacesDataModel clickedPlace;
+
+  const FavoritePage({Key? key, required this.clickedPlace}) : super(key: key);
 
   @override
   State<FavoritePage> createState() => _FavoritePageState();
 }
-
 class _FavoritePageState extends State<FavoritePage> {
   final FavouriteBloc _favouriteBloc = FavouriteBloc();
-
   @override
   void initState() {
     _favouriteBloc.add(LoadFavouritesEvent());
@@ -50,7 +51,7 @@ class _FavoritePageState extends State<FavoritePage> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => DetailsPage(favoriteItem: favoriteItem)),
+                      MaterialPageRoute(builder: (context) => DetailsPage()),
                     );
                   },
                   trailing: IconButton(

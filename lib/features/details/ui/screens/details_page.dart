@@ -12,14 +12,12 @@ import 'package:lets_go/features/details/ui/widgets/details_section.dart';
 import 'package:lets_go/features/details/ui/widgets/hero_image.dart';
 
 import 'package:lets_go/features/details/ui/widgets/place_list.dart';
-import 'package:lets_go/model/Places.dart';
+import 'package:lets_go/model/places.dart';
 
 import '../widgets/photo_gird.dart';
 
 class DetailsPage extends StatefulWidget {
-  final PlacesDataModel favoriteItem; 
-   const DetailsPage({Key? key, required this.favoriteItem}) : super(key: key); 
-
+  const DetailsPage({super.key});
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
@@ -90,9 +88,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                       icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
                                 ),
 
-                   
-                                  
-                                  
                               ],
                             )
                           : Container(),

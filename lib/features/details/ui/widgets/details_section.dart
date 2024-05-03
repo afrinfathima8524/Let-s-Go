@@ -6,7 +6,7 @@ import 'package:lets_go/model/Places.dart';
 class DetailSection extends StatelessWidget {
   final PlacesDataModel clickedPlace;
   const DetailSection({super.key, required this.clickedPlace});
-
+  bool isPressed=false;
   @override
   Widget build(BuildContext context) {
     return Column(

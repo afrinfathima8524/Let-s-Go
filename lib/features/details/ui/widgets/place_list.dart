@@ -33,10 +33,10 @@ class PlaceList extends StatelessWidget {
           height: 10,
         ),
         SizedBox(
-          height: 780,
+          height: 880,
           child: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 0),
-            physics: const NeverScrollableScrollPhysics(),
+            physics:const NeverScrollableScrollPhysics(),
             itemCount: list.length,
             itemBuilder: (context, index) {
               final place = list[index];
@@ -53,6 +53,7 @@ class PlaceList extends StatelessWidget {
             },
           ),
         ),
+   
       ],
     );
   }

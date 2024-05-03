@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
-import 'package:lets_go/features/favourite/ui/screens/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/components/placetile.dart';
 import 'package:lets_go/model/Places.dart';
@@ -29,9 +28,6 @@ class _HomePageState extends State<HomePage> {
           if (state is PlaceDetailNavigatePageState) {
              Navigator.push(context, MaterialPageRoute(builder: (context)=> DetailsPage()));
           }
-          if (state is NavigateToFavroitePageState) {
-             Navigator.push(context, MaterialPageRoute(builder: (context)=> FavoritePage()));
-          }
         },
         listenWhen: (previous, current) => current is HomeActionState,
         buildWhen: (previous, current) => current is! HomeActionState,
@@ -40,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             case HomeLoadingState:
               return const Scaffold(
                 body: Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(backgroundColor: Colors.grey,color: Colors.blue,),
                 ),
               );
             case PLacesFetchSucessState:
@@ -69,11 +65,17 @@ class _HomePageState extends State<HomePage> {
                           },
                           controller: controller,
                           decoration: InputDecoration(
+                              suffixIcon: IconButton(onPressed: (){
+                                controller.clear();
+                                homeBloc.add(ClearSearchEvent());
+                                FocusScope.of(context).unfocus();
+                              }, icon: Icon(Icons.close)),
                               prefixIcon: Icon(Icons.search),
                               hintText: 'Search',
+                              focusColor: Colors.blue.shade400,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(color: Colors.grey))),
+                                  borderSide: BorderSide(color: Colors.grey),),),
                         ),
                       ),
                       SizedBox(
