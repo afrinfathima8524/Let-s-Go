@@ -65,7 +65,7 @@ class GetStarted extends StatelessWidget {
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: GestureDetector(
-                        onTap: () => Navigator.push(
+                        onTap: () => Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Home(),
