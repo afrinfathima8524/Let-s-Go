@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:lets_go/get_started/get_started.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -15,4 +17,5 @@ class MyApp extends StatelessWidget {
       home: GetStarted()
     );
   }
+
 }

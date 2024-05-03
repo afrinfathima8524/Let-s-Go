@@ -4,6 +4,7 @@ import 'package:lets_go/features/favroite/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
+import 'package:lets_go/features/profile/ui/screen/profile_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -68,12 +69,12 @@ class _HomeState extends State<Home> {
 _builPage(int _selectedIndex) {
   switch (_selectedIndex) {
     case 1:
-      return MyTrips();
+      return const MyTrips();
     case 2:
-      return FavroitePage();
+      return const FavroitePage();
     case 3:
-      return FavroitePage();
+      return const ProfilePage();
     default:
-      return HomePage();
+      return const HomePage();
   }
 }
