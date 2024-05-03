@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:lets_go/get_started/get_started.dart';
+import 'package:lets_go/features/home/ui/splash_screen.dart';
 
 
 void main() {
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: GetStarted()
+      home: SplashScreen()
     );
   }
 

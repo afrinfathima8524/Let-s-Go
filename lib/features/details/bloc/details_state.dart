@@ -28,3 +28,8 @@ class DetailsPagePlaceDetailsChangedSuccessState extends DetailsState{
 
 //navigation State
 class DetailsToHomeNavigationState extends DetailsActionState{}
+
+//favorite snackbarstate
+
+class DetailsPageFavAddedSuccessState extends DetailsActionState{}
+class DetailsPageFavRemovedSuccessState extends DetailsActionState{}

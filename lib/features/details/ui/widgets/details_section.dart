@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/model/Places.dart';
 
 class DetailSection extends StatelessWidget {
   final PlacesDataModel clickedPlace;
+<<<<<<< HEAD
   const DetailSection({super.key, required this.clickedPlace});
   bool isPressed=false;
+=======
+  final DetailsBloc bloc;
+  const DetailSection({super.key, required this.clickedPlace,required this.bloc});
+
+>>>>>>> 07799d5bb89e56612a3d9b6976a254898c9d31b0
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -39,7 +46,9 @@ class DetailSection extends StatelessWidget {
                              ),
             ),
              IconButton(
-            onPressed: () {},
+            onPressed: () {
+              bloc.add(DetailPageFavoriteAddEvent(favorited: clickedPlace));
+            },
            icon: const Icon(Icons.favorite_border_outlined,color: Colors.black,size: 25,)),
            
              

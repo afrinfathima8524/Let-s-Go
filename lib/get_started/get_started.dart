@@ -16,13 +16,13 @@ class GetStarted extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.network(
-                "https://e1.pxfuel.com/desktop-wallpaper/266/652/desktop-wallpaper-travel-life-cartoon-travel.jpg",
+                "https://wallpapers.com/images/hd/travel-hd-axhrsecphqby11wk.jpg",
                 fit: BoxFit.cover,
                 height: constraints.maxHeight * 0.6,
                 width: constraints.maxWidth * 1,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
+                padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
                 child: Column(
                   children: [
                     Column(
@@ -60,12 +60,12 @@ class GetStarted extends StatelessWidget {
                           GoogleFonts.poppins(fontSize: 18, color: Colors.grey),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: GestureDetector(
-                        onTap: () => Navigator.push(
+                        onTap: () => Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Home(),
