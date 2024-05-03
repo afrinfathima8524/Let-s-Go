@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:lets_go/features/home/ui/home.dart';
 import 'package:lets_go/get_started/get_started.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,9 +16,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => GetStarted(),));
+     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+
+     Future.delayed(const Duration(seconds: 2),(){
+          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=> const Home(),),);
      });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: SystemUiOverlay.values);
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -31,5 +41,6 @@ class _SplashScreenState extends State<SplashScreen> {
         ],
       ),
     );
+
   }
 }
