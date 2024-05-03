@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             case HomeLoadingState:
               return const Scaffold(
                 body: Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(backgroundColor: Colors.grey,color: Colors.blue,),
                 ),
               );
             case PLacesFetchSucessState:
@@ -65,11 +65,15 @@ class _HomePageState extends State<HomePage> {
                           },
                           controller: controller,
                           decoration: InputDecoration(
+                              suffixIcon: IconButton(onPressed: (){
+                                controller.clear();
+                              }, icon: Icon(Icons.close)),
                               prefixIcon: Icon(Icons.search),
                               hintText: 'Search',
+                              focusColor: Colors.blue.shade400,
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(color: Colors.grey))),
+                                  borderSide: BorderSide(color: Colors.grey),),),
                         ),
                       ),
                       SizedBox(
