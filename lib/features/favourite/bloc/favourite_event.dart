@@ -1,12 +1,10 @@
 part of 'favourite_bloc.dart';
+abstract class FavoritesEvent {}
 
-@immutable
-abstract class FavouriteEvent {}
+class FavoritesPageInitialEvent extends FavoritesEvent {}
 
-class LoadFavouritesEvent extends FavouriteEvent {}
+class FavoritesPageFavoriteRemoveEvent extends FavoritesEvent {
+  final PlacesDataModel favorited;
 
-class RemoveFromFavouritesEvent extends FavouriteEvent {
-  final PlacesDataModel favoriteItem;
-
-  RemoveFromFavouritesEvent(this.favoriteItem);
+  FavoritesPageFavoriteRemoveEvent(this.favorited);
 }

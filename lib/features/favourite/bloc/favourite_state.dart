@@ -1,20 +1,16 @@
 part of 'favourite_bloc.dart';
 
-@immutable
-abstract class FavouriteState {}
 
-class FavouriteInitial extends FavouriteState {}
+abstract class FavoritesState {}
 
-class FavouritesLoadingState extends FavouriteState {}
+class FavoritesInitial extends FavoritesState {}
 
-class FavouritesLoadedState extends FavouriteState {
-  final List<PlacesDataModel> favourites;
+class FavoritesPageLoadingState extends FavoritesState {}
 
-  FavouritesLoadedState({required this.favourites});
+class FavoritesPageLoadedSuccessState extends FavoritesState {
+  final List<PlacesDataModel> favoritePlaces;
+
+  FavoritesPageLoadedSuccessState(this.favoritePlaces);
 }
 
-class FavouritesLoadErrorState extends FavouriteState {
-  final String errorMessage;
-
-  FavouritesLoadErrorState({required this.errorMessage});
-}
+class FavoritesPageFavoriteRemovedState extends FavoritesState {}

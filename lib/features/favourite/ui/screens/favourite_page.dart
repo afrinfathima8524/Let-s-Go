@@ -1,44 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
-import 'package:lets_go/features/details/ui/widgets/details_section.dart';
+
+import 'package:lets_go/model/Places.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
-import 'package:lets_go/model/Places.dart'; 
 
-class FavoritePage extends StatefulWidget {
-  final PlacesDataModel clickedPlace;
-
-  const FavoritePage({Key? key, required this.clickedPlace}) : super(key: key);
-
-  @override
-  State<FavoritePage> createState() => _FavoritePageState();
-}
-class _FavoritePageState extends State<FavoritePage> {
-  final FavouriteBloc _favouriteBloc = FavouriteBloc();
-  @override
-  void initState() {
-    _favouriteBloc.add(LoadFavouritesEvent());
-    super.initState();
-  }
-
+class FavoritePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Favorites'),
       ),
-      body: BlocBuilder<FavouriteBloc, FavouriteState>(
-        bloc: _favouriteBloc,
+      body: BlocBuilder<FavoritesBloc,FavoritesState>(
         builder: (context, state) {
-          if (state is FavouritesLoadingState) {
+          if (state is FavoritesInitial) {
+            BlocProvider.of<FavoritesBloc>(context).add(FavoritesPageInitialEvent());
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (state is FavouritesLoadedState) {
+          } else if (state is FavoritesPageLoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is FavoritesPageLoadedSuccessState) {
             return ListView.builder(
-              itemCount: state.favourites.length,
+              itemCount: state.favoritePlaces.length,
               itemBuilder: (context, index) {
-                final PlacesDataModel favoriteItem = state.favourites[index];
+                final PlacesDataModel favoriteItem = state.favoritePlaces[index];
                 return ListTile(
                   title: Text(favoriteItem.name ?? ''),
                   subtitle: Text(favoriteItem.location ?? ''),
@@ -57,27 +46,22 @@ class _FavoritePageState extends State<FavoritePage> {
                   trailing: IconButton(
                     icon: Icon(Icons.delete),
                     onPressed: () {
-                      _favouriteBloc.add(RemoveFromFavouritesEvent(favoriteItem));
+                      BlocProvider.of<FavoritesBloc>(context).add(FavoritesPageFavoriteRemoveEvent(favoriteItem));
                     },
                   ),
                 );
               },
             );
-          } else if (state is FavouritesLoadErrorState) {
-            return Center(
-              child: Text('Error: ${state.errorMessage}'),
-            );
-          } else {
+          } else if (state is FavoritesPageFavoriteRemovedState) {
+           
             return Container();
+          } else {
+            return Center(
+              child: Text('Error: Something went wrong!'),
+            );
           }
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _favouriteBloc.close();
-    super.dispose();
   }
 }

@@ -5,6 +5,7 @@ import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
 import 'package:lets_go/features/profile/ui/screen/profile_screen.dart';
+import 'package:lets_go/model/Places.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -71,7 +72,7 @@ _builPage(int _selectedIndex) {
     case 1:
       return const MyTrips();
     case 2:
-      return const FavoritePage();
+      return FavoritePage();
     case 3:
       return const ProfilePage();
     default:

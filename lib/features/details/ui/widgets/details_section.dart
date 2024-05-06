@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/model/Places.dart';
 
 class DetailSection extends StatefulWidget {
   final PlacesDataModel clickedPlace;
-  const DetailSection({Key? key, required this.clickedPlace}) : super(key: key);
+   final DetailsBloc bloc;
+  const DetailSection({Key? key, required this.clickedPlace,required this.bloc}) : super(key: key);
 
   @override
   _DetailSectionState createState() => _DetailSectionState();
