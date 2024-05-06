@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/model/Places.dart';
 
-class DetailSection extends StatelessWidget {
+class DetailSection extends StatefulWidget {
   final PlacesDataModel clickedPlace;
-  final DetailsBloc bloc;
-  const DetailSection({super.key, required this.clickedPlace,required this.bloc});
+  const DetailSection({Key? key, required this.clickedPlace}) : super(key: key);
+
+  @override
+  _DetailSectionState createState() => _DetailSectionState();
+}
+
+class _DetailSectionState extends State<DetailSection> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,36 +28,43 @@ class DetailSection extends StatelessWidget {
               size: 17,
             ),
             Text(
-              clickedPlace.location.toString(),
+              widget.clickedPlace.location.toString(),
               style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey),)
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey,
+              ),
+            )
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              clickedPlace.name.toString(),
-              style:  GoogleFonts.poppins(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                             ),
+              widget.clickedPlace.name.toString(),
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-             IconButton(
-            onPressed: () {
-              bloc.add(DetailPageFavoriteAddEvent(favorited: clickedPlace));
-            },
-           icon: const Icon(Icons.favorite_border_outlined,color: Colors.black,size: 25,)),
-           
-             
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  isFavorite = !isFavorite; 
+                });
+              },
+              icon: Icon(
+                Icons.favorite,
+                color: isFavorite ? Colors.blue : null,
+                size: 25,
+              ),
+            ),
           ],
         ),
         Row(
           children: [
             RatingBarIndicator(
-              rating: clickedPlace.rating as double,
+              rating: widget.clickedPlace.rating as double,
               itemBuilder: (context, index) => const Icon(
                 Icons.star,
                 color: Colors.amber,
@@ -62,11 +74,11 @@ class DetailSection extends StatelessWidget {
               direction: Axis.horizontal,
             ),
             Text(
-              "(${clickedPlace.reviews.toString()})",
-              style:  GoogleFonts.poppins(
-                         color:Colors.grey,
-                          fontSize:12,
-                         ),
+              "(${widget.clickedPlace.reviews.toString()})",
+              style: GoogleFonts.poppins(
+                color: Colors.grey,
+                fontSize: 12,
+              ),
             ),
           ],
         ),
@@ -74,11 +86,10 @@ class DetailSection extends StatelessWidget {
           height: 10,
         ),
         Text(
-          clickedPlace.description.toString() + clickedPlace.funFact.toString(),
+          widget.clickedPlace.description.toString() + widget.clickedPlace.funFact.toString(),
           style: GoogleFonts.poppins(
-                          fontSize: 16,
-                         
-                         ),
+            fontSize: 16,
+          ),
         ),
       ],
     );

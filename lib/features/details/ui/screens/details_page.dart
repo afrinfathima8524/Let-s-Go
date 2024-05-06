@@ -13,12 +13,12 @@ import 'package:lets_go/features/details/ui/widgets/details_section.dart';
 import 'package:lets_go/features/details/ui/widgets/hero_image.dart';
 
 import 'package:lets_go/features/details/ui/widgets/place_list.dart';
+import 'package:lets_go/model/places.dart';
 
 import '../widgets/photo_gird.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
-
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
@@ -65,7 +65,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
           return const Scaffold(
             body: Center(child: 
-            CircularProgressIndicator(backgroundColor: Colors.grey,color: Colors.blue,),),
+            CircularProgressIndicator(),),
           );
     
 
@@ -97,9 +97,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                       icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
                                 ),
 
-                   
-                                  
-                                  
                               ],
                             )
                           : Container(),
@@ -172,15 +169,12 @@ class _DetailsPageState extends State<DetailsPage> {
                                       ),
                                       Expanded(
                                           child:
-                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,),
-                                              ),
-                                             
+                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)),
                                     ],
                                   ),
                               ],
                             ),
                       ),
-                      
                     ],
                   ),
                 ),

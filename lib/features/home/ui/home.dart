@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lets_go/features/favroite/favourite_page.dart';
+import 'package:lets_go/features/favourite/ui/screens/favourite_page.dart';
 import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
@@ -71,7 +71,7 @@ _builPage(int _selectedIndex) {
     case 1:
       return const MyTrips();
     case 2:
-      return const FavroitePage();
+      return const FavoritePage();
     case 3:
       return const ProfilePage();
     default:
