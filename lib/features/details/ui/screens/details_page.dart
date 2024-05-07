@@ -7,16 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/widgets/details_section.dart';
 import 'package:lets_go/features/details/ui/widgets/hero_image.dart';
-
 import 'package:lets_go/features/details/ui/widgets/place_list.dart';
-import 'package:lets_go/model/places.dart';
-
 import '../widgets/photo_gird.dart';
-
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
+import 'package:lets_go/features/details/data/fav_data.dart';
 import 'package:lets_go/model/Places.dart';
 
 class DetailSection extends StatefulWidget {
@@ -14,10 +15,12 @@ class DetailSection extends StatefulWidget {
 }
 
 class _DetailSectionState extends State<DetailSection> {
-  bool isFavorite = false;
+
+ 
 
   @override
   Widget build(BuildContext context) {
+    bool isExist = favoritePlaces.contains(widget.clickedPlace);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,19 +53,22 @@ class _DetailSectionState extends State<DetailSection> {
               ),
             ),
             IconButton(
-              onPressed: () {
-                setState(() {
-                  isFavorite = !isFavorite; 
-                });
-              },
-              icon: Icon(
-                Icons.favorite,
-                color: isFavorite ? Colors.blue : null,
-                size: 25,
-              ),
-            ),
-          ],
-        ),
+  onPressed: () {
+  
+    widget.bloc.add(DetailPageFavoriteAddEvent(favorited: widget.clickedPlace));
+  },
+  
+  icon:isExist ? Icon(
+    Icons.favorite,
+    color:Colors.blue,
+    size: 25,
+  ):Icon(
+    Icons.favorite_border_outlined,
+    color:Colors.grey,
+    size: 25,
+  )
+),
+    ],),
         Row(
           children: [
             RatingBarIndicator(
