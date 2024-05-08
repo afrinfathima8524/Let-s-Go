@@ -5,15 +5,11 @@ import 'package:lets_go/features/home/bloc/home_bloc.dart';
 import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
 import 'package:lets_go/features/profile/ui/screen/profile_screen.dart';
-
-
 class Home extends StatefulWidget {
   const Home({super.key});
-
   @override
   State<Home> createState() => _HomeState();
 }
-
 class _HomeState extends State<Home> {
   final HomeBloc homeBloc = HomeBloc();
   int _selectedIndex = 0;
@@ -22,7 +18,6 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -66,7 +61,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
 _builPage(int _selectedIndex) {
   switch (_selectedIndex) {
     case 1:

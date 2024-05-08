@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
-import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
 import 'package:lets_go/model/places.dart';
 
 class FavouritesSection extends StatefulWidget {
   final List<PlacesDataModel> favoriteItems;
-
   const FavouritesSection({Key? key, required this.favoriteItems}) : super(key: key);
-
-  @override
+  @override 
   State<FavouritesSection> createState() => _FavouritesSectionState();
 }
 
@@ -63,9 +60,7 @@ class _FavouritesSectionState extends State<FavouritesSection> {
             trailing: IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                
               }
-                
             ),
           ),
         );

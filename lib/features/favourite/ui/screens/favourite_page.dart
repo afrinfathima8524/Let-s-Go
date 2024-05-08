@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
-import 'package:lets_go/model/Places.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 class FavoritePage extends StatefulWidget {
   @override
