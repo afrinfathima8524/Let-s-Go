@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_outlined,), label: "My Trip",),
             BottomNavigationBarItem(
-                icon: Icon(Icons.favorite,), label: "Favroite",),
+                icon: Icon(Icons.favorite,), label: "Favourite",),
             BottomNavigationBarItem(icon: Icon(Icons.person,), label: "Profile",),
           ],
           type: BottomNavigationBarType.fixed,
