@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lets_go/features/home/ui/splash_screen.dart';
-
-
 void main() {
   runApp(const MyApp());
 }
