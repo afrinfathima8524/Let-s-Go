@@ -1,6 +1,4 @@
 part of 'favourite_bloc.dart';
-
-
 abstract class FavoritesState {}
 abstract class FavoriteActionState extends FavoritesState{}
 
