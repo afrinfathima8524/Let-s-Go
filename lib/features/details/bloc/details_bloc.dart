@@ -65,7 +65,6 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     emit(DetailsPagePlaceDetailsChangedSuccessState(clickedPlaceDetails: placeDetail,list:places));
   }
-
   FutureOr<void> detailPageFavoriteAddEvent(DetailPageFavoriteAddEvent event, Emitter<DetailsState> emit) {
 
     if(!favoritePlaces.contains(event.favorited)){
