@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:lets_go/features/details/data/fav_data.dart';
+import 'package:lets_go/features/favourite/fav_data.dart';
 import 'package:lets_go/model/Places.dart';
 
 part 'favourite_event.dart';
