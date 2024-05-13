@@ -1,7 +1,4 @@
-// ignore_for_file: type_literal_in_constant_pattern
-
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -72,8 +69,7 @@ class _DetailsPageState extends State<DetailsPage> {
             body: Center(child: 
             CircularProgressIndicator(),),
           );
-    
-
+  
           case DetailsPageDetailsLoadErrorState:
             return const Scaffold(body: Center(child: Text("Page Not Found")));
 
@@ -294,9 +290,6 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
             );
-
-
-
           default:
             return Container();
         }
