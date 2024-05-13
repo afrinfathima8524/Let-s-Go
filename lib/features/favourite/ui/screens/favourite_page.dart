@@ -64,7 +64,7 @@ favoritesBloc.add(FavoritesPageInitialEvent());
   );
 },
 
-            trailing: IconButton(
+   trailing: IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
                 favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(favorited: favoriteItem));

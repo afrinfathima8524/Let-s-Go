@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
-import 'package:lets_go/features/details/data/fav_data.dart';
+import 'package:lets_go/features/details/data/mytrip_data.dart';
+import 'package:lets_go/features/favourite/fav_data.dart';
 import 'package:lets_go/model/Places.dart';
 
 class DetailSection extends StatefulWidget {
   final PlacesDataModel clickedPlace;
-   final DetailsBloc bloc;
-  const DetailSection({Key? key, required this.clickedPlace,required this.bloc}) : super(key: key);
+  final DetailsBloc bloc;
+  const DetailSection(
+      {Key? key, required this.clickedPlace, required this.bloc})
+      : super(key: key);
 
   @override
   _DetailSectionState createState() => _DetailSectionState();
 }
 
 class _DetailSectionState extends State<DetailSection> {
-
- 
-
   @override
   Widget build(BuildContext context) {
-    bool isExist = favoritePlaces.contains(widget.clickedPlace);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -52,23 +51,54 @@ class _DetailSectionState extends State<DetailSection> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            IconButton(
-  onPressed: () {
-  
-    widget.bloc.add(DetailPageFavoriteAddEvent(favorited: widget.clickedPlace));
-  },
-  
-  icon:isExist ? Icon(
-    Icons.favorite,
-    color:Colors.blue,
-    size: 25,
-  ):Icon(
-    Icons.favorite_border_outlined,
-    color:Colors.grey,
-    size: 25,
-  )
-),
-    ],),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.bloc.add(DetailPageFavoriteAddEvent(
+                          favorited: widget.clickedPlace));
+                    });
+                  },
+                  icon: favoritePlaces.contains(widget.clickedPlace)
+                      ? Icon(
+                          Icons.favorite,
+                          color: Colors.blue,
+                          size: 25,
+                        )
+                      : Icon(
+                          Icons.favorite_border_outlined,
+                          color: Colors.grey,
+                          size: 25,
+                        ),
+                ),
+                TextButton(
+                  style: ButtonStyle(
+                    side: MaterialStateProperty.all(
+                        BorderSide(color:!myTripList.contains(widget.clickedPlace)? Colors.grey :Colors.blue, width: 2.0)),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      widget.bloc.add(DetailPageMytripAddEvent(
+                          myTrip: widget.clickedPlace));
+                    });
+                  },
+                  child: !myTripList.contains(widget.clickedPlace)
+                      ? Text(
+                          "Add to MyTrip",
+                          style: GoogleFonts.poppins(
+                              color: Colors.grey, fontWeight: FontWeight.bold),
+                        )
+                      : Text(
+                          "Added",
+                          style: GoogleFonts.poppins(
+                              color: Colors.blue, fontWeight: FontWeight.bold),
+                        ),
+                ),
+              ],
+            ),
+          ],
+        ),
         Row(
           children: [
             RatingBarIndicator(
@@ -94,7 +124,8 @@ class _DetailSectionState extends State<DetailSection> {
           height: 10,
         ),
         Text(
-          widget.clickedPlace.description.toString() + widget.clickedPlace.funFact.toString(),
+          widget.clickedPlace.description.toString() +
+              widget.clickedPlace.funFact.toString(),
           style: GoogleFonts.poppins(
             fontSize: 16,
           ),

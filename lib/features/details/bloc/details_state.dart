@@ -33,3 +33,10 @@ class DetailsToHomeNavigationState extends DetailsActionState{}
 
 class DetailsPageFavAddedSuccessState extends DetailsActionState{}
 class DetailsPageFavRemovedSuccessState extends DetailsActionState{}
+class PlaceFavroitedActionState extends DetailsActionState{}
+
+
+//mytrip snackbarstate
+
+class DetailsPageTripAddedSuccessState extends DetailsActionState{}
+class DetailsPageTripRemovedSuccessState extends DetailsActionState{}
