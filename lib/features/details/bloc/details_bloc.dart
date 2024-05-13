@@ -3,10 +3,12 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:lets_go/features/details/data/details_data.dart';
-import 'package:lets_go/features/details/data/fav_data.dart';
+import 'package:lets_go/features/favourite/fav_data.dart';
 import 'package:lets_go/features/details/service/apiService.dart';
 import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
+
+import '../data/mytrip_data.dart';
 
 part 'details_event.dart';
 part 'details_state.dart';
@@ -17,6 +19,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<DetailsToHomeNavigateEvent>(detailsToHomeNavigateEvent);
     on<DetailsPagePlaceDetailsChangeEvent>(detailsPagePlaceDetailsChangeEvent);
     on<DetailPageFavoriteAddEvent>(detailPageFavoriteAddEvent);
+    on<DetailPageMytripAddEvent>(detailPageMytripAddEvent);
  
   }
   
@@ -47,6 +50,8 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
 
   FutureOr<void> detailsToHomeNavigateEvent(DetailsToHomeNavigateEvent event, Emitter<DetailsState> emit) {
+
+    print(favoritePlaces);
     emit(DetailsToHomeNavigationState());
   }
 
@@ -65,22 +70,32 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     emit(DetailsPagePlaceDetailsChangedSuccessState(clickedPlaceDetails: placeDetail,list:places));
   }
-
-  FutureOr<void> detailPageFavoriteAddEvent(DetailPageFavoriteAddEvent event, Emitter<DetailsState> emit) {
-
+  FutureOr<void> detailPageFavoriteAddEvent(DetailPageFavoriteAddEvent event, Emitter<DetailsState> emit) {   
     if(!favoritePlaces.contains(event.favorited)){
-
       favoritePlaces.add(event.favorited);
-
       emit(DetailsPageFavAddedSuccessState());
-
     }else{
       favoritePlaces.remove(event.favorited);
       emit(DetailsPageFavRemovedSuccessState());
     }
+   // print(favoritePlaces);
+emit(PlaceFavroitedActionState());  
 
-    print(favoritePlaces);
-  
+  }
+
+  FutureOr<void> detailPageMytripAddEvent(DetailPageMytripAddEvent event, Emitter<DetailsState> emit) {
+
+     if(!myTripList.contains(event.myTrip)){
+      myTripList.add(event.myTrip);
+      emit(DetailsPageTripAddedSuccessState());
+    }else{
+      myTripList.remove(event.myTrip);
+      emit(DetailsPageTripRemovedSuccessState());
+    }
+    print(myTripList);
+
+
+
 
   }
 }

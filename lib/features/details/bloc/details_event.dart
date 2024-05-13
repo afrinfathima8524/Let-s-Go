@@ -25,6 +25,16 @@ class DetailPageFavoriteAddEvent extends DetailsEvent{
 }
 
 
+//Mytrip 
+
+class DetailPageMytripAddEvent extends DetailsEvent{
+  final PlacesDataModel myTrip;
+
+  DetailPageMytripAddEvent({required this.myTrip});
+ 
+}
+
+
 //navigations
 class DetailsToHomeNavigateEvent extends DetailsEvent{}
 
