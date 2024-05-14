@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/profile/bloc/profile_bloc.dart';
@@ -16,25 +15,15 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-  TextEditingController _nameController =TextEditingController();
-  TextEditingController _placeController =TextEditingController();
-
-  //stream 
-  StreamController<String> _streamController = StreamController<String>();
-
-  late Stream<String> multiStream;
-
-
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _placeController = TextEditingController();
 
   final ProfileBloc profileBloc = ProfileBloc();
 
   @override
   void initState() {
-     multiStream = _streamController.stream.asBroadcastStream();
     profileBloc.add(ProfilePageInitialEvent());
 
-   
     super.initState();
   }
 
@@ -43,7 +32,13 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: BlocConsumer<ProfileBloc, ProfileState>(
         bloc: profileBloc,
-        listener: (context, state) {},
+        listener: (context, state) {
+          if(state is ProfilePageEditedSuccessState){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(milliseconds: 300),
+            content:Text("Profile Saved!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
+          }
+        },
         builder: (context, state) {
           switch (state.runtimeType) {
             case ProfilePageEditLoadingState:
@@ -132,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           TextButton(
                               onPressed: () {
-                                 profileBloc.add(ProfilePageInitialEvent());
+                                profileBloc.add(ProfilePageInitialEvent());
                               },
                               child: Text(
                                 "Cancel",
@@ -142,11 +137,12 @@ class _ProfilePageState extends State<ProfilePage> {
                               )),
                           ElevatedButton(
                             onPressed: () {
-                             
-                             _streamController.add(_nameController.text);
-                             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>ProfilePage(),));
-                           //  _streamController.add(_placeController.text);
-                             
+                              print(_nameController.text);
+                              setState(() {
+                                profileBloc
+                                    .add(ProfilePageEditDetailSavedEvent(name: _nameController.text,location:_placeController.text));
+                              });
+                              //  _streamController.add(_placeController.text);
                             },
                             child: Text(
                               "Save",
@@ -208,22 +204,17 @@ class _ProfilePageState extends State<ProfilePage> {
                           )
                         ],
                       ),
-                      StreamBuilder<String>(
-                        stream: multiStream,
-                        initialData: "name",
-                        builder: (context, snapshot) {
-                         if(snapshot.hasData){
-                           return Text(snapshot.data.toString(),
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18, fontWeight: FontWeight.bold));
-                         }throw "error";
-                        }
+                     Text(detailbook.user.name,
+                               style: GoogleFonts.poppins(
+                                   fontSize: 18,
+                                   fontWeight: FontWeight.bold)),
+                      Text(
+                        detailbook.user.place,
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue),
                       ),
-                      Text("Chennai",
-                          style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue),),
                       const SizedBox(
                         height: 20,
                       ),
