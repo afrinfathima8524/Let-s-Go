@@ -65,11 +65,11 @@ class _HomePageState extends State<HomePage> {
                           },
                           controller: controller,
                           decoration: InputDecoration(
-                              suffixIcon: IconButton(onPressed: (){
+                              suffixIcon: controller.text.isNotEmpty?IconButton(onPressed: (){
                                 controller.clear();
                                 homeBloc.add(ClearSearchEvent());
                                 FocusScope.of(context).unfocus();
-                              }, icon: Icon(Icons.close)),
+                              }, icon: Icon(Icons.close)):null,
                               prefixIcon: Icon(Icons.search),
                               hintText: 'Search',
                               focusColor: Colors.blue.shade400,
