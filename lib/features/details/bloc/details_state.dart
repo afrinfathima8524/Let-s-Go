@@ -18,14 +18,6 @@ class DetailsPageDetailsLoadedSuccessState extends DetailsState{
   DetailsPageDetailsLoadedSuccessState( {required this.details,required this.list});
 }//loaded success
 
-//place details change
-class DetailsPagePlaceDetailsChangedSuccessState extends DetailsState{
-  final PlacesDataModel clickedPlaceDetails;
-   final List<PlacesDataModel> list;
-
-  DetailsPagePlaceDetailsChangedSuccessState( {required this.clickedPlaceDetails,required this.list,});
-}
-
 //navigation State
 class DetailsToHomeNavigationState extends DetailsActionState{}
 
