@@ -1,10 +1,10 @@
-// ignore_for_file: type_literal_in_constant_pattern
+
 
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
@@ -157,8 +157,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               stream: multiStream,
                                               clickedPlace: clickedPlace,
                                             ),
-                                            DetailSection(
-                                                clickedPlace: clickedPlace,bloc: detailsBloc,),
+                                            DetailSection(clickedPlace: clickedPlace,bloc: detailsBloc,),
                                             const SizedBox(
                                               height: 10,
                                             ),
@@ -220,7 +219,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             ? Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  DetailSection(clickedPlace: clickedPlace,bloc: detailsBloc,),
+                                   DetailSection(clickedPlace: clickedPlace,bloc: detailsBloc),
                                   const SizedBox(
                                     height: 10,
                                   ),
@@ -267,7 +266,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               clickedPlace: clickedPlace,
                                             ),
                                             DetailSection(
-                                                clickedPlace: clickedPlace,bloc: detailsBloc,),
+                                               clickedPlace: clickedPlace,bloc: detailsBloc,),
                                             const SizedBox(
                                               height: 10,
                                             ),

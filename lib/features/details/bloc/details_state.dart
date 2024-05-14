@@ -15,7 +15,7 @@ class DetailsPageDetailsLoadedSuccessState extends DetailsState{
   final PlacesDataModel details;
   final List<PlacesDataModel> list;
 
-  DetailsPageDetailsLoadedSuccessState( {required this.details,required this.list,});
+  DetailsPageDetailsLoadedSuccessState( {required this.details,required this.list});
 }//loaded success
 
 //place details change
