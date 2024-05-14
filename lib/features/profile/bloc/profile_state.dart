@@ -15,11 +15,13 @@ class ProfilePageLoadSuccessState extends ProfileState{
   final List<PlacesDataModel> favList;
   final List<PlacesDataModel> tripList;
 
-  ProfilePageLoadSuccessState({required this.placeList, required this.favList, required this.tripList});
+  final User user;
+
+  ProfilePageLoadSuccessState({required this.placeList, required this.favList, required this.tripList, required this.user});
 }
 
 
 //profile edit
 class ProfilePageEditLoadingState extends ProfileState{}
 class ProfilePageEditBoxDisplayState extends ProfileState{}
-class profilePageEditedSuccessState extends ProfileActionState{}
+class ProfilePageEditedSuccessState extends ProfileActionState{}

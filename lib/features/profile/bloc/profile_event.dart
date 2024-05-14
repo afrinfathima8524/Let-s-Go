@@ -14,4 +14,8 @@ class ProfilePageEditDetailEvent extends ProfileEvent{}
 
 //editsave event
 
-class ProfilePageEditDetailSavedEvent extends ProfileEvent{}
+class ProfilePageEditDetailSavedEvent extends ProfileEvent{
+  final String name,location;
+
+  ProfilePageEditDetailSavedEvent({required this.name, required this.location});
+}

@@ -86,7 +86,7 @@ class _HomeState extends State<Home> {
                 decoration: BoxDecoration(color: Colors.blue.shade200),
               ),
               ListTile(
-                title: Text("Favroited Place"),
+                title: Text("Favorited Place"),
                 onTap: () => _onItemTapped(2),
               ),
               ListTile(
