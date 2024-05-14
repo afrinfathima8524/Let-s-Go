@@ -1,7 +1,5 @@
 import 'dart:async';
 
-
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:lets_go/features/details/data/details_data.dart';
@@ -23,87 +21,73 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
     on<DetailsPagePlaceDetailsChangeEvent>(detailsPagePlaceDetailsChangeEvent);
     on<DetailPageFavoriteAddEvent>(detailPageFavoriteAddEvent);
     on<DetailPageMytripAddEvent>(detailPageMytripAddEvent);
- 
   }
-  
-  
-  FutureOr<void> detailPageInitialEvent(DetailPageInitialEvent event, Emitter<DetailsState> emit) async {        //initial build method
-    
+
+  FutureOr<void> detailPageInitialEvent(
+      DetailPageInitialEvent event, Emitter<DetailsState> emit) async {
+    //initial build method
+
     emit(DetailsPageDetailsLoadingState());
 
     await Future.delayed(const Duration(milliseconds: 100));
 
-  //  final apiService = ApiService();   //get response
-
-   // List<PlacesDataModel> places = [] ;  //declare list as empty.
-
-
- //final response = await apiService.fetchData();// get list from function
-
-   //  places = response; //store the List of data.
-
-    // print(places[0].name);
-
     List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
 
-   
-
-
-   emit(DetailsPageDetailsLoadedSuccessState(details:placeDetail,list: places,));
-
+    emit(DetailsPageDetailsLoadedSuccessState(
+      details: placeDetail,
+      list: places,
+    ));
   }
 
-
-
-  FutureOr<void> detailsToHomeNavigateEvent(DetailsToHomeNavigateEvent event, Emitter<DetailsState> emit) {
-
+  FutureOr<void> detailsToHomeNavigateEvent(
+      DetailsToHomeNavigateEvent event, Emitter<DetailsState> emit) {
     print(favoritePlaces);
     emit(DetailsToHomeNavigationState());
   }
 
-  FutureOr<void> detailsPagePlaceDetailsChangeEvent(DetailsPagePlaceDetailsChangeEvent event, Emitter<DetailsState> emit) async {
-
+  FutureOr<void> detailsPagePlaceDetailsChangeEvent(
+      DetailsPagePlaceDetailsChangeEvent event,
+      Emitter<DetailsState> emit) async {
     placeDetail = event.clickedPlace;
 
-    final apiService = ApiService();   //get response
+    final apiService = ApiService(); //get response
 
-    List<PlacesDataModel> places = [] ;  //declare list as empty.
+    List<PlacesDataModel> places = []; //declare list as empty.
 
+    final response = await apiService.fetchData(); // get list from function
 
- final response = await apiService.fetchData();// get list from function
+    places = response; //store the List of data.
 
-     places = response; //store the List of data.
+    final index = placeDetail.id as int;
 
-      final index = placeDetail.id as int;
-
-    emit(DetailsPagePlaceDetailsChangedSuccessState(clickedPlaceDetails: places[index],list:places));
+    emit(DetailsPageDetailsLoadedSuccessState(
+      details: places[index],
+      list: places,
+    ));
   }
-  FutureOr<void> detailPageFavoriteAddEvent(DetailPageFavoriteAddEvent event, Emitter<DetailsState> emit) {   
-    if(!favoritePlaces.contains(event.favorited)){
+
+  FutureOr<void> detailPageFavoriteAddEvent(
+      DetailPageFavoriteAddEvent event, Emitter<DetailsState> emit) {
+    if (!favoritePlaces.contains(event.favorited)) {
       favoritePlaces.add(event.favorited);
       emit(DetailsPageFavAddedSuccessState());
-    }else{
+    } else {
       favoritePlaces.remove(event.favorited);
       emit(DetailsPageFavRemovedSuccessState());
     }
-   // print(favoritePlaces);
-  emit(PlaceFavroitedActionState());  
-
+    // print(favoritePlaces);
+    emit(PlaceFavroitedActionState());
   }
 
-  FutureOr<void> detailPageMytripAddEvent(DetailPageMytripAddEvent event, Emitter<DetailsState> emit) {
-
-     if(!myTripList.contains(event.myTrip)){
+  FutureOr<void> detailPageMytripAddEvent(
+      DetailPageMytripAddEvent event, Emitter<DetailsState> emit) {
+    if (!myTripList.contains(event.myTrip)) {
       myTripList.add(event.myTrip);
       emit(DetailsPageTripAddedSuccessState());
-    }else{
+    } else {
       myTripList.remove(event.myTrip);
       emit(DetailsPageTripRemovedSuccessState());
     }
-    print(myTripList);
-
-
-
-
+    // print(myTripList);
   }
 }
