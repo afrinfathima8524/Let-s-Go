@@ -36,7 +36,7 @@ class _PlaceTileState extends State<PlaceTile> {
               ),
             ),
           ),
-          Expanded(child: Text(widget.placesDataModels.name.toString(),style: GoogleFonts.poppins(fontSize:15,fontWeight:FontWeight.w500),)),
+          Text(widget.placesDataModels.name.toString(),style: GoogleFonts.poppins(fontSize:15,fontWeight:FontWeight.w500),),
           Text(widget.placesDataModels.location.toString(),style: GoogleFonts.poppins(fontSize:12,fontWeight:FontWeight.w400,color:Colors.grey),),
         ],
       ),
