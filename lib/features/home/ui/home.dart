@@ -24,6 +24,7 @@ class _HomeState extends State<Home> {
     setState(() {
       _selectedIndex = index;
     });
+_scaffoldstate.currentState!.openEndDrawer();
   }
 
   @override
@@ -48,11 +49,17 @@ class _HomeState extends State<Home> {
               onTap: () => _onItemTapped(3),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: CircleAvatar(
-                  backgroundColor: Colors.black,
-                  backgroundImage: NetworkImage(
-                      "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
-                ),
+                child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Container(
+                          width: 30,
+                          height: 30,
+                          child: 
+                               profileImage==null ? Image.network(
+                                  "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!),
+                               
+                        ),
+                      ),
               ),
             ),
           ],
@@ -68,10 +75,15 @@ class _HomeState extends State<Home> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
-                      child: CircleAvatar(
-                        backgroundColor: Colors.grey,
-                        backgroundImage: NetworkImage(
-                            "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Container(
+                          width: 70,
+                          height: 70,
+                          child: profileImage==null ? Image.network(
+                                  "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!),
+                              
+                        ),
                       ),
                     ),
 
