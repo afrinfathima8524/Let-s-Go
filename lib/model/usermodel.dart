@@ -1,6 +1,13 @@
-class User{
+import 'dart:io';
 
- final String name,place,img;
+import 'package:equatable/equatable.dart';
 
-  User({required this.name, required this.place,  this.img = "jsjsjs"});
+class User extends Equatable{
+
+ final String name,place;
+ final File? img;
+
+  User({required this.name, required this.place,  this.img});
+  @override
+  List<dynamic> get props => [name,place,img];
 }
