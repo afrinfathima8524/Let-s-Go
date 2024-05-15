@@ -15,11 +15,13 @@ class GetStarted extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                "https://wallpapers.com/images/hd/travel-hd-axhrsecphqby11wk.jpg",
-                fit: BoxFit.cover,
-                height: constraints.maxHeight * 0.6,
-                width: constraints.maxWidth * 1,
+              Expanded(
+                child: Image.network(
+                  "https://wallpapers.com/images/hd/travel-hd-axhrsecphqby11wk.jpg",
+                  fit: BoxFit.cover,
+                  height: constraints.maxHeight * 0.6,
+                  width: constraints.maxWidth * 1,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
