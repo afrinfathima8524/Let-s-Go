@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 
@@ -16,3 +18,9 @@ List<Item> profileItems = [
   Item(itemName: "Settings", icon: Icons.settings),
   Item(itemName: "Version", icon: Icons.view_in_ar)
 ];
+
+//profile pic
+File? profileImage = null ;
+
+String profileName = "";
+String profilePlace ="Edit profile Now!";
