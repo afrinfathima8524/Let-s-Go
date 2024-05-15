@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 class FavoritePage extends StatefulWidget {
@@ -9,6 +10,7 @@ class FavoritePage extends StatefulWidget {
 }
 class _FavoritePageState extends State<FavoritePage> {
   final FavoritesBloc favoritesBloc=FavoritesBloc();
+  final DetailsBloc detailsBloc2=DetailsBloc();
   @override
   void initState() {
 favoritesBloc.add(FavoritesPageInitialEvent());
@@ -37,7 +39,8 @@ favoritesBloc.add(FavoritesPageInitialEvent());
             duration: Duration(milliseconds: 100),
             content:Text("The selected place has been deleted!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
         }
-      },
+          },
+      
         builder: (context, state) {
   switch (state.runtimeType) {
     case FavoritesPageLoadingState:
@@ -62,13 +65,10 @@ favoritesBloc.add(FavoritesPageInitialEvent());
                 fit: BoxFit.cover,
               ),
             ),
-           onTap: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => DetailsPage()),
-  );
+      onTap: () {
+  detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: favoriteItem));
+  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage()));
 },
-
    trailing: IconButton(
               icon: Icon(Icons.delete,color: Colors.blue,),
               onPressed: () {
