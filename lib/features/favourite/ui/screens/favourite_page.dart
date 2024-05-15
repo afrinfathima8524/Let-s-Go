@@ -40,13 +40,10 @@ favoritesBloc.add(FavoritesPageInitialEvent());
       },
         builder: (context, state) {
   switch (state.runtimeType) {
-    
-
     case FavoritesPageLoadingState:
       return Center(
         child: CircularProgressIndicator(),
       );
-
     case FavoritesPageLoadedSuccessState:
       final successState = state as FavoritesPageLoadedSuccessState;
       return ListView.builder(

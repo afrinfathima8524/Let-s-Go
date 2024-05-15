@@ -74,8 +74,9 @@ class _HomeState extends State<Home> {
                             "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
                       ),
                     ),
+
                     Text( profileName == "" ?"username":profileName ,
-                        style: GoogleFonts.poppins(
+                         style: GoogleFonts.poppins(
                             fontSize: 20, fontWeight: FontWeight.w600)),
                     GestureDetector(
                       onTap: () {

@@ -1,9 +1,5 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/profile/bloc/profile_bloc.dart';
@@ -21,8 +17,6 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController _placeController = TextEditingController();
 
   final ProfileBloc profileBloc = ProfileBloc();
-  File? _image;
-
   @override
   void initState() {
     profileBloc.add(ProfilePageInitialEvent());

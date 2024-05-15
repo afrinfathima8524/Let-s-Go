@@ -110,13 +110,21 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Lottie.network(
-                                        "https://lottie.host/8f96e8cf-3cc5-4c09-8792-d8861fd1f8a8/xENJ7yDjbQ.json",
-                                        width: 300,
-                                        height: 200),
-                                        SizedBox(height: 30,),
-                                    Text(
-                                        'Result for "${controller.text}" Not found',style: GoogleFonts.poppins(fontSize:20,color:Colors.grey.shade600,fontWeight:FontWeight.bold),),
+                                    Expanded(
+                                      child: Center(
+                                        child: Lottie.network(
+                                            "https://lottie.host/8f96e8cf-3cc5-4c09-8792-d8861fd1f8a8/xENJ7yDjbQ.json",
+                                            width: 400,
+                                            height: 400),
+                                      ),
+                                    ),
+                                        SizedBox(height: 5,),
+                                    Expanded(
+                                      child: Center(
+                                        child: Text(
+                                            'Result for "${controller.text}" Not found',style: GoogleFonts.poppins(fontSize:20,color:Colors.grey.shade600,fontWeight:FontWeight.bold,),),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               )
@@ -140,9 +148,11 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     child: Column(
                                       children: [
-                                        PlaceTile(
-                                          placesDataModels: PlacesClicked,
-                                          homeBloc: homeBloc,
+                                        Expanded(
+                                          child: PlaceTile(
+                                            placesDataModels: PlacesClicked,
+                                            homeBloc: homeBloc,
+                                          ),
                                         ),
                                       ],
                                     ),
