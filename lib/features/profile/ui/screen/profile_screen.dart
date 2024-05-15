@@ -58,18 +58,23 @@ class _ProfilePageState extends State<ProfilePage> {
               );
 
             case ProfilePageEditBoxDisplayState:
-
-            final stateData = state as ProfilePageEditBoxDisplayState;
+              final stateData = state as ProfilePageEditBoxDisplayState;
               return Align(
                 alignment: Alignment.center,
                 child: Column(
                   children: [
                     ClipRRect(
-                       borderRadius: BorderRadius.circular(100),
+                      borderRadius: BorderRadius.circular(100),
                       child: Container(
                         width: 200,
                         height: 200,
-                        child: stateData.image==null ? Image.network("https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(stateData.image!,fit: BoxFit.cover,),
+                        child: stateData.image == null
+                            ? profileImage==null ? Image.network(
+                                "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!)
+                            : Image.file(
+                                stateData.image!,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     ),
                     const SizedBox(
@@ -77,8 +82,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     TextButton(
                         onPressed: () {
-                          profileBloc.add(ProfilePagePictureEditButtonClickedEvent());
-                          
+                          profileBloc
+                              .add(ProfilePagePictureEditButtonClickedEvent());
                         },
                         child: Text(
                           "Edit Picture",
@@ -103,7 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               filled: true,
                               fillColor: Colors.grey[200],
-                              hintText: "Enter your Name",
+                              hintText: profileName == "" ? "enter your name" : profileName,
                               focusColor: Colors.blue.shade200,
                               hintStyle:
                                   GoogleFonts.poppins(color: Colors.black)),
@@ -128,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       BorderSide(color: Colors.blue, width: 2)),
                               filled: true,
                               fillColor: Colors.grey[200],
-                              hintText: "Enter current location",
+                              hintText: profilePlace == "Edit profile Now!" ? "enter your location" : profilePlace,
                               hintStyle:
                                   GoogleFonts.poppins(color: Colors.black)),
                         ),
@@ -157,7 +162,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               print(_nameController.text);
                               setState(() {
                                 profileBloc.add(ProfilePageEditDetailSavedEvent(
-                                    
                                     name: _nameController.text,
                                     location: _placeController.text,
                                     image: stateData.image));
@@ -189,19 +193,42 @@ class _ProfilePageState extends State<ProfilePage> {
                   alignment: Alignment.center,
                   child: Column(
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(bottom: 5,),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      bottom: BorderSide(
+                                          width: 3, color: Colors.blue))),
+                              child: Text(
+                                'ProFile',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,fontSize:18),
+                              )),
+                        ],
+                      ),
                       Stack(
                         children: [
                           ClipRRect(
-                       borderRadius: BorderRadius.circular(100),
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        child: detailbook.user.img==null ? Image.network("https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!,fit: BoxFit.cover,),
-                      ),
-                    ),
+                            borderRadius: BorderRadius.circular(100),
+                            child: Container(
+                              width: 160,
+                              height: 160,
+                              child: detailbook.user.img == null
+                                  ? Image.network(
+                                      "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg")
+                                  : Image.file(
+                                      profileImage!,
+                                      fit: BoxFit.cover,
+                                    ),
+                            ),
+                          ),
                           Positioned(
-                            left: 150,
-                            top: 145,
+                            left: 120,
+                            top: 115,
                             child: GestureDetector(
                               onTap: () {
                                 profileBloc.add(ProfilePageEditDetailEvent());
@@ -252,7 +279,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Expanded(
                                   child: Column(
                                     children: [
-                                      Text("Places Available",
+                                      Text("Total Places",
                                           style: GoogleFonts.poppins(
                                             fontSize: 14,
                                             fontWeight: FontWeight.bold,
