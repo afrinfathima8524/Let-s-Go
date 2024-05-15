@@ -20,6 +20,8 @@ class _HomeState extends State<Home> {
   final HomeBloc homeBloc = HomeBloc();
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldstate = GlobalKey<ScaffoldState>();
+
+ 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -27,8 +29,10 @@ class _HomeState extends State<Home> {
 _scaffoldstate.currentState!.openEndDrawer();
   }
 
+ 
   @override
   Widget build(BuildContext context) {
+ 
 
     
     return MaterialApp(
@@ -40,12 +44,13 @@ _scaffoldstate.currentState!.openEndDrawer();
               onPressed: () {
                 _scaffoldstate.currentState?.openDrawer();
                 setState(() {
-                  profileName = profileName;
+                
+                  
                 });
               },
               icon: const Icon(Icons.notes_rounded)),
           actions: [
-            GestureDetector(
+           _selectedIndex != 3 ? GestureDetector(
               onTap: () => _onItemTapped(3),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -61,6 +66,34 @@ _scaffoldstate.currentState!.openEndDrawer();
                         ),
                       ),
               ),
+            ):Padding(
+              padding: const EdgeInsets.all(10),
+              child: IconButton(
+                tooltip: "application Version :v1.0.0",
+                onPressed: (){
+                  showDialog(context: context, builder: (context) {
+                  return AboutDialog(
+                     applicationName: "Let's Go",
+                     applicationVersion: "v1.0.0",
+                     applicationIcon: Icon(Icons.travel_explore,color: Colors.blue,),
+
+                     children: [
+                       Text("This is our new application named Let'sGo.It was developed by BlueOshan's Mobile Dev Team..."),
+
+                       const SizedBox(height: 5,),
+
+                        Text("Team :"),
+                        Text("Afrin"),
+                        Text("Vetri"),
+                        Text("Mathan"),
+                        Text("Siddharth"),
+
+
+                     ],
+
+                  ); 
+                  },);
+                },icon: Icon(Icons.info,color: Colors.blue,),),
             ),
           ],
         ),
