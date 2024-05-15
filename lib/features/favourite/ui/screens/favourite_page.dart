@@ -20,7 +20,12 @@ favoritesBloc.add(FavoritesPageInitialEvent());
       create: (context) => FavoritesBloc(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Favourites'),
+          title: Container(
+            padding: EdgeInsets.only(bottom: 5),
+            decoration: BoxDecoration(
+              border:Border(bottom: BorderSide(width: 3,color: Colors.blue))
+            ),
+            child: Text('Favourites',style: GoogleFonts.poppins(fontWeight:FontWeight.w400),)),
         ),
       body: BlocConsumer<FavoritesBloc,FavoritesState>(
         bloc: favoritesBloc,
@@ -46,13 +51,16 @@ favoritesBloc.add(FavoritesPageInitialEvent());
         itemBuilder: (context, index) {
           final  favoriteItem = successState.favoritePlaces[index];
           return ListTile(
-            title: Text(favoriteItem.name ?? ''),
-            subtitle: Text(favoriteItem.location ?? ''),
-            leading: Image.network(
-              favoriteItem.image ?? '',
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
+            title: Text(favoriteItem.name ?? '',style: GoogleFonts.poppins(fontWeight:FontWeight.w500,),),
+            subtitle: Text(favoriteItem.location ?? '',style: GoogleFonts.poppins(),),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                favoriteItem.image ?? '',
+                width: 90,
+                height: 90,
+                fit: BoxFit.cover,
+              ),
             ),
            onTap: () {
   Navigator.push(
@@ -62,7 +70,7 @@ favoritesBloc.add(FavoritesPageInitialEvent());
 },
 
    trailing: IconButton(
-              icon: Icon(Icons.delete),
+              icon: Icon(Icons.delete,color: Colors.blue,),
               onPressed: () {
                 favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(favorited: favoriteItem));
               },
