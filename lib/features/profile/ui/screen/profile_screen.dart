@@ -53,129 +53,131 @@ class _ProfilePageState extends State<ProfilePage> {
 
             case ProfilePageEditBoxDisplayState:
               final stateData = state as ProfilePageEditBoxDisplayState;
-              return Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Container(
-                        width: 200,
-                        height: 200,
-                        child: stateData.image == null
-                            ? profileImage==null ? Image.network(
-                                "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!)
-                            : Image.file(
-                                stateData.image!,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          profileBloc
-                              .add(ProfilePagePictureEditButtonClickedEvent());
-                        },
-                        child: Text(
-                          "Edit Picture",
-                          style: GoogleFonts.poppins(
-                            color: Colors.blue,
-                          ),
-                        )),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: Container(
-                        height: 50,
-                        child: TextField(
-                          controller: _nameController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.elliptical(20, 20),
-                                    bottomRight: Radius.elliptical(20, 20)),
-                              ),
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                              hintText: profileName == "" ? "enter your name" : profileName,
-                              focusColor: Colors.blue.shade200,
-                              hintStyle:
-                                  GoogleFonts.poppins(color: Colors.black)),
+              return SingleChildScrollView(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Container(
+                          width: 200,
+                          height: 200,
+                          child: stateData.image == null
+                              ? profileImage==null ? Image.network(
+                                  "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!)
+                              : Image.file(
+                                  stateData.image!,
+                                  fit: BoxFit.cover,
+                                ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: SizedBox(
-                        height: 50,
-                        child: TextField(
-                          controller: _placeController,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            profileBloc
+                                .add(ProfilePagePictureEditButtonClickedEvent());
+                          },
+                          child: Text(
+                            "Edit Picture",
+                            style: GoogleFonts.poppins(
+                              color: Colors.blue,
+                            ),
+                          )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                        child: Container(
+                          height: 50,
+                          child: TextField(
+                            controller: _nameController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
                                   borderRadius: BorderRadius.only(
                                       topLeft: Radius.elliptical(20, 20),
                                       bottomRight: Radius.elliptical(20, 20)),
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
-                              filled: true,
-                              fillColor: Colors.grey[200],
-                              hintText: profilePlace == "Edit profile Now!" ? "enter your location" : profilePlace,
-                              hintStyle:
-                                  GoogleFonts.poppins(color: Colors.black)),
+                                ),
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                hintText: profileName == "" ? "enter your name" : profileName,
+                                focusColor: Colors.blue.shade200,
+                                hintStyle:
+                                    GoogleFonts.poppins(color: Colors.black)),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                        child: SizedBox(
+                          height: 50,
+                          child: TextField(
+                            controller: _placeController,
+                            decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.elliptical(20, 20),
+                                        bottomRight: Radius.elliptical(20, 20)),
+                                    borderSide:
+                                        BorderSide(color: Colors.blue, width: 2)),
+                                filled: true,
+                                fillColor: Colors.grey[200],
+                                hintText: profilePlace == "Edit profile Now!" ? "enter your location" : profilePlace,
+                                hintStyle:
+                                    GoogleFonts.poppins(color: Colors.black)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  profileBloc.add(ProfilePageInitialEvent());
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.blue),
+                                )),
+                            ElevatedButton(
                               onPressed: () {
-                                profileBloc.add(ProfilePageInitialEvent());
+                                print(_nameController.text);
+                                setState(() {
+                                  profileBloc.add(ProfilePageEditDetailSavedEvent(
+                                      name: _nameController.text,
+                                      location: _placeController.text,
+                                      image: stateData.image));
+                                });
                               },
                               child: Text(
-                                "Cancel",
+                                "Save",
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.blue),
-                              )),
-                          ElevatedButton(
-                            onPressed: () {
-                              print(_nameController.text);
-                              setState(() {
-                                profileBloc.add(ProfilePageEditDetailSavedEvent(
-                                    name: _nameController.text,
-                                    location: _placeController.text,
-                                    image: stateData.image));
-                              });
-                            },
-                            child: Text(
-                              "Save",
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(Colors.blue),
+                              ),
                             ),
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.blue),
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
 
@@ -198,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       bottom: BorderSide(
                                           width: 3, color: Colors.blue))),
                               child: Text(
-                                'ProFile',
+                                'Profile',
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w500,fontSize:18),
                               )),

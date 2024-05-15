@@ -8,6 +8,8 @@ import 'package:lets_go/features/home/home_page.dart';
 import 'package:lets_go/features/my_trip/trips.dart';
 import 'package:lets_go/features/profile/ui/screen/profile_screen.dart';
 
+import '../../profile/data/profile_list.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
   @override
@@ -26,6 +28,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -34,6 +38,9 @@ class _HomeState extends State<Home> {
           leading: IconButton(
               onPressed: () {
                 _scaffoldstate.currentState?.openDrawer();
+                setState(() {
+                  profileName = profileName;
+                });
               },
               icon: const Icon(Icons.notes_rounded)),
           actions: [
@@ -67,8 +74,9 @@ class _HomeState extends State<Home> {
                             "https://t4.ftcdn.net/jpg/06/43/68/65/360_F_643686558_Efl6HB1ITw98bx1PdAd1wy56QpUTMh47.jpg"),
                       ),
                     ),
-                    Text(" Mr.Maddy",
-                        style: GoogleFonts.poppins(
+
+                    Text( profileName == "" ?"username":profileName ,
+                         style: GoogleFonts.poppins(
                             fontSize: 20, fontWeight: FontWeight.w600)),
                     GestureDetector(
                       onTap: () {
