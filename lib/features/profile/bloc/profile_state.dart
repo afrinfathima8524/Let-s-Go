@@ -23,5 +23,9 @@ class ProfilePageLoadSuccessState extends ProfileState{
 
 //profile edit
 class ProfilePageEditLoadingState extends ProfileState{}
-class ProfilePageEditBoxDisplayState extends ProfileState{}
+class ProfilePageEditBoxDisplayState extends ProfileState{
+  final File? image;
+
+  ProfilePageEditBoxDisplayState({this.image});
+}
 class ProfilePageEditedSuccessState extends ProfileActionState{}

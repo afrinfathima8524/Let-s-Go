@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController _placeController = TextEditingController();
 
   final ProfileBloc profileBloc = ProfileBloc();
+  File? _image;
 
   @override
   void initState() {
@@ -32,10 +36,16 @@ class _ProfilePageState extends State<ProfilePage> {
       body: BlocConsumer<ProfileBloc, ProfileState>(
         bloc: profileBloc,
         listener: (context, state) {
-          if(state is ProfilePageEditedSuccessState){
+          if (state is ProfilePageEditedSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            duration: Duration(milliseconds: 300),
-            content:Text("Profile Saved!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
+                duration: Duration(milliseconds: 300),
+                content: Text(
+                  "Profile Saved!",
+                  style: GoogleFonts.poppins(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )));
           }
         },
         builder: (context, state) {
@@ -48,20 +58,28 @@ class _ProfilePageState extends State<ProfilePage> {
               );
 
             case ProfilePageEditBoxDisplayState:
+
+            final stateData = state as ProfilePageEditBoxDisplayState;
               return Align(
                 alignment: Alignment.center,
                 child: Column(
                   children: [
-                    CircleAvatar(
-                      radius: 100,
-                      backgroundImage: NetworkImage(
-                          "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3407.jpg"),
+                    ClipRRect(
+                       borderRadius: BorderRadius.circular(100),
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        child: stateData.image==null ? Image.network("https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(stateData.image!,fit: BoxFit.cover,),
+                      ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          profileBloc.add(ProfilePagePictureEditButtonClickedEvent());
+                          
+                        },
                         child: Text(
                           "Edit Picture",
                           style: GoogleFonts.poppins(
@@ -138,10 +156,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             onPressed: () {
                               print(_nameController.text);
                               setState(() {
-                                profileBloc
-                                    .add(ProfilePageEditDetailSavedEvent(name: _nameController.text,location:_placeController.text));
+                                profileBloc.add(ProfilePageEditDetailSavedEvent(
+                                    
+                                    name: _nameController.text,
+                                    location: _placeController.text,
+                                    image: stateData.image));
                               });
-                              //  _streamController.add(_placeController.text);
                             },
                             child: Text(
                               "Save",
@@ -171,16 +191,17 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       Stack(
                         children: [
-                          const CircleAvatar(
-                            radius: 55,
-                            //backgroundColor: Colors.black,
-                            backgroundImage: NetworkImage(
-                              "https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3407.jpg",
-                            ),
-                          ),
+                          ClipRRect(
+                       borderRadius: BorderRadius.circular(100),
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        child: detailbook.user.img==null ? Image.network("https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!,fit: BoxFit.cover,),
+                      ),
+                    ),
                           Positioned(
-                            left: 85,
-                            top: 75,
+                            left: 150,
+                            top: 145,
                             child: GestureDetector(
                               onTap: () {
                                 profileBloc.add(ProfilePageEditDetailEvent());
@@ -190,23 +211,22 @@ class _ProfilePageState extends State<ProfilePage> {
                                     color: Colors.blue,
                                     borderRadius: BorderRadius.circular(50),
                                   ),
-                                  width: 25,
-                                  height: 25,
+                                  width: 35,
+                                  height: 35,
                                   child: const Center(
                                     child: Icon(
                                       Icons.edit,
                                       color: Colors.white,
-                                      size: 12,
+                                      size: 15,
                                     ),
                                   )),
                             ),
                           )
                         ],
                       ),
-                     Text(detailbook.user.name,
-                               style: GoogleFonts.poppins(
-                                   fontSize: 18,
-                                   fontWeight: FontWeight.bold)),
+                      Text(detailbook.user.name,
+                          style: GoogleFonts.poppins(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       Text(
                         detailbook.user.place,
                         style: GoogleFonts.poppins(
