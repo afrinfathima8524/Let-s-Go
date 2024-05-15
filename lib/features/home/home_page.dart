@@ -111,10 +111,12 @@ class _HomePageState extends State<HomePage> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Expanded(
-                                      child: Lottie.network(
-                                          "https://lottie.host/8f96e8cf-3cc5-4c09-8792-d8861fd1f8a8/xENJ7yDjbQ.json",
-                                          width: 400,
-                                          height: 400),
+                                      child: Center(
+                                        child: Lottie.network(
+                                            "https://lottie.host/8f96e8cf-3cc5-4c09-8792-d8861fd1f8a8/xENJ7yDjbQ.json",
+                                            width: 400,
+                                            height: 400),
+                                      ),
                                     ),
                                         SizedBox(height: 5,),
                                     Expanded(
@@ -146,9 +148,11 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     child: Column(
                                       children: [
-                                        PlaceTile(
-                                          placesDataModels: PlacesClicked,
-                                          homeBloc: homeBloc,
+                                        Expanded(
+                                          child: PlaceTile(
+                                            placesDataModels: PlacesClicked,
+                                            homeBloc: homeBloc,
+                                          ),
                                         ),
                                       ],
                                     ),
