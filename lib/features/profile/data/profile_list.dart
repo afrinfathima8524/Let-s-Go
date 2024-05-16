@@ -25,4 +25,6 @@ List<Item> profileItems = [
 File? profileImage = null ;
 
 String profileName = "";
+String profileEmail = "";
+String profilePassword = "";
 String profilePlace ="Edit profile Now!";
