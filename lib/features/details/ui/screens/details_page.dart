@@ -62,7 +62,7 @@ class _DetailsPageState extends State<DetailsPage> {
         }else if(state is DetailsPageTripRemovedSuccessState){
 
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.blue,
+            backgroundColor: Colors.red,
             duration: Duration(milliseconds: 200),
             content:Text("Place Removed!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
 
