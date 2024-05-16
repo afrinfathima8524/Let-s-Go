@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
+import 'package:lottie/lottie.dart';
 class FavoritePage extends StatefulWidget {
   @override
   State<FavoritePage> createState() => _FavoritePageState();
@@ -45,7 +46,7 @@ favoritesBloc.add(FavoritesPageInitialEvent());
   switch (state.runtimeType) {
     case FavoritesPageLoadingState:
       return Center(
-        child: CircularProgressIndicator(),
+        child:Lottie.network("https://lottie.host/73943ba5-eba0-4b8c-9524-276c371a31c5/cxYpKmwsvz.json",width: 300,height: 300,)
       );
     case FavoritesPageLoadedSuccessState:
       final successState = state as FavoritesPageLoadedSuccessState;
