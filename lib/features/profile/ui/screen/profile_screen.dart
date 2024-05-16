@@ -35,12 +35,11 @@ class _ProfilePageState extends State<ProfilePage> {
         listener: (context, state) {
           if (state is ProfilePageEditedSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              backgroundColor: Colors.blue,
                 duration: Duration(milliseconds: 300),
                 content: Text(
                   "Profile Saved!",
                   style: GoogleFonts.poppins(
-                    color: Colors.white,
+                    color: Colors.blue,
                     fontWeight: FontWeight.bold,
                   ),
                 )));

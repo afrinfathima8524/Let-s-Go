@@ -2,21 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/login.dart';
-import 'package:lets_go/features/profile/data/profile_list.dart';
 
 class SignInPage extends StatelessWidget {
   SignInPage({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
-  void logUserIn() {
-    ///
-    profileEmail = emailController.text;
-    profilePassword = passwordController.text;
-    profileName = usernameController.text;
-
-    
-  }
+  void logUserIn() {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,9 +62,6 @@ class SignInPage extends StatelessWidget {
                   MyButton(
                     onTap: () {
                       logUserIn();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
-
-                        print(profileEmail);
                     },
                     text: 'Sign In',
                   ),
