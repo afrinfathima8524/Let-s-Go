@@ -35,6 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
         listener: (context, state) {
           if (state is ProfilePageEditedSuccessState) {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Colors.white,
                 duration: Duration(milliseconds: 300),
                 content: Text(
                   "Profile Saved!",
