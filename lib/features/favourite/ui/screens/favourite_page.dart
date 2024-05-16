@@ -5,34 +5,43 @@ import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/favourite/bloc/favourite_bloc.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lottie/lottie.dart';
+
 class FavoritePage extends StatefulWidget {
   @override
   State<FavoritePage> createState() => _FavoritePageState();
 }
+
 class _FavoritePageState extends State<FavoritePage> {
-  final FavoritesBloc favoritesBloc=FavoritesBloc();
-  final DetailsBloc detailsBloc2=DetailsBloc();
+  late final FavoritesBloc favoritesBloc;
+  late final DetailsBloc detailsBloc2;
+
   @override
   void initState() {
-favoritesBloc.add(FavoritesPageInitialEvent());
+    favoritesBloc = FavoritesBloc();
+    detailsBloc2 = DetailsBloc();
+    favoritesBloc.add(FavoritesPageInitialEvent());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FavoritesBloc(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Container(
-            padding: EdgeInsets.only(bottom: 5),
-            decoration: BoxDecoration(
-              border:Border(bottom: BorderSide(width: 3,color: Colors.blue))
-            ),
-            child: Text('Favourites',style: GoogleFonts.poppins(fontWeight:FontWeight.w400),)),
+    return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          padding: EdgeInsets.only(bottom: 5),
+          decoration: BoxDecoration(
+            border: Border(bottom: BorderSide(width: 3, color: Colors.blue)),
+          ),
+          child: Text(
+            'Favourites',
+            style: GoogleFonts.poppins(fontWeight: FontWeight.w400),
+          ),
         ),
-      body: BlocConsumer<FavoritesBloc,FavoritesState>(
+      ),
+      body: BlocConsumer<FavoritesBloc, FavoritesState>(
         bloc: favoritesBloc,
         listenWhen: (previous, current) => current is FavoriteActionState,
+
       buildWhen: (previous, current) => current is! FavoriteActionState,
       listener: (context, state) {
         if(state is FavoritesPageFavoriteRemovedState){
@@ -66,34 +75,34 @@ favoritesBloc.add(FavoritesPageInitialEvent());
                 height: 90,
                 fit: BoxFit.cover,
               ),
-            ),
-      onTap: () {
-  detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: favoriteItem));
-  Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage()));
-},
-   trailing: IconButton(
-              icon: Icon(Icons.delete,color: Colors.blue,),
-              onPressed: () {
-                favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(favorited: favoriteItem));
-              },
-            ),
-          );
+                      ),
+                      onTap: () {
+                        detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: favoriteItem));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage()));
+                      },
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete, color: Colors.blue),
+                        onPressed: () {
+                          favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(favorited: favoriteItem));
+                        },
+                      ),
+                    );
+                  },
+                );
+              }
+            case FavoritesPageFavoriteRemovedState:
+              return Container();
+            case FavoritesInitial:
+              return Center(
+                child: Text('Initial state'),
+              );
+            default:
+              return Center(
+                child: Text('Error: Something went wrong!'),
+              );
+          }
         },
-      );
-
-    case FavoritesPageFavoriteRemovedState:
-      return Container();
-
-    default:
-      return Center(
-        child: Text('Error: Something went wrong!'),
-      );
-  }
-} 
-  ),
-    )
+      ),
     );
   }
 }
-
- 
