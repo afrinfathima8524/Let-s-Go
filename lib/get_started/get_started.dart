@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lets_go/features/authpages/login.dart';
 import 'package:lets_go/features/authpages/signin.dart';
 
 class GetStarted extends StatelessWidget {
@@ -64,9 +63,6 @@ class GetStarted extends StatelessWidget {
                             GoogleFonts.poppins(fontSize: 18, color: Colors.grey),
                       ),
                       SizedBox(
-                        height: 15,
-                      ),
-                      SizedBox(
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: GestureDetector(
                           onTap: () => Navigator.pushReplacement(
@@ -75,11 +71,12 @@ class GetStarted extends StatelessWidget {
                                 builder: (context) => SignInPage(),
                               )),
                           child: Container(
+                            margin: EdgeInsets.symmetric(vertical: 20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(40),
                               color: Colors.blue.shade300,
                             ),
-                            padding: EdgeInsets.all(20),
+                            padding: EdgeInsets.symmetric(vertical: 15,horizontal: 10),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

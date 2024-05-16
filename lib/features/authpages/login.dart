@@ -1,16 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/components/square_tile.dart';
 import 'package:lets_go/features/authpages/forget_pass.dart';
 import 'package:lets_go/features/authpages/signin.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({super.key});
 
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final usernameController = TextEditingController();
+
   final passwordController = TextEditingController();
+
   void signUserIn() {}
 
   @override
@@ -41,7 +49,13 @@ class LoginPage extends StatelessWidget {
                   MyTextField(
                     hintText: 'Enter Username',
                     obsecureText: false,
+                    inputFormater: [
+                      FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
+                    ],
                     controller: usernameController,
+                    validator: (val) {
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -50,6 +64,9 @@ class LoginPage extends StatelessWidget {
                     hintText: 'Enter Password',
                     obsecureText: true,
                     controller: passwordController,
+                    validator: (val) {
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 10,
