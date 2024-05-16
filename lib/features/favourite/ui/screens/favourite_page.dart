@@ -44,7 +44,8 @@ class _FavoritePageState extends State<FavoritePage> {
         buildWhen: (previous, current) => current is! FavoriteActionState,
         listener: (context, state) {
           if (state is FavoritesPageFavoriteRemovedState) {
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
                 backgroundColor: Colors.red,
                 duration: Duration(milliseconds: 100),
                 content: Text(
@@ -52,8 +53,6 @@ class _FavoritePageState extends State<FavoritePage> {
                   style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                  ),
-                )));
                   ),
                 ),
               ),
@@ -66,7 +65,7 @@ class _FavoritePageState extends State<FavoritePage> {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            case FavoritesPageLoadedSuccessState:
+case FavoritesPageLoadedSuccessState:
               final successState = state as FavoritesPageLoadedSuccessState;
               if (successState.favoritePlaces.isEmpty) {
                 return Center(
@@ -116,16 +115,13 @@ class _FavoritePageState extends State<FavoritePage> {
                         ),
                       ),
                       onTap: () {
-                        detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(
-                            clickedPlace: favoriteItem));
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => DetailsPage()));
+                        detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: favoriteItem));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage()));
                       },
                       trailing: IconButton(
                         icon: Icon(Icons.delete, color: Colors.blue),
                         onPressed: () {
-                          favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(
-                              favorited: favoriteItem));
+                          favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(favorited: favoriteItem));
                         },
                       ),
                     );
@@ -148,3 +144,4 @@ class _FavoritePageState extends State<FavoritePage> {
     );
   }
 }
+
