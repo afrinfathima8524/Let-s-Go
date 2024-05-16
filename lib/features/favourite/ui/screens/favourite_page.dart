@@ -41,49 +41,89 @@ class _FavoritePageState extends State<FavoritePage> {
       body: BlocConsumer<FavoritesBloc, FavoritesState>(
         bloc: favoritesBloc,
         listenWhen: (previous, current) => current is FavoriteActionState,
-
-      buildWhen: (previous, current) => current is! FavoriteActionState,
-      listener: (context, state) {
-        if(state is FavoritesPageFavoriteRemovedState){
-           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.red,
-            duration: Duration(milliseconds: 100),
-            content:Text("The selected place has been deleted!",style: GoogleFonts.poppins(color: Colors.white,fontWeight:FontWeight.bold,),)));
-        }
-          },
-      
+        buildWhen: (previous, current) => current is! FavoriteActionState,
+        listener: (context, state) {
+          if (state is FavoritesPageFavoriteRemovedState) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                backgroundColor: Colors.red,
+                duration: Duration(milliseconds: 100),
+                content: Text(
+                  "The selected place has been deleted!",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                )));
+          }
+        },
         builder: (context, state) {
-  switch (state.runtimeType) {
-    case FavoritesPageLoadingState:
-      return Center(
-        child:Lottie.network("https://lottie.host/73943ba5-eba0-4b8c-9524-276c371a31c5/cxYpKmwsvz.json",width: 300,height: 300,)
-      );
-    case FavoritesPageLoadedSuccessState:
-      final successState = state as FavoritesPageLoadedSuccessState;
-      return ListView.builder(
-        itemCount: successState.favoritePlaces.length,
-        itemBuilder: (context, index) {
-          final  favoriteItem = successState.favoritePlaces[index];
-          return ListTile(
-            title: Text(favoriteItem.name ?? '',style: GoogleFonts.poppins(fontWeight:FontWeight.w500,),),
-            subtitle: Text(favoriteItem.location ?? '',style: GoogleFonts.poppins(),),
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                favoriteItem.image ?? '',
-                width: 90,
-                height: 90,
-                fit: BoxFit.cover,
-              ),
+          switch (state.runtimeType) {
+            case FavoritesPageLoadingState:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            case FavoritesPageLoadedSuccessState:
+              final successState = state as FavoritesPageLoadedSuccessState;
+              if (successState.favoritePlaces.isEmpty) {
+                return Center(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(
+                      child: Lottie.network(
+                        "https://lottie.host/6096c0ad-b67c-4fda-9396-af5f50b4ee43/lS8njlPOD6.json",
+                        width: 400,
+                        height: 400,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Center(
+                      child: Text(
+                        'No favourite places found',
+                        style: GoogleFonts.poppins(
+                          fontSize: 25,
+                          color: Colors.grey.shade600,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ));
+              } else {
+                return ListView.builder(
+                  itemCount: successState.favoritePlaces.length,
+                  itemBuilder: (context, index) {
+                    final favoriteItem = successState.favoritePlaces[index];
+                    return ListTile(
+                      title: Text(
+                        favoriteItem.name ?? '',
+                        style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
+                      ),
+                      subtitle: Text(favoriteItem.location ?? '',
+                          style: GoogleFonts.poppins()),
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.network(
+                          favoriteItem.image ?? '',
+                          width: 90,
+                          height: 90,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       onTap: () {
-                        detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(clickedPlace: favoriteItem));
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => DetailsPage()));
+                        detailsBloc2.add(DetailsPagePlaceDetailsChangeEvent(
+                            clickedPlace: favoriteItem));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => DetailsPage()));
                       },
                       trailing: IconButton(
                         icon: Icon(Icons.delete, color: Colors.blue),
                         onPressed: () {
-                          favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(favorited: favoriteItem));
+                          favoritesBloc.add(FavoritesPageFavoriteRemoveEvent(
+                              favorited: favoriteItem));
                         },
                       ),
                     );
