@@ -145,4 +145,3 @@ case FavoritesPageLoadedSuccessState:
     );
   }
 }
-
