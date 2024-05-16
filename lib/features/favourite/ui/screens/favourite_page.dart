@@ -54,6 +54,10 @@ class _FavoritePageState extends State<FavoritePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 )));
+                  ),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -66,32 +70,31 @@ class _FavoritePageState extends State<FavoritePage> {
               final successState = state as FavoritesPageLoadedSuccessState;
               if (successState.favoritePlaces.isEmpty) {
                 return Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Lottie.network(
-                        "https://lottie.host/6096c0ad-b67c-4fda-9396-af5f50b4ee43/lS8njlPOD6.json",
-                        width: 400,
-                        height: 400,
+                  child:Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   children: [
+                     Center(
+                     child: Lottie.network(
+                              "https://lottie.host/6096c0ad-b67c-4fda-9396-af5f50b4ee43/lS8njlPOD6.json",
+                       width: 400,
+                       height: 400,
+                            ),
+                          ),
+                    SizedBox(height: 5,),
+                   Center(
+                   child: Text(
+                         'No favourite places found',
+                   style: GoogleFonts.poppins(
+                   fontSize: 25,
+                   color: Colors.grey.shade600,
+                   fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Center(
-                      child: Text(
-                        'No favourite places found',
-                        style: GoogleFonts.poppins(
-                          fontSize: 25,
-                          color: Colors.grey.shade600,
-                          fontWeight: FontWeight.bold,
-                        ),
+                     ),
                       ),
-                    ),
-                  ],
-                ));
+                     ],
+                   )
+                );
               } else {
                 return ListView.builder(
                   itemCount: successState.favoritePlaces.length,
@@ -102,8 +105,7 @@ class _FavoritePageState extends State<FavoritePage> {
                         favoriteItem.name ?? '',
                         style: GoogleFonts.poppins(fontWeight: FontWeight.w500),
                       ),
-                      subtitle: Text(favoriteItem.location ?? '',
-                          style: GoogleFonts.poppins()),
+                      subtitle: Text(favoriteItem.location ?? '', style: GoogleFonts.poppins()),
                       leading: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.network(

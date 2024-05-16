@@ -26,6 +26,3 @@ File? profileImage = null ;
 
 String profileName = "";
 String profilePlace ="Edit profile Now!";
-//
-String profileEmail = "";
-String profilePassword = "";
