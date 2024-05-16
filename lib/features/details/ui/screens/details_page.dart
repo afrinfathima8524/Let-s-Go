@@ -44,27 +44,23 @@ class _DetailsPageState extends State<DetailsPage> {
           Navigator.of(context).pop();
         }else if(state is DetailsPageFavAddedSuccessState){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.blue,
             duration: Duration(milliseconds: 100),
-            content:Text("Place delightful to you!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
+            content:Text("Place delightful to you!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
         }else if(state is DetailsPageFavRemovedSuccessState){
 
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.red,
             duration: Duration(milliseconds: 100),
-            content:Text("Sorry to see you go!",style: GoogleFonts.poppins(color: Colors.white,fontWeight:FontWeight.bold,),)));
+            content:Text("Sorry to see you go!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
 
         }else if(state is DetailsPageTripAddedSuccessState){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.blue,
             duration: Duration(milliseconds: 200),
-            content:Text("Place added to MyTrip!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
+            content:Text("Place added to MyTrip!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
         }else if(state is DetailsPageTripRemovedSuccessState){
 
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.red,
             duration: Duration(milliseconds: 200),
-            content:Text("Place Removed!",style: GoogleFonts.poppins(color: Colors.white,fontWeight:FontWeight.bold,),)));
+            content:Text("Place Removed!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
 
         }
       },
