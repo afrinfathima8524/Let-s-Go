@@ -20,3 +20,8 @@ class ProfilePageEditDetailSavedEvent extends ProfileEvent{
 
   ProfilePageEditDetailSavedEvent({required this.name, required this.location,this.image,});
 }
+
+//show details of profile
+class ProfilePageShowDetailsEvent extends ProfileEvent{
+  
+}
