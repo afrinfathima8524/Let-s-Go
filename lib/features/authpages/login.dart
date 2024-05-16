@@ -5,6 +5,10 @@ import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/components/square_tile.dart';
 import 'package:lets_go/features/authpages/forget_pass.dart';
 import 'package:lets_go/features/authpages/signin.dart';
+import 'package:lets_go/features/home/ui/home.dart';
+import 'package:lets_go/features/profile/data/profile_list.dart';
+
+import '../home/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -77,6 +81,10 @@ class LoginPage extends StatelessWidget {
                   MyButton(
                     onTap: () {
                       signUserIn();
+
+                      if(profileName == usernameController.text && profilePassword == passwordController.text){
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Home(),));
+                      }
                     }, text: 'Log In',
                   ),
                   const SizedBox(

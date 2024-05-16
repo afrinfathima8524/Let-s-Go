@@ -37,8 +37,9 @@ favoritesBloc.add(FavoritesPageInitialEvent());
       listener: (context, state) {
         if(state is FavoritesPageFavoriteRemovedState){
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
             duration: Duration(milliseconds: 100),
-            content:Text("The selected place has been deleted!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
+            content:Text("The selected place has been deleted!",style: GoogleFonts.poppins(color: Colors.white,fontWeight:FontWeight.bold,),)));
         }
           },
       
