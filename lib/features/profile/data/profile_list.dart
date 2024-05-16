@@ -23,7 +23,6 @@ List<Item> profileItems = [
 
 //profile pic
 File? profileImage = null ;
-
 String profileName = "";
 String profileEmail = "";
 String profilePassword = "";
