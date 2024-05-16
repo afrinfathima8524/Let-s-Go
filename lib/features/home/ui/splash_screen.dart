@@ -20,19 +20,21 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Column(
-            children: [
-              Center(
-                child: Image.asset("assets/logo.png",fit: BoxFit.cover,),
-              ),
-              Text("Let's Goooooo",style: GoogleFonts.poppins(fontSize:40,color:Colors.blue,fontWeight:FontWeight.bold),)
-            ],
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Center(
+                  child: Image.asset("assets/logo.png",fit: BoxFit.cover,),
+                ),
+                Text("Let's Goooooo",style: GoogleFonts.poppins(fontSize:40,color:Colors.blue,fontWeight:FontWeight.bold),)
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
