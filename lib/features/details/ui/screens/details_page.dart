@@ -11,6 +11,7 @@ import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/widgets/details_section.dart';
 import 'package:lets_go/features/details/ui/widgets/hero_image.dart';
 import 'package:lets_go/features/details/ui/widgets/place_list.dart';
+import 'package:lottie/lottie.dart';
 import '../widgets/photo_gird.dart';
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -68,9 +69,8 @@ class _DetailsPageState extends State<DetailsPage> {
 
           case DetailsPageDetailsLoadingState:
 
-          return const Scaffold(
-            body: Center(child: 
-            CircularProgressIndicator(),),
+          return Scaffold(
+            body: Center(child:Lottie.network("https://lottie.host/73943ba5-eba0-4b8c-9524-276c371a31c5/cxYpKmwsvz.json",width: 300,height: 300,)),
           );
   
           case DetailsPageDetailsLoadErrorState:

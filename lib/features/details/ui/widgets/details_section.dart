@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/data/mytrip_data.dart';
-import 'package:lets_go/features/favourite/fav_data.dart';
+import 'package:lets_go/features/favourite/data/fav_data.dart';
 import 'package:lets_go/model/Places.dart';
 
 class DetailSection extends StatefulWidget {

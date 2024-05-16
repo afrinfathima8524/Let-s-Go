@@ -20,7 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeInitialFetchEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 2));
     emit(PLacesFetchSucessState(places: places, filteredPlace: null));
   }
 

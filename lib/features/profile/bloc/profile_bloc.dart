@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_go/features/details/data/mytrip_data.dart';
-import 'package:lets_go/features/favourite/fav_data.dart';
+import 'package:lets_go/features/favourite/data/fav_data.dart';
 
 import 'package:lets_go/model/Places.dart';
 import 'package:lets_go/model/usermodel.dart';
