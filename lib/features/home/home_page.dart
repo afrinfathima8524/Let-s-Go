@@ -36,12 +36,13 @@ class _HomePageState extends State<HomePage> {
         builder: (context, state) {
           switch (state.runtimeType) {
             case HomeLoadingState:
-              return const Scaffold(
+              return Scaffold(
                 body: Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.grey,
-                    color: Colors.blue,
-                  ),
+                  // child: CircularProgressIndicator(
+                  //   backgroundColor: Colors.grey,
+                  //   color: Colors.blue,
+                  // ),
+                  child:Lottie.network("https://lottie.host/73943ba5-eba0-4b8c-9524-276c371a31c5/cxYpKmwsvz.json",width: 300,height: 300,)
                 ),
               );
             case PLacesFetchSucessState:

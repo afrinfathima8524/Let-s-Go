@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lets_go/features/details/data/mytrip_data.dart';
-import 'package:lets_go/features/favourite/fav_data.dart';
+import 'package:lets_go/features/favourite/data/fav_data.dart';
 
 import 'package:lets_go/model/Places.dart';
 import 'package:lets_go/model/usermodel.dart';
@@ -25,6 +25,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ProfilePageEditDetailSavedEvent>(profilePageEditDetailSavedEvent);
     on<ProfilePagePictureEditButtonClickedEvent>(
         profilePagePictureEditButtonClickedEvent);
+        on<ProfilePageShowDetailsEvent>(profilePageShowDetailsEvent);
   }
 
   FutureOr<void> profilePageInitialEvent(
@@ -88,8 +89,33 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     //final imgTemp = File(image.path);
     final imagePermanent = await saveFilePermanently(image.path);
     _image = imagePermanent;
-    print("img: $_image");
+    //print("img: $_image");
     profileImage = _image;
     emit(ProfilePageEditBoxDisplayState(image: profileImage));
+  }
+
+  FutureOr<void> profilePageShowDetailsEvent(ProfilePageShowDetailsEvent event, Emitter<ProfileState> emit) async{
+
+    final apiService = ApiService(); //get response
+    List<PlacesDataModel> places = []; //declare list as empty.
+    final response = await apiService.fetchData(); // get list from function
+    places = response;
+
+    
+
+  
+
+  //  print(index);
+
+    emit(ProfilePageShowAlertBoxEventState());
+ User user = User(name: profileName, place: profilePlace, img: profileImage);
+    emit(ProfilePageLoadSuccessState(
+        favList: favoritePlaces,
+        placeList: places,
+        tripList: myTripList,
+        user: user));
+  
+   
+   
   }
 }

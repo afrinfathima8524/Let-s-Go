@@ -29,3 +29,7 @@ class ProfilePageEditBoxDisplayState extends ProfileState{
   ProfilePageEditBoxDisplayState({this.image});
 }
 class ProfilePageEditedSuccessState extends ProfileActionState{}
+
+
+//show profile alert
+class ProfilePageShowAlertBoxEventState extends ProfileActionState{}

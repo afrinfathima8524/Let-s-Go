@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/profile/bloc/profile_bloc.dart';
 import 'package:lets_go/features/profile/data/profile_list.dart';
+import 'package:lottie/lottie.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -17,6 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
   TextEditingController _placeController = TextEditingController();
 
   final ProfileBloc profileBloc = ProfileBloc();
+  int selected = 0;
   @override
   void initState() {
     profileBloc.add(ProfilePageInitialEvent());
@@ -40,6 +43,75 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontWeight: FontWeight.bold,
                   ),
                 )));
+          } else if (state is ProfilePageShowAlertBoxEventState) {
+            // showAdaptiveDialog(
+            //   context: context,
+            //   builder: (context) {
+            //     return AlertDialog(
+            //       title: Text(profileItems[selected].itemName),
+            //       content: Text(profileItems[selected].para),
+            //       actions: [
+            //         TextButton(
+            //             onPressed: () {
+            //               Navigator.of(context).pop();
+            //             },
+            //             child: Text("close"))
+            //       ],
+            //     );
+            //   },
+            // );
+
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return Container(
+                  height: 320,
+                  width: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15 ,vertical: 10),
+                    child: Column(
+                                     
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(
+                                  bottom: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        bottom: BorderSide(
+                                            width: 3, color: Colors.blue))),
+                                child: Text(
+                                  profileItems[selected].itemName,
+                                  style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500, fontSize: 18),
+                                )),
+                            TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(context);
+                          },
+                          child: Text("close",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.w400),)),
+                                
+                          ],
+                        ),
+
+
+                        Lottie.network(profileItems[selected].pic,width: 200,height: 150),
+
+                       Text(profileItems[selected].para,style: GoogleFonts.poppins(color:Colors.grey,fontWeight:FontWeight.w400),),
+
+
+
+
+ 
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
           }
         },
         builder: (context, state) {
@@ -64,8 +136,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           width: 200,
                           height: 200,
                           child: stateData.image == null
-                              ? profileImage==null ? Image.network(
-                                  "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg"):Image.file(profileImage!)
+                              ? profileImage == null
+                                  ? Image.network(
+                                      "https://t4.ftcdn.net/jpg/05/89/93/27/360_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.jpg")
+                                  : Image.file(profileImage!)
                               : Image.file(
                                   stateData.image!,
                                   fit: BoxFit.cover,
@@ -77,8 +151,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       TextButton(
                           onPressed: () {
-                            profileBloc
-                                .add(ProfilePagePictureEditButtonClickedEvent());
+                            profileBloc.add(
+                                ProfilePagePictureEditButtonClickedEvent());
                           },
                           child: Text(
                             "Edit Picture",
@@ -103,7 +177,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 filled: true,
                                 fillColor: Colors.grey[200],
-                                hintText: profileName == "" ? "enter your name" : profileName,
+                                hintText: profileName == ""
+                                    ? "enter your name"
+                                    : profileName,
                                 focusColor: Colors.blue.shade200,
                                 hintStyle:
                                     GoogleFonts.poppins(color: Colors.black)),
@@ -124,11 +200,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                     borderRadius: BorderRadius.only(
                                         topLeft: Radius.elliptical(20, 20),
                                         bottomRight: Radius.elliptical(20, 20)),
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
                                 filled: true,
                                 fillColor: Colors.grey[200],
-                                hintText: profilePlace == "Edit profile Now!" ? "enter your location" : profilePlace,
+                                hintText: profilePlace == "Edit profile Now!"
+                                    ? "enter your location"
+                                    : profilePlace,
                                 hintStyle:
                                     GoogleFonts.poppins(color: Colors.black)),
                           ),
@@ -156,10 +234,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               onPressed: () {
                                 print(_nameController.text);
                                 setState(() {
-                                  profileBloc.add(ProfilePageEditDetailSavedEvent(
-                                      name: _nameController.text,
-                                      location: _placeController.text,
-                                      image: stateData.image));
+                                  profileBloc.add(
+                                      ProfilePageEditDetailSavedEvent(
+                                          name: _nameController.text,
+                                          location: _placeController.text,
+                                          image: stateData.image));
                                 });
                               },
                               child: Text(
@@ -170,7 +249,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               ),
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(Colors.blue),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.blue),
                               ),
                             ),
                           ],
@@ -193,8 +273,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 20),
-                              padding: EdgeInsets.only(bottom: 5,),
+                              margin: EdgeInsets.only(left: 20),
+                              padding: EdgeInsets.only(
+                                bottom: 5,
+                              ),
                               decoration: BoxDecoration(
                                   border: Border(
                                       bottom: BorderSide(
@@ -202,7 +284,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               child: Text(
                                 'Profile',
                                 style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.w500,fontSize:18),
+                                    fontWeight: FontWeight.w500, fontSize: 18),
                               )),
                         ],
                       ),
@@ -347,15 +429,25 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                 return Column(
                                   children: [
-                                    ListTile(
-                                      leading: Icon(item.icon),
-                                      title: Text(item.itemName,
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black)),
-                                      trailing: const Icon(
-                                        Icons.arrow_forward_ios,
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          selected = index;
+
+                                          profileBloc.add(
+                                              ProfilePageShowDetailsEvent());
+                                        });
+                                      },
+                                      child: ListTile(
+                                        leading: Icon(item.icon),
+                                        title: Text(item.itemName,
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black)),
+                                        trailing: const Icon(
+                                          Icons.arrow_forward_ios,
+                                        ),
                                       ),
                                     ),
                                     item.itemName != "Version"
@@ -368,7 +460,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 );
                               },
                             )),
-                      )
+                      ),
                     ],
                   ),
                 ),
