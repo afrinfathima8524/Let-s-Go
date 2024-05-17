@@ -64,7 +64,7 @@ class _HomeState extends State<Home> {
 _builPage(int _selectedIndex) {
   switch (_selectedIndex) {
     case 1:
-      return const MyTrips();
+      return const myTripList();
     case 2:
       return FavoritePage();
     case 3:
