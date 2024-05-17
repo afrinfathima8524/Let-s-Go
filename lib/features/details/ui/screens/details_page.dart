@@ -4,13 +4,14 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/widgets/details_section.dart';
 import 'package:lets_go/features/details/ui/widgets/hero_image.dart';
 import 'package:lets_go/features/details/ui/widgets/place_list.dart';
+import 'package:lottie/lottie.dart';
 import '../widgets/photo_gird.dart';
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key});
@@ -43,23 +44,27 @@ class _DetailsPageState extends State<DetailsPage> {
           Navigator.of(context).pop();
         }else if(state is DetailsPageFavAddedSuccessState){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.blue,
             duration: Duration(milliseconds: 100),
-            content:Text("Place delightful to you!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
+            content:Text("Place delightful to you!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
         }else if(state is DetailsPageFavRemovedSuccessState){
 
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
             duration: Duration(milliseconds: 100),
-            content:Text("Sorry to see you go!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
+            content:Text("Sorry to see you go!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
 
         }else if(state is DetailsPageTripAddedSuccessState){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.blue,
             duration: Duration(milliseconds: 200),
-            content:Text("Place added to MyTrip!",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),)));
+            content:Text("Place added to MyTrip!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
         }else if(state is DetailsPageTripRemovedSuccessState){
 
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
             duration: Duration(milliseconds: 200),
-            content:Text("Place Removed!",style: GoogleFonts.poppins(color:const Color.fromARGB(255, 243, 33, 33),fontWeight:FontWeight.bold,),)));
+            content:Text("Place Removed!",style: GoogleFonts.poppins(color:Colors.white,fontWeight:FontWeight.bold,),)));
 
         }
       },
@@ -68,12 +73,10 @@ class _DetailsPageState extends State<DetailsPage> {
 
           case DetailsPageDetailsLoadingState:
 
-          return const Scaffold(
-            body: Center(child: 
-            CircularProgressIndicator(),),
+          return Scaffold(
+            body: Center(child:Lottie.network("https://lottie.host/73943ba5-eba0-4b8c-9524-276c371a31c5/cxYpKmwsvz.json",width: 300,height: 300,)),
           );
-    
-
+  
           case DetailsPageDetailsLoadErrorState:
             return const Scaffold(body: Center(child: Text("Page Not Found")));
 
@@ -157,117 +160,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                               stream: multiStream,
                                               clickedPlace: clickedPlace,
                                             ),
-                                            DetailSection(
-                                                clickedPlace: clickedPlace,bloc: detailsBloc,),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            PhotosGrid(
-                                              clickedPlace: clickedPlace,
-                                              streamController: streamController,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      Expanded(
-                                          child:
-                                              PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)),
-                                    ],
-                                  ),
-                              ],
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-
-            case DetailsPagePlaceDetailsChangedSuccessState:
-
-            final successState = state as DetailsPagePlaceDetailsChangedSuccessState;
-            final clickedPlace = successState.clickedPlaceDetails;
-            return LayoutBuilder(
-              builder: (context, constraints) => Scaffold(
-                body: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      constraints.maxWidth < 900
-                          ? Stack(
-                              children: [
-                               
-                                HeroBanner(
-                                  stream: multiStream,
-                                  clickedPlace:clickedPlace,
-                                ),
-                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                                  child: IconButton(
-                                      onPressed: () {detailsBloc.add(DetailsToHomeNavigateEvent());},
-                                      icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
-                                ),
-                              ],
-                            )
-                          : Container(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: constraints.maxWidth < 900
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  DetailSection(clickedPlace: clickedPlace,bloc: detailsBloc,),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  PhotosGrid(
-                                    clickedPlace: clickedPlace,
-                                    streamController: streamController,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  constraints.maxWidth < 900
-                                      ? PlaceList(list: successState.list,detailsBloc: detailsBloc,streamController: streamController,)
-                                      : Container(),
-                                ],
-                              )
-                            : Column(
-                              children: [
-                                SizedBox(
-                                  
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: IconButton(onPressed: (){
-                                      detailsBloc.add(DetailsToHomeNavigateEvent());
-                                    }, icon: const Icon(Icons.arrow_back,size: 25,))),
-                                ),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      //row setup
-                                       
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            HeroBanner(
-                                              stream: multiStream,
-                                              clickedPlace: clickedPlace,
-                                            ),
-                                            DetailSection(
-                                                clickedPlace: clickedPlace,bloc: detailsBloc,),
+                                            DetailSection(clickedPlace: clickedPlace,bloc: detailsBloc,),
                                             const SizedBox(
                                               height: 10,
                                             ),

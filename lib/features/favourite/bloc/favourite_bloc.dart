@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
-import 'package:lets_go/features/favourite/fav_data.dart';
+import 'package:lets_go/features/favourite/data/fav_data.dart';
 import 'package:lets_go/model/Places.dart';
 
 part 'favourite_event.dart';
@@ -16,7 +16,7 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
       FavoritesPageInitialEvent event, Emitter<FavoritesState> emit) async {
     emit(FavoritesPageLoadingState());
 
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(seconds: 1));
     emit(FavoritesPageLoadedSuccessState(favoritePlaces: favoritePlaces));
   }
 

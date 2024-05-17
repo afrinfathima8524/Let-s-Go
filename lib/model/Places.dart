@@ -1,4 +1,8 @@
-class PlacesDataModel {
+// ignore_for_file: must_be_immutable
+
+import 'package:equatable/equatable.dart';
+
+class PlacesDataModel extends Equatable {
   int? id;
   String? name;
   String? location;
@@ -21,6 +25,9 @@ class PlacesDataModel {
       this.reviews,
       this.funFact,
       this.photos});
+
+  @override
+  List<dynamic> get props => [id,name,location,description,image,visitorsPerYear,rating,reviews,funFact,photos];
 
   PlacesDataModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -49,4 +56,5 @@ class PlacesDataModel {
     data['photos'] = this.photos;
     return data;
   }
+  
 }
