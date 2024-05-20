@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lets_go/features/details/data/mytrip_data.dart';
 import 'package:lets_go/features/favourite/data/fav_data.dart';
 
 import 'package:lets_go/model/Places.dart';
@@ -13,6 +12,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 import '../../details/service/apiService.dart';
+import '../../my_trip/mytrip_data.dart';
 import '../data/profile_list.dart';
 
 part 'profile_event.dart';
