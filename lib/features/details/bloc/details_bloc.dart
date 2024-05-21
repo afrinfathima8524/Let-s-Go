@@ -9,7 +9,6 @@ import 'package:lets_go/features/my_trip/mytrip_data.dart';
 import 'package:lets_go/model/Places.dart';
 import 'package:meta/meta.dart';
 import '../../home/repo/places_repo.dart';
-import '../data/mytrip_data.dart';
 part 'details_event.dart';
 part 'details_state.dart';
 

@@ -1,9 +1,11 @@
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lets_go/features/home/ui/home.dart';
 import 'package:lets_go/features/my_trip/bloc/trip_bloc.dart';
@@ -17,8 +19,11 @@ class myTripList extends StatefulWidget {
 
 class _myTripListState extends State<myTripList> {
   final TripBloc tripBloc = TripBloc();
+  late final DetailsBloc detailsBloc3;
+
   @override
   void initState() {
+    detailsBloc3 = DetailsBloc();
     tripBloc.add(TripPageInitialEvent());
     super.initState();
   }
@@ -49,7 +54,8 @@ class _myTripListState extends State<myTripList> {
           buildWhen: (previous, current) => current is! TripActionState,
           listener: (context, state) {
             if (state is TripPageFavoriteRemovedState) {
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
                   duration: Duration(milliseconds: 100),
                   content: Text(
                     "The selected place has been deleted!",
@@ -57,7 +63,9 @@ class _myTripListState extends State<myTripList> {
                       color: const Color.fromARGB(255, 243, 33, 33),
                       fontWeight: FontWeight.bold,
                     ),
-                  )));
+                  ),
+                ),
+              );
             }
           },
           builder: (BuildContext context, TripState state) {
@@ -81,12 +89,11 @@ class _myTripListState extends State<myTripList> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailsPage(),
-                                    ),
-                                  );
+                                  detailsBloc3.add(
+                                      DetailsPagePlaceDetailsChangeEvent(
+                                          clickedPlace: TripItem));
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => DetailsPage()));
                                 },
                                 child: Container(
                                   height: 200,
@@ -94,40 +101,98 @@ class _myTripListState extends State<myTripList> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                     image: DecorationImage(
-                                        image: NetworkImage(
-                                          TripItem.image.toString(),
-                                        ),
-                                        fit: BoxFit.cover),
+                                      image: NetworkImage(
+                                        TripItem.image.toString(),
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  child: Container(
+                                    height: 200,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.black.withOpacity(0.4),
+                                    ),
                                   ),
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    TripItem.name.toString(),
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
+                              Positioned(
+                                left: 0,
+                                right: 0,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.delete_outline),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        tripBloc.add(
+                                          TripPageFavoriteRemoveEvent(
+                                              Triped: TripItem),
+                                        );
+                                      },
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                )
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.delete_outline),
-                                    color: Colors.black,
-                                    onPressed: () {
-                                      tripBloc.add(
-                                        TripPageFavoriteRemoveEvent(
-                                            Triped: TripItem),
-                                      );
-                                    },
-                                  ),
-                                ],
+                              Positioned(
+                                bottom: 45,
+                                left: 10,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      TripItem.name.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                left: 10,
+                                bottom: 30,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      TripItem.location.toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Positioned(
+                                left: 10,
+                                bottom: 5,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    RatingBar.builder(
+                                      initialRating: TripItem.rating as double,
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemSize: 24.0,
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                      onRatingUpdate: (rating) {
+                                        print(rating);
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -149,30 +214,3 @@ class _myTripListState extends State<myTripList> {
     );
   }
 }
-// myTripList
-
-// ListTile(
-//                       title: Text(TripItem.name ?? ''),
-//                       subtitle: Text(TripItem.location ?? ''),
-//                       leading: Image.network(
-//                         TripItem.image ?? '',
-//                         width: 100,
-//                         height: 80,
-//                         fit: BoxFit.cover,
-//                       ),
-//                       onTap: () {
-//                         Navigator.push(
-//                             context,
-//                             MaterialPageRoute(
-//                               builder: (context) => DetailsPage(),
-//                             ),
-//                             );
-//                       },
-//                       trailing: IconButton(
-//                         icon: Icon(Icons.delete_outline_outlined),
-//                         onPressed: () {
-//                           tripBloc.add(
-//                               TripPageFavoriteRemoveEvent(Triped: TripItem));
-//                         },
-//                       ),
-//                     );
