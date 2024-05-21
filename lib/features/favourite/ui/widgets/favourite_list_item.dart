@@ -5,8 +5,9 @@ import 'package:lets_go/model/places.dart';
 
 class FavouritesSection extends StatefulWidget {
   final List<PlacesDataModel> favoriteItems;
-  const FavouritesSection({Key? key, required this.favoriteItems}) : super(key: key);
-  @override 
+  const FavouritesSection({Key? key, required this.favoriteItems})
+      : super(key: key);
+  @override
   State<FavouritesSection> createState() => _FavouritesSectionState();
 }
 
@@ -53,15 +54,11 @@ class _FavouritesSectionState extends State<FavouritesSection> {
             ),
             onTap: () {
               Navigator.push(
-               context,
-          MaterialPageRoute(builder: (context) => (DetailsPage())),
-                 );
+                context,
+                MaterialPageRoute(builder: (context) => (DetailsPage())),
+              );
             },
-            trailing: IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-              }
-            ),
+            trailing: IconButton(icon: Icon(Icons.delete), onPressed: () {}),
           ),
         );
       },
