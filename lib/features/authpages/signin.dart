@@ -1,22 +1,61 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
-import 'package:lets_go/features/authpages/login.dart';
-import 'package:lets_go/features/profile/data/profile_list.dart';
 
-class SignInPage extends StatelessWidget {
-  SignInPage({super.key});
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
+class SignInPage extends StatefulWidget {
+  final Function()? onTap;
+  SignInPage({super.key, required this.onTap});
+
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+
   final emailController = TextEditingController();
-  void logUserIn() {
-    ///
-    profileEmail = emailController.text;
-    profilePassword = passwordController.text;
-    profileName = usernameController.text;
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-    
+  void logUserIn() async {
+    // profileEmail = emailController.text;
+    // profilePassword = passwordController.text;
+    // profileName = usernameController.text;
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+    try {
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+      } else {
+        showErrorMessage("Password DOes'nt macth");
+      }
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      showErrorMessage(e.code);
+    }
   }
+
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(message),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,23 +95,24 @@ class SignInPage extends StatelessWidget {
                     height: 20,
                   ),
                   MyTextField(
-                    hintText: 'Enter Username',
-                    obsecureText: false,
-                    controller: usernameController,
+                    hintText: 'Enter Password',
+                    obsecureText: true,
+                    controller: passwordController,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  MyTextField(hintText: "Enter Password", obsecureText: true,controller: passwordController,),
+                  MyTextField(
+                    hintText: "Confirm Password",
+                    obsecureText: true,
+                    controller: confirmPasswordController,
+                  ),
                   const SizedBox(
                     height: 45,
                   ),
                   MyButton(
                     onTap: () {
                       logUserIn();
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
-
-                        print(profileEmail);
                     },
                     text: 'Sign In',
                   ),
@@ -87,9 +127,7 @@ class SignInPage extends StatelessWidget {
                         width: 4,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
-                        },
+                        onTap:widget.onTap,
                         child: Text(
                           "Log In",
                           style: TextStyle(

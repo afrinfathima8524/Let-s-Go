@@ -67,7 +67,8 @@ class ForgetPassword extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(),));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(onTap: () {
+                          },),));
                         },
                         child: Text(
                           "Log In",

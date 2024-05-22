@@ -1,21 +1,50 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/components/square_tile.dart';
 import 'package:lets_go/features/authpages/forget_pass.dart';
-import 'package:lets_go/features/authpages/signin.dart';
-import 'package:lets_go/features/home/ui/home.dart';
-import 'package:lets_go/features/profile/data/profile_list.dart';
 
 
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  final Function()? onTap;
+  LoginPage({super.key, required this.onTap});
 
-  final usernameController = TextEditingController();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  void signUserIn() {}
+
+  void signUserIn() async{
+    showDialog(context: context, builder: (context) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    },);
+    try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      showErrorMessage(e.code);
+    }
+  }
+  void showErrorMessage(String message){
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text(message),
+      );
+    },);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,9 +72,9 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 25,),
                   MyTextField(
-                    hintText: 'Enter Username',
+                    hintText: 'Enter Email',
                     obsecureText: false,
-                    controller: usernameController,
+                    controller: emailController,
                   ),
                   const SizedBox(
                     height: 20,
@@ -81,10 +110,6 @@ class LoginPage extends StatelessWidget {
                   MyButton(
                     onTap: () {
                       signUserIn();
-
-                      if(profileName == usernameController.text && profilePassword == passwordController.text){
-                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Home(),));
-                      }
                     }, text: 'Log In',
                   ),
                   const SizedBox(
@@ -140,9 +165,7 @@ class LoginPage extends StatelessWidget {
                         width: 4,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage(),));
-                        },
+                        onTap: widget.onTap,
                         child: Text(
                           "Register Now",
                           style: TextStyle(
