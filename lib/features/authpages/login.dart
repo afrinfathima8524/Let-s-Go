@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,25 +6,45 @@ import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/components/square_tile.dart';
 import 'package:lets_go/features/authpages/forget_pass.dart';
-import 'package:lets_go/features/authpages/signin.dart';
-import 'package:lets_go/features/home/ui/home.dart';
-import 'package:lets_go/features/profile/data/profile_list.dart';
 
 
 
 class LoginPage extends StatefulWidget {
-  LoginPage({super.key});
+  final Function()? onTap;
+  LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
-
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signUserIn() {}
+  void signUserIn() async{
+    showDialog(context: context, builder: (context) {
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    },);
+    try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      showErrorMessage(e.code);
+    }
+  }
+  void showErrorMessage(String message){
+    showDialog(context: context, builder: (context) {
+      return AlertDialog(
+        title: Text(message),
+      );
+    },);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +72,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 25,),
                   MyTextField(
-                    hintText: 'Enter Username',
+                    hintText: 'Enter Email',
                     obsecureText: false,
-                    inputFormater: [
-                      FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
-                    ],
-                    controller: usernameController,
-                    validator: (val) {
-                      return null;
-                    },
+                    controller: emailController,
                   ),
                   const SizedBox(
                     height: 20,
@@ -68,9 +83,6 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: 'Enter Password',
                     obsecureText: true,
                     controller: passwordController,
-                    validator: (val) {
-                      return null;
-                    },
                   ),
                   const SizedBox(
                     height: 10,
@@ -98,10 +110,6 @@ class _LoginPageState extends State<LoginPage> {
                   MyButton(
                     onTap: () {
                       signUserIn();
-
-                      if(profileName == usernameController.text && profilePassword == passwordController.text){
-                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => Home(),));
-                      }
                     }, text: 'Log In',
                   ),
                   const SizedBox(
@@ -157,9 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: 4,
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignInPage(),));
-                        },
+                        onTap: widget.onTap,
                         child: Text(
                           "Register Now",
                           style: TextStyle(

@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MyTextField extends StatelessWidget {
   final controller;
   final String hintText;
   final bool obsecureText;
-  final String? Function(String?)? validator;
-  final void Function(String?)? onChange;
-  final List<TextInputFormatter>? inputFormater;
-  const MyTextField({super.key, required this.hintText, this.controller, required this.obsecureText, this.validator, this.onChange, this.inputFormater});
+  const MyTextField({super.key, required this.hintText, this.controller, required this.obsecureText,});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: TextFormField(
-        onChanged: onChange,
-        validator: validator,
         controller: controller,
-        inputFormatters: inputFormater,
         obscureText: obsecureText,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
