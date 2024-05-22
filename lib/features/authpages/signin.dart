@@ -12,7 +12,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -35,7 +34,12 @@ class _SignInPageState extends State<SignInPage> {
           email: emailController.text,
           password: passwordController.text,
         );
+        await FirebaseAuth.instance.signOut();
+        Navigator.pop(context);
+        Navigator.pop(context);
+        widget.onTap!();
       } else {
+        Navigator.pop(context);
         showErrorMessage("Password DOes'nt macth");
       }
       Navigator.pop(context);
@@ -127,7 +131,7 @@ class _SignInPageState extends State<SignInPage> {
                         width: 4,
                       ),
                       GestureDetector(
-                        onTap:widget.onTap,
+                        onTap: widget.onTap,
                         child: Text(
                           "Log In",
                           style: TextStyle(
