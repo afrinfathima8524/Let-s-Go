@@ -171,15 +171,11 @@ class _HomeState extends State<Home> {
                   title: Text("My Trip"),
                   onTap: () => _onItemTapped(1),
                 ),
-                ListTile(
-                  title: GestureDetector(
-                    onTap: () => signOut(),
-                    child: Text("Log Out")),
-                  trailing: IconButton(
-                    onPressed: () {
-                      signOut();
-                    },
-                    icon: Icon(Icons.logout),
+                GestureDetector(
+                  onTap: () => signOut(),
+                  child: ListTile(
+                    title: Text("Log Out"),
+                    trailing: Icon(Icons.logout),
                   ),
                 ),
               ],
