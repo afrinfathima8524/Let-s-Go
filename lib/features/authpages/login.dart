@@ -18,6 +18,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  bool obscureText = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -48,14 +49,17 @@ class _LoginPageState extends State<LoginPage> {
       return null;
     }
 
-  void signUserIn() async{
-    showDialog(context: context, builder: (context) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    },);
+  void signUserIn() async {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
     try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -65,12 +69,16 @@ class _LoginPageState extends State<LoginPage> {
       showErrorMessage(e.code);
     }
   }
-  void showErrorMessage(String message){
-    showDialog(context: context, builder: (context) {
-      return AlertDialog(
-        title: Text(message),
-      );
-    },);
+
+  void showErrorMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(message),
+        );
+      },
+    );
   }
 
   @override
@@ -91,7 +99,10 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Image.asset("assets/logo.png",height: 200,),
+                    Image.asset(
+                    "assets/logo.png",
+                    height: 200,
+                  ),
                     const SizedBox(
                       height: 5,
                     ),
@@ -99,7 +110,9 @@ class _LoginPageState extends State<LoginPage> {
                       "Weclome Back You've Been Missed",
                       style: TextStyle(fontSize: 16, color: Colors.grey[700]),
                     ),
-                    const SizedBox(height: 25,),
+                    const SizedBox(
+                    height: 25,
+                  ),
                     MyTextField(
                       onSaved: (p0) {
                         email= p0!;
@@ -117,8 +130,18 @@ class _LoginPageState extends State<LoginPage> {
                         password= p0!;
                       },
                       validator: _passwordValidator,
-                      hintText: 'Enter Password',
-                      obsecureText: true,
+                      icon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                      icon: Icon(obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility,color:obscureText? Colors.black:Colors.blue,),
+                    ),
+                    hintText: 'Enter Password',
+                      obsecureText: obscureText,
                       controller: passwordController,
                     ),
                     const SizedBox(
@@ -131,7 +154,11 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ForgetPassword(),));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ForgetPassword(),
+                                ));
                             },
                             child: Text(
                               "Forget Password?",
@@ -151,7 +178,8 @@ class _LoginPageState extends State<LoginPage> {
                           signUserIn();
                         }
                        
-                      }, text: 'Log In',
+                      },
+                    text: 'Log In',
                     ),
                     const SizedBox(
                       height: 25,
@@ -198,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 15,
                     ),
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Not A member?"),
@@ -210,7 +238,8 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             "Register Now",
                             style: TextStyle(
-                                color: Colors.grey.shade600, fontWeight: FontWeight.bold),
+                                color: Colors.grey.shade600,
+                              fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

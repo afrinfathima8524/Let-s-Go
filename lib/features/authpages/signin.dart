@@ -19,6 +19,8 @@ class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
 
   late String email,password,confirmPassword;
+  bool obscureText = true;
+  bool confirmObscureText = true;
 
   void logUserIn() async {
     // profileEmail = emailController.text;
@@ -137,8 +139,18 @@ class _SignInPageState extends State<SignInPage> {
                         password =p0!;
                       },
                       validator:_passwordValidator,
-                      hintText: 'Enter Password',
-                      obsecureText: true,
+                      icon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                      icon: Icon(obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility,color:obscureText? Colors.black:Colors.blue,),
+                    ),
+                    hintText: 'Enter Password',
+                      obsecureText: obscureText,
                       controller: passwordController,
                     ),
                     const SizedBox(
@@ -149,8 +161,18 @@ class _SignInPageState extends State<SignInPage> {
                         confirmPassword =p0!;
                       },
                        validator:_passwordValidator,
-                      hintText: "Confirm Password",
-                      obsecureText: true,
+                      icon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          confirmObscureText = !confirmObscureText;
+                        });
+                      },
+                      icon: Icon(confirmObscureText
+                          ? Icons.visibility_off:
+                             Icons.visibility,color: confirmObscureText? Colors.black:Colors.blue,),
+                    ),
+                    hintText: "Confirm Password",
+                      obsecureText: confirmObscureText,
                       controller: confirmPasswordController,
                     ),
                     const SizedBox(
