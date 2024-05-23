@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
-import 'package:lets_go/features/authpages/login.dart';
 
 class ForgetPassword extends StatefulWidget {
   ForgetPassword({super.key});
@@ -17,9 +16,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   late String email;
 
-   void _resetPassword(BuildContext context) async {
+  void _resetPassword(BuildContext context) async {
     try {
-      
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -36,20 +34,20 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   }
 
   //email validation
-   String? _emailValidator(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Email cannot be empty';
-      }
-      // Simple regex for email validation
-      String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-      RegExp regex = RegExp(pattern);
-      if (!regex.hasMatch(value)) {
-        return 'Enter a valid email';
-      }
-      return null;
+  String? _emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email cannot be empty';
     }
+    // Simple regex for email validation
+    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Enter a valid email';
+    }
+    return null;
+  }
 
- final _formKey =GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +57,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         child: SingleChildScrollView(
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 400,),
+              constraints: BoxConstraints(
+                maxWidth: 400,
+              ),
               child: Form(
                 key: _formKey,
                 child: Column(
@@ -100,13 +100,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     ),
                     MyButton(
                       onTap: () {
-                        if(_formKey.currentState!.validate()){
-                         _formKey.currentState!.save();
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
                           print(email);
-                        _resetPassword(context);
-
+                          _resetPassword(context);
                         }
-                       
                       },
                       text: 'Reset Password',
                     ),
@@ -122,8 +120,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(onTap: () {
-                            },),));
+                            Navigator.pop(context);
                           },
                           child: Text(
                             "Log In",
