@@ -15,9 +15,9 @@ class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  bool obscureText = false;
-  bool confirmObscureText = false;
-  
+  bool obscureText = true;
+  bool confirmObscureText = true;
+
   void logUserIn() async {
     // profileEmail = emailController.text;
     // profilePassword = passwordController.text;

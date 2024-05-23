@@ -18,8 +18,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  bool obscureText = false;
-  
+  bool obscureText = true;
+
   void signUserIn() async {
     showDialog(
       context: context,
