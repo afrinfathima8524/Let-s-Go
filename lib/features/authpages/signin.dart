@@ -15,7 +15,9 @@ class _SignInPageState extends State<SignInPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-
+  bool obscureText = false;
+  bool confirmObscureText = false;
+  
   void logUserIn() async {
     // profileEmail = emailController.text;
     // profilePassword = passwordController.text;
@@ -99,16 +101,36 @@ class _SignInPageState extends State<SignInPage> {
                     height: 20,
                   ),
                   MyTextField(
+                    icon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          obscureText = !obscureText;
+                        });
+                      },
+                      icon: Icon(obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility,color:obscureText? Colors.black:Colors.blue,),
+                    ),
                     hintText: 'Enter Password',
-                    obsecureText: true,
+                    obsecureText: obscureText,
                     controller: passwordController,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   MyTextField(
+                    icon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          confirmObscureText = !confirmObscureText;
+                        });
+                      },
+                      icon: Icon(confirmObscureText
+                          ? Icons.visibility_off:
+                             Icons.visibility,color: confirmObscureText? Colors.black:Colors.blue,),
+                    ),
                     hintText: "Confirm Password",
-                    obsecureText: true,
+                    obsecureText: confirmObscureText,
                     controller: confirmPasswordController,
                   ),
                   const SizedBox(
