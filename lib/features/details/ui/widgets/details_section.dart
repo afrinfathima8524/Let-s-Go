@@ -5,6 +5,7 @@ import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/favourite/data/fav_data.dart';
 import 'package:lets_go/features/my_trip/mytrip_data.dart';
 import 'package:lets_go/model/Places.dart';
+
 class DetailSection extends StatefulWidget {
   final PlacesDataModel clickedPlace;
   final DetailsBloc bloc;

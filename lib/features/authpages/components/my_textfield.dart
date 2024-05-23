@@ -4,8 +4,10 @@ class MyTextField extends StatefulWidget {
   final controller;
   final String hintText;
   final bool obsecureText;
-  final icon;
-  const MyTextField({super.key, required this.hintText, this.controller, required this.obsecureText, this.icon,});
+  final String? Function(String?) validator;
+  final void Function(String?) onSaved;
+  const MyTextField({super.key, required this.hintText, this.controller, required this.obsecureText, required this.validator, required this.onSaved,});
+
 
   @override
   State<MyTextField> createState() => _MyTextFieldState();
@@ -17,8 +19,10 @@ class _MyTextFieldState extends State<MyTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: TextFormField(
-        controller: widget.controller,
-        obscureText: widget.obsecureText,
+        onSaved: onSaved,
+        validator:validator,
+        controller: controller,
+        obscureText: obsecureText,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
