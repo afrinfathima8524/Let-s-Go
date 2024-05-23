@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
-import 'package:lets_go/features/authpages/login.dart';
 
 class ForgetPassword extends StatelessWidget {
   ForgetPassword({super.key});
@@ -16,7 +15,9 @@ class ForgetPassword extends StatelessWidget {
         child: SingleChildScrollView(
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 400,),
+              constraints: BoxConstraints(
+                maxWidth: 400,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -67,8 +68,7 @@ class ForgetPassword extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage(onTap: () {
-                          },),));
+                          Navigator.pop(context);
                         },
                         child: Text(
                           "Log In",
