@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class MyTextField extends StatefulWidget {
   final controller;
   final String hintText;
   final bool obsecureText;
@@ -8,6 +8,12 @@ class MyTextField extends StatelessWidget {
   final void Function(String?) onSaved;
   const MyTextField({super.key, required this.hintText, this.controller, required this.obsecureText, required this.validator, required this.onSaved,});
 
+
+  @override
+  State<MyTextField> createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends State<MyTextField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,8 +31,9 @@ class MyTextField extends StatelessWidget {
               borderSide: BorderSide(color: Colors.grey.shade400)),
           fillColor: Colors.grey.shade200,
           filled: true,
-          hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey.shade500)
+          hintText: widget.hintText,
+          hintStyle: TextStyle(color: Colors.grey.shade500),
+          suffixIcon: widget.icon,
         ),
       ),
     );

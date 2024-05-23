@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:lets_go/features/authpages/auth_page.dart';
 
 class GetStarted extends StatelessWidget {
