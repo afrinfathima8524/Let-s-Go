@@ -34,9 +34,12 @@ class _SignInPageState extends State<SignInPage> {
         );
       },
     );
+
+    // Simulate a delay
     await Future.delayed(Duration(seconds: 2), () {
-      Navigator.of(context).pop();
+      Navigator.pop(context);
     });
+
     try {
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -44,13 +47,11 @@ class _SignInPageState extends State<SignInPage> {
           password: passwordController.text,
         );
         await FirebaseAuth.instance.signOut();
-        Navigator.pop(context);
         widget.onTap!();
       } else {
         Navigator.pop(context);
         showErrorMessage("Password DOes'nt macth");
       }
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);
