@@ -31,6 +31,9 @@ class _SignInPageState extends State<SignInPage> {
         );
       },
     );
+    await Future.delayed(Duration(seconds: 2),(){
+Navigator.of(context).pop();
+    });
     try {
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -38,11 +41,9 @@ class _SignInPageState extends State<SignInPage> {
           password: passwordController.text,
         );
         await FirebaseAuth.instance.signOut();
-        Future.delayed(Duration(seconds: 2), () {
-          Navigator.pop(context);
           Navigator.pop(context);
           widget.onTap!();
-        });
+     
       } else {
         Navigator.pop(context);
         showErrorMessage("Passwords don't match");
