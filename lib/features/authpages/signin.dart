@@ -23,6 +23,9 @@ class _SignInPageState extends State<SignInPage> {
   bool confirmObscureText = true;
 
   void logUserIn() async {
+    // profileEmail = emailController.text;
+    // profilePassword = passwordController.text;
+    // profileName = usernameController.text;
     showDialog(
       context: context,
       builder: (context) {
@@ -31,9 +34,12 @@ class _SignInPageState extends State<SignInPage> {
         );
       },
     );
-    await Future.delayed(Duration(seconds: 2),(){
-Navigator.of(context).pop();
+
+    // Simulate a delay
+    await Future.delayed(Duration(seconds: 2), () {
+      Navigator.pop(context);
     });
+
     try {
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -41,15 +47,13 @@ Navigator.of(context).pop();
           password: passwordController.text,
         );
         await FirebaseAuth.instance.signOut();
-          Navigator.pop(context);
-          widget.onTap!();
-     
+        widget.onTap!();
       } else {
         Navigator.pop(context);
-        showErrorMessage("Passwords don't match");
+        showErrorMessage("Password DOes'nt macth");
       }
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context); 
+      Navigator.pop(context);
       showErrorMessage(e.code);
     }
   }
