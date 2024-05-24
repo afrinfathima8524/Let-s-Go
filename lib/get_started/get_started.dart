@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lets_go/features/authpages/login.dart';
 import 'package:lets_go/features/authpages/signin.dart';
 
 class GetStarted extends StatelessWidget {
