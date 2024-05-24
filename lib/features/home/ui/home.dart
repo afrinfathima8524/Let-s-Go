@@ -172,7 +172,24 @@ class _HomeState extends State<Home> {
                   onTap: () => _onItemTapped(1),
                 ),
                 GestureDetector(
-                  onTap: () => signOut(),
+                  onTap: () {
+                    showDialog(context: context, builder: (context) {
+                     return AlertDialog(
+                        title: Text("Confirm Logout"),
+                        content: Text("are you sure you want to logout?"),
+                        actions: [
+                          TextButton(onPressed: (){
+                            Navigator.pop(context);
+                          }, child: Text("Cancel"),),
+                          TextButton(onPressed: (){
+                            Navigator.of(context).pop();
+                            signOut();
+                          }, child: Text("Log Out"))
+                        ],
+                      );
+                    },
+                    );
+                  },
                   child: ListTile(
                     title: Text("Log Out"),
                     trailing: Icon(Icons.logout),
