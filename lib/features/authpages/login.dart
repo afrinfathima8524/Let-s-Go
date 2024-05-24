@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/components/square_tile.dart';
@@ -22,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  late final String email,password;
+  late String email,password;
 
   //email validation
    String? _emailValidator(String? value) {
@@ -75,7 +76,12 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(message),
+          title: Text(message,style: GoogleFonts.poppins(color:Colors.black,fontWeight:FontWeight.w500,),),
+          content:Text("Invalid user credentials refer to the situation where the provided username or password does not match the records stored in the system.",
+          style: GoogleFonts.poppins(color:Colors.black38,),),
+          actions: [
+            TextButton(onPressed:(){Navigator.of(context).pop();}, child:Text("Try again",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),), )
+          ],
         );
       },
     );
@@ -108,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Text(
                       "Weclome Back You've Been Missed",
-                      style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                      style: GoogleFonts.poppins(fontSize: 16, color: Colors.grey[700]),
                     ),
                     const SizedBox(
                     height: 25,
@@ -162,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: Text(
                               "Forget Password?",
-                              style: TextStyle(color: Colors.grey.shade600),
+                              style: GoogleFonts.poppins(color: Colors.grey.shade600),
                             ),
                           ),
                         ],
@@ -177,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                          _formKey.currentState!.save();
                           signUserIn();
                         }
+                        
                        
                       },
                     text: 'Log In',
@@ -198,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Text(
                               "or continue with",
-                              style: TextStyle(color: Colors.grey.shade700),
+                              style:GoogleFonts.poppins(color: Colors.grey.shade700),
                             ),
                           ),
                           Expanded(
@@ -229,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Not A member?"),
+                        Text("Not a member?",style: GoogleFonts.poppins(),),
                         SizedBox(
                           width: 4,
                         ),
@@ -237,8 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                           onTap: widget.onTap,
                           child: Text(
                             "Register Now",
-                            style: TextStyle(
-                                color: Colors.grey.shade600,
+                            style: GoogleFonts.poppins(color: Colors.grey.shade600,
                               fontWeight: FontWeight.bold),
                           ),
                         ),
