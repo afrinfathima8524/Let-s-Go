@@ -7,6 +7,7 @@ import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 import 'package:lets_go/features/authpages/components/square_tile.dart';
 import 'package:lets_go/features/authpages/forget_pass.dart';
+import 'package:lets_go/features/authpages/services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
   final Function()? onTap;
@@ -220,14 +221,14 @@ class _LoginPageState extends State<LoginPage> {
                     const SizedBox(
                       height: 25,
                     ),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SquareTile(imagepath: "assets/google.png"),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        SquareTile(imagepath: "assets/apple.png"),
+                        SquareTile(imagepath: "assets/google.png",onTap: () => AuthService().siginInWithGoogle(),),
+                        // SizedBox(
+                        //   width: 25,
+                        // ),
+                        // SquareTile(imagepath: "assets/apple.png",onTap: () => AuthService().siginInWithGoogle(),),
                       ],
                     ),
                     const SizedBox(
