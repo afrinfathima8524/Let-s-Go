@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  late final String email,password;
+  late String email,password;
 
   //email validation
    String? _emailValidator(String? value) {
@@ -177,6 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                          _formKey.currentState!.save();
                           signUserIn();
                         }
+                        
                        
                       },
                     text: 'Log In',
