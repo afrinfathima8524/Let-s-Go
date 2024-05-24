@@ -18,7 +18,7 @@ class _SignInPageState extends State<SignInPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  late String email,password,confirmPassword;
+  late String email, password, confirmPassword;
   bool obscureText = true;
   bool confirmObscureText = true;
 
@@ -34,9 +34,12 @@ class _SignInPageState extends State<SignInPage> {
         );
       },
     );
-    await Future.delayed(Duration(seconds: 2),(){
-Navigator.of(context).pop();
+
+    // Simulate a delay
+    await Future.delayed(Duration(seconds: 2), () {
+      Navigator.pop(context);
     });
+
     try {
       if (passwordController.text == confirmPasswordController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -44,14 +47,11 @@ Navigator.of(context).pop();
           password: passwordController.text,
         );
         await FirebaseAuth.instance.signOut();
-          Navigator.pop(context);
-          widget.onTap!();
-     
+        widget.onTap!();
       } else {
         Navigator.pop(context);
         showErrorMessage("Password DOes'nt macth");
       }
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
       showErrorMessage(e.code);
@@ -68,30 +68,31 @@ Navigator.of(context).pop();
       },
     );
   }
+
   //email validation
-   String? _emailValidator(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Email cannot be empty';
-      }
-      // Simple regex for email validation
-      String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-      RegExp regex = RegExp(pattern);
-      if (!regex.hasMatch(value)) {
-        return 'Enter a valid email';
-      }
-      return null;
+  String? _emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email cannot be empty';
     }
+    // Simple regex for email validation
+    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Enter a valid email';
+    }
+    return null;
+  }
 
   //pass validation
-   String? _passwordValidator(String? value) {
-      if (value == null || value.isEmpty) {
-        return 'Password cannot be empty';
-      }
-      if (value.length < 8) {
-        return 'Password must be at least 8 characters';
-      }
-      return null;
+  String? _passwordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password cannot be empty';
     }
+    if (value.length < 8) {
+      return 'Password must be at least 8 characters';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +128,7 @@ Navigator.of(context).pop();
                     ),
                     MyTextField(
                       onSaved: (p0) {
-                        email =p0!;
+                        email = p0!;
                       },
                       validator: _emailValidator,
                       hintText: 'Enter Email',
@@ -138,21 +139,22 @@ Navigator.of(context).pop();
                       height: 20,
                     ),
                     MyTextField(
-                       onSaved: (p0) {
-                        password =p0!;
+                      onSaved: (p0) {
+                        password = p0!;
                       },
-                      validator:_passwordValidator,
+                      validator: _passwordValidator,
                       icon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obscureText = !obscureText;
-                        });
-                      },
-                      icon: Icon(obscureText
-                          ? Icons.visibility_off
-                          : Icons.visibility,color:obscureText? Colors.black:Colors.blue,),
-                    ),
-                    hintText: 'Enter Password',
+                        onPressed: () {
+                          setState(() {
+                            obscureText = !obscureText;
+                          });
+                        },
+                        icon: Icon(
+                          obscureText ? Icons.visibility_off : Icons.visibility,
+                          color: obscureText ? Colors.black : Colors.blue,
+                        ),
+                      ),
+                      hintText: 'Enter Password',
                       obsecureText: obscureText,
                       controller: passwordController,
                     ),
@@ -160,21 +162,25 @@ Navigator.of(context).pop();
                       height: 20,
                     ),
                     MyTextField(
-                       onSaved: (p0) {
-                        confirmPassword =p0!;
+                      onSaved: (p0) {
+                        confirmPassword = p0!;
                       },
-                       validator:_passwordValidator,
+                      validator: _passwordValidator,
                       icon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          confirmObscureText = !confirmObscureText;
-                        });
-                      },
-                      icon: Icon(confirmObscureText
-                          ? Icons.visibility_off:
-                             Icons.visibility,color: confirmObscureText? Colors.black:Colors.blue,),
-                    ),
-                    hintText: "Confirm Password",
+                        onPressed: () {
+                          setState(() {
+                            confirmObscureText = !confirmObscureText;
+                          });
+                        },
+                        icon: Icon(
+                          confirmObscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color:
+                              confirmObscureText ? Colors.black : Colors.blue,
+                        ),
+                      ),
+                      hintText: "Confirm Password",
                       obsecureText: confirmObscureText,
                       controller: confirmPasswordController,
                     ),
@@ -183,12 +189,10 @@ Navigator.of(context).pop();
                     ),
                     MyButton(
                       onTap: () {
-                        if(_formKey.currentState!.validate()){
-                           
-                           _formKey.currentState!.save();
-                            logUserIn();
-                          }
-                       
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          logUserIn();
+                        }
                       },
                       text: 'Sign In',
                     ),
