@@ -28,15 +28,17 @@ class _HomeState extends State<Home> {
     });
     _scaffoldstate.currentState!.openEndDrawer();
   }
-@override
+
+  @override
   void initState() {
     super.initState();
-    FirebaseAuth.instance.authStateChanges().listen((user){
+    FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {
-        currentUser=user;
+        currentUser = user;
       });
     });
   }
+
   void signOut() {
     FirebaseAuth.instance.signOut();
   }
@@ -152,7 +154,7 @@ class _HomeState extends State<Home> {
                       //             fontWeight: FontWeight.w500,
                       //             color: Colors.grey.shade600))),
                       Text(
-                        currentUser?.email??"",
+                        currentUser?.email ?? "",
                         style: TextStyle(fontSize: 12),
                       ),
                     ],
@@ -173,21 +175,38 @@ class _HomeState extends State<Home> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    showDialog(context: context, builder: (context) {
-                     return AlertDialog(
-                        title: Text("Confirm Logout"),
-                        content: Text("are you sure you want to logout?"),
-                        actions: [
-                          TextButton(onPressed: (){
-                            Navigator.pop(context);
-                          }, child: Text("Cancel"),),
-                          TextButton(onPressed: (){
-                            Navigator.of(context).pop();
-                            signOut();
-                          }, child: Text("Log Out"))
-                        ],
-                      );
-                    },
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                          title: Text("Confirm Logout"),
+                          content: Text("are you sure you want to logout?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "Cancel",
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                signOut();
+                              },
+                              child: Text(
+                                "Log Out",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            )
+                          ],
+                        );
+                      },
                     );
                   },
                   child: ListTile(

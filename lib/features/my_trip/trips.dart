@@ -9,6 +9,7 @@ import 'package:lets_go/features/details/bloc/details_bloc.dart';
 import 'package:lets_go/features/details/ui/screens/details_page.dart';
 import 'package:lets_go/features/home/ui/home.dart';
 import 'package:lets_go/features/my_trip/bloc/trip_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 class myTripList extends StatefulWidget {
   const myTripList({super.key});
@@ -30,94 +31,118 @@ class _myTripListState extends State<myTripList> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => TripBloc(),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BackButton(
-            color: Colors.black,
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Home(),
-                ),
-              );
-            },
-          ),
-          title: Text('Trip Page'),
-          centerTitle: true,
+    return Scaffold(
+     appBar: AppBar(
+      title: Container(
+        padding: EdgeInsets.only(bottom: 5),
+        decoration: BoxDecoration(
+          border: Border(bottom: BorderSide(width: 3, color: Colors.blue)),
         ),
-        body: BlocConsumer<TripBloc, TripState>(
-          bloc: tripBloc,
-          listenWhen: (previous, current) => current is TripActionState,
-          buildWhen: (previous, current) => current is! TripActionState,
-          listener: (context, state) {
-            if (state is TripPageFavoriteRemovedState) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  duration: Duration(milliseconds: 100),
-                  content: Text(
-                    "The selected place has been deleted!",
-                    style: GoogleFonts.poppins(
-                      color: const Color.fromARGB(255, 243, 33, 33),
-                      fontWeight: FontWeight.bold,
-                    ),
+        child: Text(
+          'My Trips',
+          style: GoogleFonts.poppins(fontWeight: FontWeight.w400),
+        ),
+      ),
+    ),
+      body: BlocConsumer<TripBloc, TripState>(
+        bloc: tripBloc,
+        listenWhen: (previous, current) => current is TripActionState,
+        buildWhen: (previous, current) => current is! TripActionState,
+        listener: (context, state) {
+          if (state is TripPageFavoriteRemovedState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                duration: Duration(milliseconds: 100),
+                content: Text(
+                  "The selected place has been deleted!",
+                  style: GoogleFonts.poppins(
+                    color: const Color.fromARGB(255, 243, 33, 33),
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
+              ),
+            );
+          }
+        },
+        builder: (BuildContext context, TripState state) {
+          switch (state.runtimeType) {
+            case TripPageLoadingState:
+              return Center(
+                child: CircularProgressIndicator(),
               );
-            }
-          },
-          builder: (BuildContext context, TripState state) {
-            switch (state.runtimeType) {
-              case TripPageLoadingState:
+            case TripPageLoadedState:
+              final successState = state as TripPageLoadedState;
+              if (successState.TripAdd.isEmpty) {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child:Column(
+                   mainAxisAlignment: MainAxisAlignment.center,
+                   crossAxisAlignment: CrossAxisAlignment.center,
+                   children: [
+                     Center(
+                     child: Lottie.network(
+                              "https://lottie.host/6096c0ad-b67c-4fda-9396-af5f50b4ee43/lS8njlPOD6.json",
+                       width: 400,
+                       height: 400,
+                            ),
+                          ),
+                    SizedBox(height: 5,),
+                   Center(
+                   child: Text(
+                         'No Trips Added',
+                   style: GoogleFonts.poppins(
+                   fontSize: 25,
+                   color: Colors.grey.shade600,
+                   fontWeight: FontWeight.bold,
+                      ),
+                     ),
+                      ),
+                     ],
+                   )
                 );
-              case TripPageLoadedState:
-                final successState = state as TripPageLoadedState;
-                return ListView.builder(
-                  itemCount: successState.TripAdd.length,
-                  itemBuilder: (context, index) {
-                    final TripItem = successState.TripAdd[index];
-                    return Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20, right: 20, top: 20),
-                          child: Stack(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  detailsBloc3.add(
-                                      DetailsPagePlaceDetailsChangeEvent(
-                                          clickedPlace: TripItem));
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => DetailsPage()));
-                                },
+              } else {
+
+              return ListView.builder(
+                itemCount: successState.TripAdd.length,
+                itemBuilder: (context, index) {
+                  final TripItem = successState.TripAdd[index];
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, top: 20),
+                        child: Stack(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                detailsBloc3.add(
+                                    DetailsPagePlaceDetailsChangeEvent(
+                                        clickedPlace: TripItem));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => DetailsPage()));
+                              },
+                              child: Container(
+                                height: 200,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      TripItem.image.toString(),
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                                 child: Container(
                                   height: 200,
                                   width: double.infinity,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    image: DecorationImage(
-                                      image: NetworkImage(
-                                        TripItem.image.toString(),
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  child: Container(
-                                    height: 200,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.black.withOpacity(0.4),
-                                    ),
+                                    color: Colors.black.withOpacity(0.4),
                                   ),
                                 ),
                               ),
-                              Positioned(
+                            ),
+                            Positioned(
                                 left: 0,
                                 right: 0,
                                 child: Row(
@@ -134,82 +159,81 @@ class _myTripListState extends State<myTripList> {
                                       },
                                     ),
                                   ],
-                                )
+                                )),
+                            Positioned(
+                              bottom: 45,
+                              left: 10,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    TripItem.name.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                        color: Colors.white),
+                                  ),
+                                ],
                               ),
-                              Positioned(
-                                bottom: 45,
-                                left: 10,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      TripItem.name.toString(),
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 25,
-                                          color: Colors.white),
+                            ),
+                            Positioned(
+                              left: 10,
+                              bottom: 30,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    TripItem.location.toString(),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Positioned(
-                                left: 10,
-                                bottom: 30,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      TripItem.location.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 15,
-                                      ),
+                            ),
+                            Positioned(
+                              left: 10,
+                              bottom: 5,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  RatingBar.builder(
+                                    initialRating: TripItem.rating as double,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: true,
+                                    itemCount: 5,
+                                    itemSize: 24.0,
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
                                     ),
-                                  ],
-                                ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
+                                ],
                               ),
-                              Positioned(
-                                left: 10,
-                                bottom: 5,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    RatingBar.builder(
-                                      initialRating: TripItem.rating as double,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: true,
-                                      itemCount: 5,
-                                      itemSize: 24.0,
-                                      itemBuilder: (context, _) => Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      onRatingUpdate: (rating) {
-                                        print(rating);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    );
-                  },
-                );
-              case TripPageFavoriteRemovedState:
-                return Container();
-              default:
-                return Center(
-                  child: Text('Error Something went Wrong'),
-                );
-            }
-          },
-        ),
+                      ),
+                    ],
+                  );
+                },
+              );
+              };
+            case TripPageFavoriteRemovedState:
+              return Container();
+            default:
+              return Center(
+                child: Text('Error Something went Wrong'),
+              );
+          }
+        },
       ),
     );
   }
