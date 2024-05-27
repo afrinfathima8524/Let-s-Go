@@ -217,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SquareTile(imagepath: "assets/google.png",onTap: () => AuthService().siginInWithGoogle(),),
+                        SquareTile(imagepath: "assets/google.png",onTap: () => AuthService().siginInWithGoogle(),text: "Login With Google",),
                         // SizedBox(
                         //   width: 25,
                         // ),
