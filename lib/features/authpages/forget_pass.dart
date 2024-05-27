@@ -1,5 +1,7 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
@@ -19,19 +21,38 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   void _resetPassword(BuildContext context) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Password reset email sent to $email'),
-        ),
-      );
-    } catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to send password reset email: $error'),
-        ),
-      );
+      showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Password reset email sent to $email',style: GoogleFonts.poppins(color:Colors.black,fontWeight:FontWeight.w500,),),
+          content:Text("Inside the email, you'll find a link to reset your password. Click the link and follow the provided instructions to set a new password.",
+          style: GoogleFonts.poppins(color:Colors.black38,),),
+          actions: [
+            TextButton(onPressed:(){Navigator.of(context).pop();}, child:Text("Ok",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),), )
+          ],
+        );
+      },
+    );
+    } on FirebaseAuthException catch (e)  {
+     showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Failed to send password reset: $e',style: GoogleFonts.poppins(color:Colors.black,fontWeight:FontWeight.w500,),),
+          actions: [
+            TextButton(onPressed:(){Navigator.of(context).pop();}, child:Text("Try again",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),), )
+          ],
+        );
+      },
+    );
+       
     }
   }
+
+
+ 
+  
 
   //email validation
   String? _emailValidator(String? value) {
@@ -80,7 +101,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: Text(
                         "Forget Your Password? don't worry we've got your back",
-                        style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+                        style:GoogleFonts.poppins(fontSize: 20, color: Colors.grey[700]),
                       ),
                     ),
                     const SizedBox(
@@ -102,7 +123,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
-                          print(email);
+                          //print(email);
                           _resetPassword(context);
                         }
                       },
@@ -114,7 +135,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Already A Member?"),
+                        Text("Already A Member?",style: GoogleFonts.poppins(),),
                         SizedBox(
                           width: 4,
                         ),
@@ -124,9 +145,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           },
                           child: Text(
                             "Log In",
-                            style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontWeight: FontWeight.bold),
+                            style: GoogleFonts.poppins(color: Colors.grey.shade600,
+                            fontWeight: FontWeight.bold)
                           ),
                         ),
                       ],

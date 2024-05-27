@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lets_go/features/authpages/components/my_button.dart';
 import 'package:lets_go/features/authpages/components/my_textfield.dart';
 
@@ -53,7 +54,7 @@ class _SignInPageState extends State<SignInPage> {
         showErrorMessage("Password DOes'nt macth");
       }
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
+     // Navigator.pop(context);
       showErrorMessage(e.code);
     }
   }
@@ -63,7 +64,12 @@ class _SignInPageState extends State<SignInPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(message),
+          title: Text(message,style: GoogleFonts.poppins(color:Colors.black,fontWeight:FontWeight.w500,),),
+          content:Text("Email address already in use. Please enter a different email or log in with your existing account.",
+          style: GoogleFonts.poppins(color:Colors.black38,),),
+          actions: [
+            TextButton(onPressed:(){Navigator.of(context).pop();}, child:Text("Try again",style: GoogleFonts.poppins(color:Colors.blue,fontWeight:FontWeight.bold,),), )
+          ],
         );
       },
     );
@@ -121,7 +127,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     Text(
                       "Weclome! to Let's Goo",
-                      style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+                      style:GoogleFonts.poppins(fontSize: 16, color: Colors.grey[700]),
                     ),
                     const SizedBox(
                       height: 50,
@@ -194,7 +200,7 @@ class _SignInPageState extends State<SignInPage> {
                           logUserIn();
                         }
                       },
-                      text: 'Sign In',
+                      text: 'Sign Up',
                     ),
                     const SizedBox(
                       height: 25,
@@ -202,7 +208,7 @@ class _SignInPageState extends State<SignInPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Already A Member?"),
+                        Text("Already A Member?",style: GoogleFonts.poppins(),),
                         SizedBox(
                           width: 4,
                         ),
@@ -210,9 +216,8 @@ class _SignInPageState extends State<SignInPage> {
                           onTap: widget.onTap,
                           child: Text(
                             "Log In",
-                            style: TextStyle(
-                                color: Colors.grey.shade600,
-                                fontWeight: FontWeight.bold),
+                            style:GoogleFonts.poppins(color: Colors.grey.shade600,
+                             fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
