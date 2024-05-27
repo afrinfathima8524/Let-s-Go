@@ -22,6 +22,7 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldstate = GlobalKey<ScaffoldState>();
   User? currentUser;
+  String userName='';
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -35,6 +36,10 @@ class _HomeState extends State<Home> {
     FirebaseAuth.instance.authStateChanges().listen((user) {
       setState(() {
         currentUser = user;
+        if (user != null) {
+          int index=user.email!.indexOf("@");
+          userName=user.email!.substring(0,index);
+        }
       });
     });
   }
@@ -138,8 +143,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-
-                      Text(profileName == "" ? "username" : profileName,
+                      Text(userName,
                           style: GoogleFonts.poppins(
                               fontSize: 20, fontWeight: FontWeight.w600)),
                       // GestureDetector(
