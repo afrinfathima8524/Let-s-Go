@@ -41,6 +41,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         tripList: myTripList,
         user: user));
     print("propic:${profileImage}");
+     print("procity:${profilePlace}");
   }
 
   FutureOr<void> profilePageEditDetailEvent(

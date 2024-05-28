@@ -39,6 +39,7 @@ class _HomeState extends State<Home> {
         if (user != null) {
           int index=user.email!.indexOf("@");
           userName=user.email!.substring(0,index);
+          profileName = userName;
         }
       });
     });
@@ -143,7 +144,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      Text(userName,
+                      Text(profileName,
                           style: GoogleFonts.poppins(
                               fontSize: 20, fontWeight: FontWeight.w600)),
                       // GestureDetector(
