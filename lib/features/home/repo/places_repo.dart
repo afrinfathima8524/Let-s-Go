@@ -7,7 +7,7 @@ class PlacesRepo {
     var client=http.Client();
     List<PlacesDataModel> places=[];
     try{
-      var response= await client.get(Uri.parse('https://mocki.io/v1/0adf14b4-11e1-40f9-9047-66ade76b500d'));
+      var response= await client.get(Uri.parse('https://mocki.io/v1/eecf478e-90fe-4beb-b869-22562682fd89'));
       List result = jsonDecode(response.body);
       for (var i = 0; i < result.length; i++) {
         PlacesDataModel place=PlacesDataModel.fromJson(result[i] as Map<String,dynamic>);
