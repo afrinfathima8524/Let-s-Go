@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http/http.dart';
 import 'package:lets_go/features/details/data/details_data.dart';
 import 'package:lets_go/features/favourite/data/fav_data.dart';
 import 'package:lets_go/features/details/service/apiService.dart';
@@ -26,7 +27,7 @@ class DetailsBloc extends Bloc<DetailsEvent, DetailsState> {
 
     emit(DetailsPageDetailsLoadingState());
     await Future.delayed(const Duration(milliseconds: 100));
-    List<PlacesDataModel> places = await PlacesRepo.fetchPlace();
+    List<PlacesDataModel> places = await PlacesRepo(Client()).fetchPlace();
 
     emit(DetailsPageDetailsLoadedSuccessState(
       details: placeDetail,

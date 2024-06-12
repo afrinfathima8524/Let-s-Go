@@ -1,0 +1,191 @@
+[
+    {
+    "id": 1,
+    "name": "Eiffel Tower",
+    "location": "Paris, France",
+    "description": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France.",
+    "image": "https://static.toiimg.com/img/107852737/Master.jpg",
+    "visitors_per_year": 7000000,
+    "rating": 4.5,
+    "reviews": "1.5M reviews",
+    "fun_fact": "Gustave Eiffel, the engineer behind the tower, also contributed to the design of the Statue of Liberty.",
+    "photos": [
+    "https://static.toiimg.com/img/107852737/Master.jpg",
+    "https://res.klook.com/image/upload/c_fill,w_750,h_500/q_80/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/xcwkkfxxnxdpxl3zyjvz.jpg",
+    "https://www.toureiffel.paris/themes/custom/tour_eiffel/img/picto_myGoogleBusiness_1.jpg",
+    "https://www.travelweek.ca/wp-content/uploads/2022/09/Eiffel_09.14-830x526.jpg",
+    "https://res.klook.com/image/upload/c_fill,w_750,h_560/q_80/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/yanmh48dtq6av89leobx.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/0/0d/Eiffel_Tower_Uploaded_by_Argonowski.jpg"
+    ]
+    },
+    {
+    "id": 2,
+    "name": "Great Wall of China",
+    "location": "China",
+    "description": "The Great Wall of China is a series of fortifications made of stone, brick, tamped earth, wood, and other materials.",
+    "image": "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2019/06/The-Great-Wall-of-China.jpg",
+    "visitors_per_year": 10000000,
+    "rating": 4.8,
+    "reviews": "3M reviews",
+    "fun_fact": "Contrary to popular belief, the Great Wall of China cannot be seen from space with the naked eye.",
+    "photos": [
+    "https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2019/06/The-Great-Wall-of-China.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/1/10/20090529_Great_Wall_8185.jpg",
+    "https://news.artnet.com/app/news-upload/2015/06/7540048558_5bb365146d_b-1024x768.jpg",
+    "https://cdn.britannica.com/82/94382-050-20CF23DB/Great-Wall-of-China-Beijing.jpg",
+    "https://i0.wp.com/ringmar.net/irhistorynew/wp-content/uploads/2017/01/great-wall-1.jpeg",
+    "https://www.airpano.ru/files/china-great-wall/images/image9a.jpg"
+    ]
+    },
+    {
+    "id": 3,
+    "name": "Machu Picchu",
+    "location": "Cusco Region, Peru",
+    "description": "Machu Picchu is an Incan citadel set high in the Andes Mountains in Peru.",
+    "image": "https://webunwto.s3.eu-west-1.amazonaws.com/2020-12/machupichu.jpg",
+    "visitors_per_year": 2500000,
+    "rating": 4.1,
+    "reviews": "300k reviews",
+    "fun_fact": "Machu Picchu was constructed in the 15th century, then abandoned during the Spanish Conquest.",
+    "photos": [
+    "https://webunwto.s3.eu-west-1.amazonaws.com/2020-12/machupichu.jpg",
+    "https://media.npr.org/assets/img/2022/03/27/gettyimages-1128315663-ffef1bc492334695a54854d05dde9d737dbf4d36-s1100-c50.jpg",
+    "https://images.saymedia-content.com/.image/t_share/MTg5NDEyODA4NTI0MzA5NzY2/tour-machu-picchu-peru-how-to-go-and-why.jpg",
+    "https://res.klook.com/image/upload/c_fill,w_750,h_560/q_80/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/sgw7nofg1fawji54zdr0.jpg",
+    "https://travel.home.sndimg.com/content/dam/images/travel/fullset/2014/05/28/50/Machu-Picchu-Mountain.rend.hgtvcom.1280.1280.suffix/1491584261034.jpeg",
+    "https://www.machupicchu.org/wp-content/uploads/top-destinations-machu-picchu.jpg"
+    ]
+    },
+    {
+    "id": 4,
+    "name": "Taj Mahal",
+    "location": "Agra, India",
+    "description": "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in the Indian city of Agra.",
+    "image": "https://unciatrails.com/wp-content/uploads/2020/07/Taj2-1.jpg",
+    "visitors_per_year": 8000000,
+    "rating": 4.5,
+    "reviews": "5M reviews",
+    "fun_fact": "The Taj Mahal was designated as a UNESCO World Heritage Site in 1983.",
+    "photos": [
+    "https://unciatrails.com/wp-content/uploads/2020/07/Taj2-1.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Taj_Mahal_%28Edited%29.jpeg/1200px-Taj_Mahal_%28Edited%29.jpeg",
+    "https://images.squarespace-cdn.com/content/v1/6298cb774cf3830bc9b342bf/1685531811469-PWDD7ZJIRO3Y3E5UTRDD/Taj+Mahal-23.jpg",
+    "https://agratourism.in/images/places-to-visit/headers/taj-mahal-agra-tourism-entry-fee-timings-holidays-reviews-header.jpg",
+    "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/89000/89520-Taj-Mahal.jpg",
+    "https://news.cgtn.com/news/2023-08-23/Taj-Mahal-the-masterpiece-of-Indian-art-1mvkNTU7gFG/img/e589c42cd575427b8847522846fb1f2c/e589c42cd575427b8847522846fb1f2c.jpeg"
+    ]
+    },
+    {
+    "id": 5,
+    "name": "Pyramids of Giza",
+    "location": "Cairo, Egypt",
+    "description": "The Pyramids of Giza consist of the Great Pyramid of Giza, the Pyramid of Khafre, and the Pyramid of Menkaure.",
+    "image": "https://www.timeoutriyadh.com/cloud/timeoutriyadh/2021/07/11/Cairo_1.jpg",
+    "visitors_per_year": 1500000,
+    "rating": 3.5,
+    "reviews": "750k reviews",
+    "fun_fact": "The Great Pyramid of Giza is the only remaining Seven Wonders of the Ancient World.",
+    "photos": [
+    "https://www.timeoutriyadh.com/cloud/timeoutriyadh/2021/07/11/Cairo_1.jpg",
+    "https://cdn.britannica.com/06/122506-050-C8E03A8A/Pyramid-of-Khafre-Giza-Egypt.jpg",
+    "https://media.tacdn.com/media/attractions-splice-spp-674x446/0b/39/b0/08.jpg",
+    "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w,f_auto,q_auto:best/rockcms/2022-04/220418-egypt-pyramids-giza-se-313p-b3e3eb.jpg",
+    "https://www.civitatis.com/f/egipto/alejandria/excursion-el-cairo-piramides-giza-589x392.jpg",
+    "https://cdn.britannica.com/74/194374-131-40F15D56/pyramid-sunset-egypt.jpg"
+    ]
+    },
+    {
+    "id": 6,
+    "name": "Statue of Liberty",
+    "location": "New York City, USA",
+    "description": "The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in New York Harbor within New York City.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/d3/Statue_of_Liberty%2C_NY.jpg",
+    "visitors_per_year": 4500000,
+    "rating": 4.7,
+    "reviews": "2M reviews",
+    "fun_fact": "The statue was a gift to the United States from the people of France.",
+    "photos": [
+    "https://upload.wikimedia.org/wikipedia/commons/d/d3/Statue_of_Liberty%2C_NY.jpg",
+    "https://cdn.britannica.com/82/183382-050-D832EC3A/Detail-head-crown-Statue-of-Liberty-New.jpg",
+    "https://news.artnet.com/app/news-upload/2022/10/GettyImages-514700202-1024x692.jpg",
+    "https://parade.com/.image/t_share/MTkwNTc5MjI1MDE5NzU0MzY0/statue-of-liberty-2.jpg",
+    "https://www.statueoflibertytour.com/wp-content/uploads/2022/02/statue-liberty-base.jpg",
+    "https://t3.ftcdn.net/jpg/05/10/68/20/360_F_510682087_PaIQbmjNelpGVQMnhOXegeN1GoDHzDHo.jpg"
+    ]
+    },
+    {
+    "id": 7,
+    "name": "The Colosseum",
+    "location": "Rome, Italy",
+    "description": "The Colosseum is an oval amphitheatre in the centre of the city of Rome, Italy.",
+    "image": "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1652340658/EducationHub/photos/colosseum.jpg",
+    "visitors_per_year": 6000000,
+    "rating": 4.4,
+    "reviews": "500k reviews",
+    "fun_fact": "It is the largest amphitheatre ever built and is considered one of the greatest works of Roman architecture.",
+    "photos": [
+    "https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1652340658/EducationHub/photos/colosseum.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Rom_Colosseum_Sept_2021_3.jpg/800px-Rom_Colosseum_Sept_2021_3.jpg",
+    "https://miro.medium.com/v2/resize:fit:549/1*u4a2Y_iJr3zG7fBunE5XsQ.jpeg",
+    "https://images.saymedia-content.com/.image/t_share/MTc1MTE1NjMzNjExNTE1NzE2/the-roman-colosseum.jpg",
+    "https://www.rome.net/f/italia/roma/guia/coliseo-m.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1200px-Colosseo_2020.jpg"
+    ]
+    },
+    {
+    "id": 8,
+    "name": "Sydney Opera House",
+    "location": "Sydney, Australia",
+    "description": "The Sydney Opera House is a multi-venue performing arts centre at Sydney Harbour in Sydney, New South Wales, Australia.",
+    "image": "https://cdn.britannica.com/96/100196-050-C92064E0/Sydney-Opera-House-Port-Jackson.jpg",
+    "visitors_per_year": 1000000,
+    "rating": 4.1,
+    "reviews": "1M reviews",
+    "fun_fact": "The Sydney Opera House was designed by Danish architect Jørn Utzon and opened in 1973.",
+    "photos": [
+    "https://cdn.britannica.com/96/100196-050-C92064E0/Sydney-Opera-House-Port-Jackson.jpg",
+    "https://i.pinimg.com/564x/7f/68/08/7f6808f4c2ff20202e6b4ba8f05cc243.jpg",
+    "https://www.japantimes.co.jp/japantimes/uploads/images/2023/12/27/271425.jpg",
+    "https://media.tacdn.com/media/attractions-splice-spp-674x446/12/3f/5b/28.jpg",
+    "https://www.blibli.com/friends-backend/wp-content/uploads/2022/11/tempat-wisata-di-sydney-scaled.jpg",
+    "https://upload.wikimedia.org/wikipedia/commons/4/40/Sydney_Opera_House_Sails.jpg"
+    ]
+    },
+    {
+    "id": 9,
+    "name": "Petra",
+    "location": "Ma'an Governorate, Jordan",
+    "description": "Petra is a historical and archaeological city in southern Jordan.",
+    "image": "https://i.natgeofe.com/n/e0ed6bd3-4d8e-4385-a6c1-5f9283b434fe/ed-deir_4x3.jpg",
+    "visitors_per_year": 600000,
+    "rating": 3.5,
+    "reviews": "150k reviews",
+    "fun_fact": "Petra was the capital of the Nabatean Kingdom and is famous for its rock-cut architecture and water conduit system.",
+    "photos": [
+    "https://i.natgeofe.com/n/e0ed6bd3-4d8e-4385-a6c1-5f9283b434fe/ed-deir_4x3.jpg",
+    "https://www.ancient-origins.net/sites/default/files/field/image/Petra-Jordan-Ad-Deir-Monastery.jpg",
+    "https://images.squarespace-cdn.com/content/v1/5856bc666a49634cd55b0ba9/dcefe0e8-9753-438b-a813-d45c671e3da1/visiting-petra-jordan.jpeg",
+    "https://theworldtravelguy.com/wp-content/uploads/2019/06/DSCF5609.jpg",
+    "https://static.toiimg.com/thumb/msid-47330138,width-550,height-433/47330138.jpg",
+    "https://media.tacdn.com/media/attractions-splice-spp-674x446/0e/96/1b/1a.jpg"
+    ]
+    },
+    {
+    "id": 10,
+    "name": "Niagara Falls",
+    "location": "Ontario, Canada / New York, USA",
+    "description": "Niagara Falls is a group of three waterfalls at the southern end of Niagara Gorge, spanning the border between the province of Ontario in Canada and the state of New York in the United States.",
+    "image": "https://cdn.britannica.com/30/94430-050-D0FC51CD/Niagara-Falls.jpg",
+    "visitors_per_year": 3000000,
+    "rating": 4.8,
+    "reviews": "2.5M reviews",
+    "fun_fact": "Niagara Falls is renowned both for its beauty and as a valuable source of hydroelectric power.",
+    "photos": [
+    "https://cdn.britannica.com/30/94430-050-D0FC51CD/Niagara-Falls.jpg",
+    "https://www.niagarafallstourism.com/site/assets/files/8781/nft_2023_summer_-_falls-80.jpg",
+    "https://assets.cityexperiences.com/wp-content/uploads/2023/03/niagara-falls-sunrise.jpg",
+    "https://res.cloudinary.com/hello-tickets/image/upload/c_limit,f_auto,q_auto,w_1300/v1639279455/yqadiacduagms4bujvuo.jpg",
+    "https://www.niagarafallsstatepark.com/~/media/parks/niagara-falls/attractions-and-tours/visitor-center/small-spotlight-three-sisters.jpg"
+    ]
+    }
+    ]
