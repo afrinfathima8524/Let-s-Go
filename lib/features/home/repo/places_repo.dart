@@ -9,7 +9,7 @@ class PlacesRepo {
     List<PlacesDataModel> places = [];
     try {
       var response = await client.get(Uri.parse(
-          'https://mocki.io/v1/eecf478e-90fe-4beb-b869-22562682fd89'));
+          'https://mocki.io/v1/acf41dcd-797d-4833-9414-0ef65e04f129'));
       List result = jsonDecode(response.body);
       for (var i = 0; i < result.length; i++) {
         PlacesDataModel place =

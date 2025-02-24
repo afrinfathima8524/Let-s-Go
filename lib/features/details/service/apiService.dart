@@ -9,7 +9,7 @@ class ApiService {
 
   Future<List<PlacesDataModel>> fetchData() async{
 
-    String url = "https://mocki.io/v1/0adf14b4-11e1-40f9-9047-66ade76b500d";
+    String url = "https://mocki.io/v1/acf41dcd-797d-4833-9414-0ef65e04f129";
 
     final response = await http.get(Uri.parse(url));
 
